@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">reyliar logo</title>
+  <desc id="desc">A geometric monogram for reyliar.</desc>
+  <defs>
+    <linearGradient id="base" x1="70" y1="70" x2="442" y2="442" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22231d"/>
+      <stop offset="1" stop-color="#10110f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="104" y1="96" x2="405" y2="400" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#54dfb0"/>
+      <stop offset="0.52" stop-color="#f2c552"/>
+      <stop offset="1" stop-color="#ff7668"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="48" fill="url(#base)"/>
+  <path d="M120 124h142c74 0 120 39 120 101 0 43-23 77-62 92l71 95h-88l-60-82h-61v82h-62V124Zm140 154c38 0 59-16 59-48s-21-47-59-47h-78v95h78Z" fill="#f4f5ef"/>
+  <path d="M116 392h279v32H116z" fill="url(#accent)"/>
+  <path d="M116 88h188v28H116z" fill="url(#accent)"/>
+</svg>

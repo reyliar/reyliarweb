@@ -1,19 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
-  <title id="title">reyliar logo</title>
-  <desc id="desc">A geometric monogram for reyliar.</desc>
+  <title id="title">reyliar avatar</title>
+  <desc id="desc">Dark portrait style avatar with purple roses.</desc>
   <defs>
-    <linearGradient id="base" x1="70" y1="70" x2="442" y2="442" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#22231d"/>
-      <stop offset="1" stop-color="#10110f"/>
+    <radialGradient id="bg" cx="50%" cy="42%" r="58%">
+      <stop stop-color="#392039"/>
+      <stop offset="0.62" stop-color="#150d18"/>
+      <stop offset="1" stop-color="#090404"/>
+    </radialGradient>
+    <linearGradient id="skin" x1="220" y1="122" x2="338" y2="378" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f0c1b9"/>
+      <stop offset="0.55" stop-color="#9f6f74"/>
+      <stop offset="1" stop-color="#4e3039"/>
     </linearGradient>
-    <linearGradient id="accent" x1="104" y1="96" x2="405" y2="400" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#54dfb0"/>
-      <stop offset="0.52" stop-color="#f2c552"/>
-      <stop offset="1" stop-color="#ff7668"/>
+    <linearGradient id="rose" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#d569ff"/>
+      <stop offset="1" stop-color="#6424a0"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="48" fill="url(#base)"/>
-  <path d="M120 124h142c74 0 120 39 120 101 0 43-23 77-62 92l71 95h-88l-60-82h-61v82h-62V124Zm140 154c38 0 59-16 59-48s-21-47-59-47h-78v95h78Z" fill="#f4f5ef"/>
-  <path d="M116 392h279v32H116z" fill="url(#accent)"/>
-  <path d="M116 88h188v28H116z" fill="url(#accent)"/>
+  <circle cx="256" cy="256" r="242" fill="url(#bg)"/>
+  <path d="M151 381c20-60 71-96 109-96 58 0 98 39 119 96-41 28-83 42-126 42-40 0-75-14-102-42Z" fill="#271821"/>
+  <path d="M182 252c0-91 53-154 127-139 43 9 74 46 74 102 0 47-26 95-58 126-27 27-69 29-99 5-30-24-44-58-44-94Z" fill="url(#skin)"/>
+  <path d="M178 277c-18-96 24-181 97-197 67-15 131 31 143 111-64-28-128-13-188 42-15 14-28 30-52 44Z" fill="#08070b"/>
+  <path d="M232 242c42-36 96-52 151-24-8-63-50-104-111-104-58 0-94 50-94 132 18-8 32-21 54-4Z" fill="#0e0a11"/>
+  <path d="M226 258c18-7 36-7 55 0-17 11-35 11-55 0Zm92-4c19-7 36-5 51 6-17 6-33 4-51-6Z" fill="#1a0c13"/>
+  <path d="M282 265c9 32 3 55-18 70 34 4 61-8 79-36-20 7-35-3-61-34Z" fill="#5a3943" opacity=".7"/>
+  <path d="M226 344c37 19 76 18 116-3-23 39-79 42-116 3Z" fill="#251017"/>
+  <g fill="url(#rose)">
+    <path d="M126 150c-22-17-18-53 8-64 22-9 50 6 56 31 6 24-11 49-35 53-10 2-20-1-29-20Z"/>
+    <path d="M401 203c-20-15-16-48 8-58 21-9 47 5 52 29 5 22-11 45-34 49-9 1-18-2-26-20Z"/>
+    <path d="M107 309c-20-15-16-48 8-58 21-9 47 5 52 29 5 22-11 45-34 49-9 1-18-2-26-20Z"/>
+    <path d="M159 405c-17-13-14-41 6-49 18-8 40 4 44 24 5 19-9 38-28 42-8 1-16-2-22-17Z"/>
+  </g>
+  <g fill="none" stroke="#f0a0ff" stroke-linecap="round" stroke-width="7" opacity=".65">
+    <path d="M119 133c20-11 39-6 50 13"/>
+    <path d="M394 187c19-10 36-5 46 13"/>
+    <path d="M101 293c19-10 36-5 46 13"/>
+    <path d="M154 391c16-8 31-4 40 11"/>
+  </g>
+  <g fill="none" stroke="#9ca4be" stroke-linecap="round" stroke-width="7" opacity=".72">
+    <path d="M154 204c-30 21-51 48-62 81"/>
+    <path d="M386 257c28 20 45 46 51 78"/>
+    <path d="M195 429c39 20 89 25 150 11"/>
+  </g>
 </svg>

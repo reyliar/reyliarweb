@@ -1,15 +1,17 @@
 :root {
   color-scheme: dark;
-  --bg: #10110f;
-  --surface: rgba(25, 26, 21, 0.78);
-  --surface-strong: rgba(34, 35, 29, 0.92);
-  --text: #f4f5ef;
-  --muted: #acb1a4;
-  --line: rgba(244, 245, 239, 0.12);
-  --mint: #54dfb0;
-  --coral: #ff7668;
-  --gold: #f2c552;
-  --shadow: rgba(0, 0, 0, 0.34);
+  --bg: #090404;
+  --panel: #530303;
+  --panel-soft: #691010;
+  --panel-line: rgba(255, 173, 173, 0.14);
+  --text: #ffd8d8;
+  --title: #ffaaa9;
+  --muted: #c98b8b;
+  --hot: #ff7474;
+  --pink: #f0388f;
+  --blue: #5e7bff;
+  --cyan: #38a9ff;
+  --shadow: rgba(0, 0, 0, 0.44);
 }
 
 * {
@@ -27,23 +29,9 @@ body {
   letter-spacing: 0;
   color: var(--text);
   background:
-    linear-gradient(145deg, rgba(84, 223, 176, 0.16), transparent 34%),
-    linear-gradient(315deg, rgba(255, 118, 104, 0.13), transparent 36%),
-    repeating-linear-gradient(90deg, transparent 0 31px, rgba(244, 245, 239, 0.025) 31px 32px),
+    linear-gradient(rgba(5, 0, 0, 0.46), rgba(5, 0, 0, 0.7)),
+    url("assets/kiss-bg.svg") center center / cover no-repeat fixed,
     var(--bg);
-}
-
-body::before {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  content: "";
-  background:
-    linear-gradient(rgba(244, 245, 239, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(244, 245, 239, 0.04) 1px, transparent 1px);
-  background-size: 44px 44px;
-  -webkit-mask-image: linear-gradient(to bottom, black, transparent 78%);
-  mask-image: linear-gradient(to bottom, black, transparent 78%);
 }
 
 a {
@@ -60,185 +48,386 @@ svg {
 
 .page-shell {
   display: grid;
-  width: min(100%, 520px);
+  width: min(100%, 780px);
   min-height: 100vh;
   margin: 0 auto;
-  padding: 48px 20px 28px;
+  padding: 72px 18px 44px;
   align-content: center;
-  gap: 24px;
+  gap: 18px;
 }
 
-.profile {
+.profile-panel {
+  position: relative;
   display: grid;
   justify-items: center;
+  padding: 36px 28px 18px;
+  overflow: hidden;
   text-align: center;
-  gap: 8px;
+  border: 1px solid var(--panel-line);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 116, 116, 0.2), transparent 32%),
+    linear-gradient(180deg, var(--panel-soft), var(--panel));
+  box-shadow: 0 22px 70px var(--shadow);
+}
+
+.profile-panel::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent),
+    radial-gradient(circle at 50% 22%, rgba(255, 144, 144, 0.14), transparent 21%);
+  opacity: 0.8;
+}
+
+.avatar,
+.activity,
+.quick-links,
+.views,
+h1,
+.tagline {
+  position: relative;
+  z-index: 1;
 }
 
 .avatar {
-  width: 112px;
-  height: 112px;
+  width: 136px;
+  height: 136px;
   margin-bottom: 8px;
-  border: 1px solid rgba(244, 245, 239, 0.2);
-  border-radius: 8px;
-  box-shadow: 0 18px 48px var(--shadow);
-}
-
-.handle,
-.bio,
-.footer,
-.link-subtitle {
-  color: var(--muted);
-}
-
-.handle,
-.bio,
-.footer {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.45;
+  border-radius: 50%;
+  filter: drop-shadow(0 16px 26px rgba(255, 91, 128, 0.22));
 }
 
 h1 {
   margin: 0;
-  font-size: clamp(2.4rem, 12vw, 4.2rem);
-  line-height: 0.98;
+  color: var(--title);
+  font-size: 42px;
+  line-height: 0.95;
+  font-weight: 800;
+  text-shadow: 0 0 20px rgba(255, 116, 116, 0.56);
+}
+
+.tagline {
+  margin: 10px 0 24px;
+  color: #e8aaaa;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.activity {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr) 80px;
+  align-items: center;
+  width: min(100%, 406px);
+  min-height: 112px;
+  margin-bottom: 28px;
+  padding: 14px;
+  text-align: left;
+  border: 1px solid rgba(255, 178, 178, 0.12);
+  border-radius: 8px;
+  background: rgba(55, 9, 9, 0.54);
+}
+
+.activity-avatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+}
+
+.status-dot {
+  position: absolute;
+  left: 72px;
+  bottom: 26px;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #481010;
+  border-radius: 50%;
+  background: #22c46b;
+}
+
+.activity-copy {
+  min-width: 0;
+  padding: 0 14px;
+}
+
+.activity-copy p {
+  margin: 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.activity-copy strong,
+.activity-name {
+  color: var(--text);
+}
+
+.activity-name {
+  font-size: 18px;
   font-weight: 800;
 }
 
-.links {
+.activity-name span {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 7px;
+  color: #d0b5ff;
+  font-size: 12px;
+  vertical-align: 2px;
+  border: 1px solid rgba(208, 181, 255, 0.26);
+  border-radius: 999px;
+  background: rgba(85, 63, 125, 0.34);
+}
+
+.activity-device {
   display: grid;
+  width: 80px;
+  height: 80px;
+  place-items: center;
+  color: var(--cyan);
+  border-radius: 8px;
+  background: #26363a;
+}
+
+.activity-device svg {
+  width: 44px;
+  height: 44px;
+}
+
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.quick-links a {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: var(--hot);
+  border-radius: 8px;
+  background: rgba(255, 176, 176, 0.12);
+  box-shadow: 0 0 22px rgba(255, 116, 116, 0.32);
+  transition: transform 180ms ease, color 180ms ease, background 180ms ease;
+}
+
+.quick-links a:hover,
+.quick-links a:focus-visible {
+  color: #ffd0d0;
+  background: rgba(255, 116, 116, 0.28);
+  transform: translateY(-2px);
+}
+
+.quick-links a:focus-visible,
+.link-card:focus-visible {
+  outline: 3px solid rgba(255, 190, 190, 0.72);
+  outline-offset: 3px;
+}
+
+.quick-links svg {
+  width: 27px;
+  height: 27px;
+}
+
+.views {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #f2b8b8;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.views svg {
+  width: 20px;
+  height: 20px;
+}
+
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
 .link-card {
   display: grid;
-  grid-template-columns: 44px 1fr 22px;
+  grid-template-columns: 42px minmax(0, 1fr);
   align-items: center;
-  min-height: 72px;
-  padding: 12px 14px 12px 12px;
-  border: 1px solid var(--line);
+  gap: 12px;
+  min-height: 74px;
+  padding: 12px;
+  border: 1px solid rgba(255, 173, 173, 0.11);
   border-radius: 8px;
-  background: var(--surface);
-  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.18);
-  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+  background: rgba(14, 10, 10, 0.84);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
 }
 
 .link-card:hover,
 .link-card:focus-visible {
-  border-color: rgba(84, 223, 176, 0.55);
-  background: var(--surface-strong);
+  border-color: rgba(255, 116, 116, 0.48);
+  background: rgba(36, 12, 12, 0.92);
   transform: translateY(-2px);
-}
-
-.link-card:focus-visible {
-  outline: 3px solid rgba(242, 197, 82, 0.7);
-  outline-offset: 3px;
-}
-
-.link-card--featured {
-  border-color: rgba(84, 223, 176, 0.34);
-  background:
-    linear-gradient(135deg, rgba(84, 223, 176, 0.2), transparent 48%),
-    var(--surface-strong);
 }
 
 .link-icon {
   display: grid;
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   place-items: center;
-  color: var(--bg);
-  background: var(--text);
+  color: white;
   border-radius: 8px;
-}
-
-.link-card:nth-child(2) .link-icon {
-  background: var(--mint);
-}
-
-.link-card:nth-child(3) .link-icon {
-  background: var(--coral);
-}
-
-.link-card:nth-child(4) .link-icon {
-  background: var(--gold);
-}
-
-.link-card:nth-child(5) .link-icon {
-  background: #f4f5ef;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .link-icon svg {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 }
 
-.link-copy {
-  display: grid;
-  min-width: 0;
-  padding-inline: 14px;
-  gap: 3px;
-}
-
-.link-title,
-.link-subtitle {
+.link-card strong,
+.link-card small {
+  display: block;
   overflow: hidden;
+  line-height: 1.25;
+  text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.link-title {
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.25;
+.link-card strong {
+  color: white;
+  font-size: 17px;
 }
 
-.link-subtitle {
-  font-size: 0.88rem;
-  line-height: 1.25;
-}
-
-.link-arrow {
-  width: 22px;
-  height: 22px;
+.link-card small {
+  margin-top: 5px;
   color: var(--muted);
-  transition: color 180ms ease, transform 180ms ease;
+  font-size: 14px;
 }
 
-.link-card:hover .link-arrow,
-.link-card:focus-visible .link-arrow {
-  color: var(--text);
-  transform: translateX(2px);
+.instagram .link-icon {
+  background: var(--pink);
 }
 
-.footer {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  padding-top: 4px;
-  font-size: 0.86rem;
+.tiktok .link-icon {
+  color: #080808;
+  background: white;
+}
+
+.payhip .link-icon {
+  background: #2e87df;
+}
+
+.steam .link-icon {
+  color: #050505;
+  background: white;
+}
+
+.discord .link-icon {
+  background: var(--blue);
+}
+
+@media (max-width: 720px) {
+  .page-shell {
+    padding: 34px 14px 26px;
+    align-content: start;
+  }
+
+  .profile-panel {
+    padding: 30px 16px 16px;
+  }
+
+  h1 {
+    font-size: 38px;
+  }
+
+  .tagline {
+    font-size: 17px;
+  }
+
+  .activity {
+    grid-template-columns: 70px minmax(0, 1fr) 58px;
+    min-height: 96px;
+    padding: 12px;
+  }
+
+  .activity-avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .status-dot {
+    left: 61px;
+    bottom: 24px;
+  }
+
+  .activity-copy p {
+    font-size: 13px;
+  }
+
+  .activity-name {
+    font-size: 16px;
+  }
+
+  .activity-device {
+    width: 58px;
+    height: 58px;
+  }
+
+  .activity-device svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .link-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 420px) {
-  .page-shell {
-    padding: 32px 14px 22px;
-    gap: 20px;
-  }
-
   .avatar {
-    width: 96px;
-    height: 96px;
+    width: 122px;
+    height: 122px;
   }
 
-  .link-card {
-    grid-template-columns: 40px 1fr 20px;
-    min-height: 68px;
-    padding: 10px 12px 10px 10px;
+  .activity {
+    grid-template-columns: 58px minmax(0, 1fr);
   }
 
-  .link-icon {
-    width: 40px;
-    height: 40px;
+  .activity-avatar {
+    width: 58px;
+    height: 58px;
+  }
+
+  .status-dot {
+    left: 52px;
+    bottom: 26px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .activity-device {
+    display: none;
+  }
+
+  .quick-links {
+    gap: 8px;
+  }
+
+  .quick-links a {
+    width: 38px;
+    height: 38px;
   }
 }

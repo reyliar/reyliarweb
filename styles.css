@@ -31,7 +31,7 @@ body {
   color: var(--text);
   background:
     linear-gradient(rgba(5, 0, 0, 0.42), rgba(5, 0, 0, 0.68)),
-    url("assets/resident-evil-banner.jpg?v=20260606-7") center center / cover no-repeat fixed,
+    url("assets/resident-evil-banner.jpg?v=20260606-8") center center / cover no-repeat fixed,
     var(--bg);
 }
 
@@ -49,28 +49,38 @@ svg {
 
 .page-shell {
   display: grid;
-  width: min(100%, 900px);
+  width: min(100%, 1040px);
   min-height: 100svh;
   margin: 0 auto;
   padding: 32px 18px;
   place-content: center;
+  justify-items: center;
+  gap: 16px;
 }
 
 .profile-panel {
   position: relative;
+  isolation: isolate;
   display: grid;
   justify-items: center;
-  width: min(100%, 854px);
+  justify-self: center;
+  width: min(100%, 940px);
   padding: 54px 34px 24px;
   overflow: hidden;
   text-align: center;
-  border: 1px solid var(--panel-line);
+  border: 1px solid rgba(255, 214, 214, 0.18);
   border-radius: 8px;
   background:
-    radial-gradient(circle at 50% 0%, rgba(255, 120, 120, 0.18), transparent 34%),
-    linear-gradient(135deg, var(--panel-soft), var(--panel-mid) 44%, var(--panel) 72%, #210000);
+    radial-gradient(circle at 50% 0%, rgba(255, 150, 150, 0.2), transparent 34%),
+    linear-gradient(135deg, rgba(101, 8, 8, 0.78), rgba(75, 2, 2, 0.7) 44%, rgba(52, 0, 0, 0.76) 72%, rgba(33, 0, 0, 0.82));
   background-size: 180% 180%;
-  box-shadow: 0 22px 70px var(--shadow);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 238, 238, 0.17),
+    inset 0 0 0 1px rgba(255, 130, 130, 0.05),
+    0 24px 80px rgba(0, 0, 0, 0.5),
+    0 0 42px rgba(255, 68, 68, 0.08);
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
   animation:
     panel-enter 760ms cubic-bezier(0.16, 1, 0.3, 1) both,
     panel-gradient 13s ease-in-out infinite;
@@ -79,18 +89,37 @@ svg {
 .profile-panel::before {
   position: absolute;
   inset: 0;
+  z-index: 0;
   pointer-events: none;
   content: "";
   background:
-    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent),
-    radial-gradient(circle at 50% 22%, rgba(255, 144, 144, 0.14), transparent 21%);
-  opacity: 0.8;
+    linear-gradient(118deg, rgba(255, 255, 255, 0.2) 0%, transparent 18%, transparent 62%, rgba(255, 166, 166, 0.1) 100%),
+    radial-gradient(circle at 50% 18%, rgba(255, 172, 172, 0.22), transparent 24%),
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+  opacity: 0.74;
+  mix-blend-mode: screen;
+}
+
+.profile-panel::after {
+  position: absolute;
+  inset: 1px;
+  z-index: 0;
+  pointer-events: none;
+  content: "";
+  border-radius: 7px;
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(255, 255, 255, 0.15), transparent 34%),
+    radial-gradient(ellipse at 82% 100%, rgba(255, 79, 79, 0.12), transparent 36%);
+  box-shadow:
+    inset 0 0 34px rgba(255, 204, 204, 0.04),
+    inset 0 -22px 44px rgba(0, 0, 0, 0.16);
 }
 
 .avatar-frame,
 .activity,
 .quick-links,
 .views,
+.site-footer,
 h1,
 .tagline {
   position: relative;
@@ -175,8 +204,15 @@ h1 {
   text-align: left;
   border: 1px solid rgba(255, 178, 178, 0.12);
   border-radius: 8px;
-  background: rgba(34, 5, 5, 0.62);
-  box-shadow: inset 0 1px 0 rgba(255, 210, 210, 0.05);
+  background:
+    linear-gradient(145deg, rgba(255, 230, 230, 0.07), transparent 30%),
+    rgba(34, 5, 5, 0.48);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 230, 230, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
+    0 16px 36px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
 }
 
 .activity-avatar-frame {
@@ -261,22 +297,29 @@ h1 {
   flex: 0 1 auto;
   align-items: center;
   max-width: 96px;
-  min-height: 24px;
-  padding: 2px 8px 2px 6px;
+  height: 1.45em;
+  padding: 0 0.46em 0 0.32em;
   gap: 4px;
   color: #ffd1d1;
-  font-size: 18px;
-  font-weight: 800;
-  line-height: 1.2;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1;
   border: 1px solid rgba(255, 192, 192, 0.24);
   border-radius: 999px;
-  background: rgba(96, 24, 24, 0.48);
+  background:
+    linear-gradient(145deg, rgba(255, 230, 230, 0.12), transparent 42%),
+    rgba(96, 24, 24, 0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 230, 230, 0.14),
+    0 8px 18px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .guild-tag-icon {
   flex: 0 0 auto;
-  width: 18px;
-  height: 18px;
+  width: 1.05em;
+  height: 1.05em;
   object-fit: contain;
 }
 
@@ -293,7 +336,13 @@ h1 {
   place-items: center;
   color: var(--cyan);
   border-radius: 8px;
-  background: #26363a;
+  border: 1px solid rgba(255, 230, 230, 0.07);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), transparent 36%),
+    rgba(38, 54, 58, 0.74);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .activity-device svg,
@@ -328,8 +377,14 @@ h1 {
   color: #ff8b8b;
   border: 1px solid rgba(255, 210, 210, 0.08);
   border-radius: 8px;
-  background: linear-gradient(145deg, rgba(255, 184, 184, 0.14), rgba(255, 120, 120, 0.05));
-  box-shadow: 0 0 26px rgba(255, 94, 94, 0.24);
+  background:
+    linear-gradient(145deg, rgba(255, 245, 245, 0.13), rgba(255, 120, 120, 0.05)),
+    rgba(85, 10, 10, 0.34);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 235, 235, 0.14),
+    0 0 26px rgba(255, 94, 94, 0.24);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
   transition: transform 180ms ease, color 180ms ease, background 180ms ease, border-color 180ms ease;
 }
 
@@ -386,6 +441,14 @@ h1 {
 .views svg {
   width: 20px;
   height: 20px;
+}
+
+.site-footer {
+  color: rgba(255, 216, 216, 0.72);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 0 1px 14px rgba(255, 80, 80, 0.24);
 }
 
 @keyframes panel-enter {

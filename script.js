@@ -1,12 +1,9 @@
 const DISCORD = {
-  // Buraya reyliar'in Discord User ID'sini yaz: Ornek: "123456789012345678"
-  // Kullanici Lanyard sunucusunda yoksa API presence dondurmez ve fallback gosterilir.
   userId: new URLSearchParams(window.location.search).get("discordId")
     || document.documentElement.dataset.discordUserId
     || "",
   officialEndpoint: document.documentElement.dataset.discordApiEndpoint || "",
-  fallbackBio: "its reyli! | TR | editor",
-  fallbackBadge: "AEP",
+  viewsEndpoint: document.documentElement.dataset.viewsEndpoint || "",
   refreshMs: 30_000,
 };
 
@@ -16,12 +13,9 @@ const CDN_BASE = "https://cdn.discordapp.com";
 const selectors = {
   title: "#profile-title",
   bio: "#profile-bio",
-  profileAvatar: "#profile-avatar",
   activityAvatar: "#activity-avatar",
-  profileDecoration: "#profile-decoration",
   activityDecoration: "#activity-decoration",
-  favicon: "#site-icon",
-  name: "#discord-name",
+  displayName: "#discord-display-name",
   badge: "#profile-badge",
   badgeIcon: "#guild-badge-icon",
   badgeText: "#guild-badge-text",
@@ -29,6 +23,8 @@ const selectors = {
   activityTitle: "#activity-title",
   state: "#activity-state",
   statusDot: "#status-dot",
+  activityIcon: "#activity-icon",
+  viewCount: "#view-count",
 };
 
 const el = Object.fromEntries(
@@ -50,24 +46,45 @@ const activityVerbs = {
   5: "Competing in",
 };
 
+const wellKnownActivityIcons = {
+  roblox: "https://cdn.discordapp.com/app-icons/363445589247131668/ef239176cd01d1c2bb7d1418b7a9b37f.png?size=128",
+  spotify: "https://cdn.discordapp.com/embed/avatars/0.png",
+};
+
 function setText(node, value) {
-  if (node && value) node.textContent = value;
+  if (node) node.textContent = value || "";
 }
 
 function validDiscordId(value) {
   return /^\d{17,20}$/.test(value || "");
 }
 
+function cdnExt(hash, fallback = "png") {
+  return hash?.startsWith("a_") ? "gif" : fallback;
+}
+
 function avatarUrl(user, size = 256) {
   if (!user?.id || !user?.avatar) return "assets/avatar.svg";
-  const ext = user.avatar.startsWith("a_") ? "gif" : "png";
-  return `${CDN_BASE}/avatars/${user.id}/${user.avatar}.${ext}?size=${size}`;
+  return `${CDN_BASE}/avatars/${user.id}/${user.avatar}.${cdnExt(user.avatar)}?size=${size}`;
 }
 
 function decorationUrl(user, size = 240) {
   const asset = user?.avatar_decoration_data?.asset;
   if (!asset) return "";
-  return `${CDN_BASE}/avatar-decoration-presets/${asset}.png?size=${size}&passthrough=false`;
+  return `${CDN_BASE}/avatar-decoration-presets/${asset}.png?size=${size}&passthrough=true`;
+}
+
+function applicationAssetUrl(activity, asset, size = 128) {
+  if (!activity?.application_id || !asset) return "";
+  if (asset.startsWith("mp:")) return `https://media.discordapp.net/${asset.slice(3)}`;
+  if (/^https?:\/\//i.test(asset)) return asset;
+  return `${CDN_BASE}/app-assets/${activity.application_id}/${asset}.png?size=${size}`;
+}
+
+function applicationIconUrl(activity, size = 128) {
+  const key = activity?.name?.toLowerCase();
+  if (key && wellKnownActivityIcons[key]) return wellKnownActivityIcons[key];
+  return applicationAssetUrl(activity, activity?.assets?.large_image || activity?.assets?.small_image, size);
 }
 
 function getPrimaryGuild(user) {
@@ -90,12 +107,17 @@ function guildTagBadgeUrl(guild, size = 64) {
   return `${CDN_BASE}/guild-tag-badges/${guild.guildId}/${guild.badge}.webp?size=${size}`;
 }
 
-function pickActivity(data) {
+function publicBio(user, kv = {}) {
+  return user?.bio || user?.about_me || user?.about || kv?.bio || kv?.about || "";
+}
+
+function pickActivity(data = {}) {
   if (data.spotify) {
     return {
       verb: "Listening to",
       name: data.spotify.song,
       state: data.spotify.artist,
+      icon: data.spotify.album_art_url || wellKnownActivityIcons.spotify,
     };
   }
 
@@ -106,6 +128,7 @@ function pickActivity(data) {
       verb: activityVerbs[richActivity.type] || "Doing",
       name: richActivity.name,
       state: richActivity.details || richActivity.state || statusText[data.discord_status] || "Online",
+      icon: applicationIconUrl(richActivity),
     };
   }
 
@@ -113,8 +136,9 @@ function pickActivity(data) {
   if (customStatus) {
     return {
       verb: "Status",
-      name: customStatus.state || customStatus.name,
+      name: customStatus.state || customStatus.name || statusText[data.discord_status] || "Online",
       state: statusText[data.discord_status] || "Online",
+      icon: "",
     };
   }
 
@@ -122,27 +146,22 @@ function pickActivity(data) {
     verb: "Status",
     name: statusText[data.discord_status] || "Offline",
     state: "No active activity",
+    icon: "",
   };
 }
 
 function updateDecoration(user) {
   const url = decorationUrl(user);
-  for (const node of [el.profileDecoration, el.activityDecoration]) {
-    if (!node) continue;
-    if (!url) {
-      node.hidden = true;
-      node.removeAttribute("src");
-      continue;
-    }
-    node.src = url;
-    node.hidden = false;
-  }
-}
+  if (!el.activityDecoration) return;
 
-function updateFavicon(url) {
-  if (!el.favicon || !url) return;
-  el.favicon.href = url;
-  el.favicon.type = url.includes(".gif") ? "image/gif" : "image/png";
+  if (!url) {
+    el.activityDecoration.hidden = true;
+    el.activityDecoration.removeAttribute("src");
+    return;
+  }
+
+  el.activityDecoration.src = url;
+  el.activityDecoration.hidden = false;
 }
 
 function updateStatus(status) {
@@ -150,18 +169,15 @@ function updateStatus(status) {
   el.statusDot.className = `status-dot status-dot--${status || "offline"}`;
 }
 
-function updateGuildTag(user, kv) {
+function updateGuildTag(user) {
   if (!el.badge || !el.badgeText) return;
 
   const guild = getPrimaryGuild(user);
-  const fallbackTag = kv?.badge || DISCORD.fallbackBadge;
-  const tag = guild?.tag || fallbackTag;
-  const icon = guildTagBadgeUrl(guild);
-
-  el.badge.hidden = !tag;
-  setText(el.badgeText, tag);
+  el.badge.hidden = !guild?.tag;
+  setText(el.badgeText, guild?.tag || "");
 
   if (!el.badgeIcon) return;
+  const icon = guildTagBadgeUrl(guild);
   if (!icon) {
     el.badgeIcon.hidden = true;
     el.badgeIcon.removeAttribute("src");
@@ -176,35 +192,51 @@ function updateUserIdentity(user, kv = {}) {
   if (!user) return;
 
   const displayName = user.display_name || user.global_name || user.username || "reyliar";
-  const bio = kv?.bio || kv?.about || DISCORD.fallbackBio;
+  const bio = publicBio(user, kv);
   const avatar = avatarUrl(user);
 
   setText(el.title, displayName);
-  setText(el.bio, bio);
+  setText(el.displayName, displayName);
 
-  if (el.name) {
-    el.name.firstChild.textContent = `${displayName}`;
+  if (bio) {
+    setText(el.bio, bio);
+    el.bio.hidden = false;
+  } else if (el.bio) {
+    setText(el.bio, "");
+    el.bio.hidden = true;
   }
 
-  updateGuildTag(user, kv);
+  updateGuildTag(user);
 
-  for (const node of [el.profileAvatar, el.activityAvatar]) {
-    if (!node) continue;
-    node.src = avatar;
-    node.alt = `${displayName} Discord profil fotografi`;
+  if (el.activityAvatar) {
+    el.activityAvatar.src = avatar;
+    el.activityAvatar.alt = `${displayName} Discord profil fotografi`;
   }
 
   updateDecoration(user);
-  updateFavicon(avatarUrl(user, 128));
 }
 
-function updatePresence(data) {
+function updateActivityIcon(icon) {
+  if (!el.activityIcon) return;
+
+  if (!icon) {
+    el.activityIcon.hidden = true;
+    el.activityIcon.removeAttribute("src");
+    return;
+  }
+
+  el.activityIcon.src = icon;
+  el.activityIcon.hidden = false;
+}
+
+function updatePresence(data = {}) {
   const currentActivity = pickActivity(data);
 
   setText(el.verb, currentActivity.verb);
   setText(el.activityTitle, currentActivity.name);
   setText(el.state, currentActivity.state);
-  updateStatus(data.discord_status);
+  updateActivityIcon(currentActivity.icon);
+  updateStatus(data.discord_status || data.status || "offline");
 }
 
 async function loadOfficialUser() {
@@ -222,6 +254,7 @@ async function loadOfficialUser() {
     }
 
     updateUserIdentity(payload.user, payload.kv);
+    if (payload.presence) updatePresence(payload.presence);
     return true;
   } catch (error) {
     console.warn("Official Discord profile could not be loaded:", error);
@@ -229,25 +262,52 @@ async function loadOfficialUser() {
   }
 }
 
-async function loadDiscordProfile() {
-  if (!validDiscordId(DISCORD.userId)) return;
-
-  const officialLoaded = await loadOfficialUser();
-
+async function loadLanyardPresence(allowIdentityFallback) {
   try {
     const response = await fetch(`${LANYARD_BASE}/${DISCORD.userId}`, { cache: "no-store" });
     const payload = await response.json();
 
     if (!response.ok || !payload.success) {
-      throw new Error("Lanyard profile response failed");
+      throw new Error("Lanyard presence response failed");
     }
 
-    if (!officialLoaded) updateUserIdentity(payload.data.discord_user, payload.data.kv);
+    if (allowIdentityFallback) updateUserIdentity(payload.data.discord_user, payload.data.kv);
     updatePresence(payload.data);
   } catch (error) {
-    console.warn("Discord presence could not be loaded:", error);
+    console.warn("Live Discord presence could not be loaded:", error);
+    updatePresence({ discord_status: "offline", activities: [] });
+  }
+}
+
+async function loadDiscordProfile() {
+  if (!validDiscordId(DISCORD.userId)) return;
+
+  const officialLoaded = await loadOfficialUser();
+  await loadLanyardPresence(!officialLoaded);
+}
+
+async function loadViewCount() {
+  if (!DISCORD.viewsEndpoint || !el.viewCount) return;
+
+  try {
+    const response = await fetch(DISCORD.viewsEndpoint, {
+      method: "POST",
+      cache: "no-store",
+      credentials: "same-origin",
+    });
+    const payload = await response.json();
+
+    if (!response.ok || !payload.success) {
+      throw new Error("View counter response failed");
+    }
+
+    setText(el.viewCount, new Intl.NumberFormat("tr-TR").format(payload.count || 0));
+  } catch (error) {
+    console.warn("View count could not be loaded:", error);
+    setText(el.viewCount, "0");
   }
 }
 
 loadDiscordProfile();
+loadViewCount();
 setInterval(loadDiscordProfile, DISCORD.refreshMs);

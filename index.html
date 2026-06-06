@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr" data-discord-user-id="1421177012814614548" data-discord-api-endpoint="/api/discord-user">
+<html lang="tr" data-discord-user-id="1421177012814614548" data-discord-api-endpoint="/api/discord-user" data-views-endpoint="/api/views">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,25 +9,24 @@
     <link rel="canonical" href="https://reyliar.xyz/">
 
     <meta property="og:title" content="reyliar">
-    <meta property="og:description" content="its reyli! | TR | editor">
+    <meta property="og:description" content="reyliar Discord profili ve baglantilari.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://reyliar.xyz/">
-    <meta property="og:image" content="https://reyliar.xyz/assets/avatar.svg">
+    <meta property="og:image" content="https://reyliar.xyz/assets/ada-wong-icon.jpg">
 
-    <link id="site-icon" rel="icon" href="assets/avatar.svg?v=20260606-3" type="image/svg+xml">
-    <link rel="preload" href="assets/resident-evil-banner.jpg?v=20260606-3" as="image">
-    <link rel="stylesheet" href="styles.css?v=20260606-3">
+    <link id="site-icon" rel="icon" href="assets/ada-wong-icon.jpg?v=20260606-5" type="image/jpeg">
+    <link rel="preload" href="assets/resident-evil-banner.jpg?v=20260606-5" as="image">
+    <link rel="stylesheet" href="styles.css?v=20260606-5">
   </head>
   <body>
     <main class="page-shell" aria-label="reyliar baglantilari">
       <section class="profile-panel" aria-labelledby="profile-title">
         <span class="avatar-frame">
-          <img id="profile-avatar" class="avatar" src="assets/avatar.svg" width="136" height="136" alt="reyliar profil gorseli">
-          <img id="profile-decoration" class="avatar-decoration" width="160" height="160" alt="" hidden>
+          <img class="avatar" src="assets/ada-wong-icon.jpg?v=20260606-5" width="136" height="136" alt="Ada Wong profil gorseli">
         </span>
 
         <h1 id="profile-title">reyliar</h1>
-        <p id="profile-bio" class="tagline">its reyli! | TR | editor</p>
+        <p id="profile-bio" class="tagline" hidden></p>
 
         <div class="activity" aria-label="Discord durumu">
           <span class="activity-avatar-frame">
@@ -37,16 +36,17 @@
           </span>
           <div class="activity-copy">
             <p id="discord-name" class="activity-name">
-              reyliar
+              <span id="discord-display-name">reyliar</span>
               <span id="profile-badge" class="guild-tag" aria-label="Discord server tag">
                 <img id="guild-badge-icon" class="guild-tag-icon" width="18" height="18" alt="" hidden>
-                <span id="guild-badge-text">AEP</span>
+                <span id="guild-badge-text"></span>
               </span>
             </p>
-            <p><strong id="activity-verb">Playing</strong> <span id="activity-title">Visual Studio Code</span></p>
-            <p id="activity-state">Idling</p>
+            <p><strong id="activity-verb">Status</strong> <span id="activity-title">Loading Discord</span></p>
+            <p id="activity-state">Fetching live status</p>
           </div>
           <span class="activity-device" aria-hidden="true">
+            <img id="activity-icon" class="activity-icon" alt="" hidden>
             <svg viewBox="0 0 24 24" role="img">
               <path d="M7 3h2v2H7V3Zm8 0h2v2h-2V3ZM5 7h14v2H5V7Zm2 4h2v2H7v-2Zm4 0h2v2h-2v-2Zm4 0h2v2h-2v-2ZM3 15h18v2H3v-2Zm2 4h14v2H5v-2Z"/>
             </svg>
@@ -90,7 +90,7 @@
           <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
             <path d="M12 5c5.2 0 8.7 4.2 9.8 6a1.9 1.9 0 0 1 0 2c-1.1 1.8-4.6 6-9.8 6s-8.7-4.2-9.8-6a1.9 1.9 0 0 1 0-2C3.3 9.2 6.8 5 12 5Zm0 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/>
           </svg>
-          93
+          <span id="view-count">...</span>
         </p>
       </section>
 
@@ -163,6 +163,6 @@
         </a>
       </nav>
     </main>
-    <script src="script.js?v=20260606-3" defer></script>
+    <script src="script.js?v=20260606-5" defer></script>
   </body>
 </html>

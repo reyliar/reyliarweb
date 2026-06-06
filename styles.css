@@ -30,7 +30,7 @@ body {
   color: var(--text);
   background:
     linear-gradient(rgba(5, 0, 0, 0.42), rgba(5, 0, 0, 0.68)),
-    url("assets/resident-evil-banner.jpg") center center / cover no-repeat fixed,
+    url("assets/resident-evil-banner.jpg?v=20260606-2") center center / cover no-repeat fixed,
     var(--bg);
 }
 

@@ -9,8 +9,17 @@ const DISCORD = {
 
 const LANYARD_BASE = "https://api.lanyard.rest/v1/users";
 const CDN_BASE = "https://cdn.discordapp.com";
+const YOUTUBE_API_SRC = "https://www.youtube.com/iframe_api";
+
+const MUSIC = {
+  videoId: "LHLumo6sDG4",
+  defaultVolume: 55,
+  progressMs: 500,
+};
 
 const selectors = {
+  enterScreen: "#enter-screen",
+  enterButton: "#enter-button",
   activity: ".activity",
   title: "#profile-title",
   bio: "#profile-bio",
@@ -27,6 +36,15 @@ const selectors = {
   statusDot: "#status-dot",
   activityIcon: "#activity-icon",
   viewCount: "#view-count",
+  musicPlayer: "#music-player-card",
+  youtubePlayer: "#youtube-player",
+  musicToggle: "#music-toggle",
+  musicMute: "#music-mute",
+  musicVolume: "#music-volume",
+  musicProgress: "#music-progress",
+  musicCurrent: "#music-current",
+  musicDuration: "#music-duration",
+  musicState: "#music-state",
 };
 
 const el = Object.fromEntries(
@@ -35,6 +53,13 @@ const el = Object.fromEntries(
 
 let hasLivePresence = false;
 let discordProfileRequest = null;
+let youtubePlayer = null;
+let youtubeReady = false;
+let youtubeApiLoading = false;
+let musicWantsPlay = false;
+let musicSeeking = false;
+let musicProgressTimer = null;
+let lastMusicVolume = MUSIC.defaultVolume;
 
 const statusText = {
   online: "Online",
@@ -58,6 +83,309 @@ const wellKnownActivityIcons = {
 
 function setText(node, value) {
   if (node) node.textContent = value || "";
+}
+
+function clampNumber(value, min, max, fallback) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return fallback;
+  return Math.min(max, Math.max(min, number));
+}
+
+function formatTime(value) {
+  const seconds = Math.max(0, Math.floor(Number(value) || 0));
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainder = String(seconds % 60).padStart(2, "0");
+
+  if (hours > 0) {
+    return `${hours}:${String(minutes).padStart(2, "0")}:${remainder}`;
+  }
+
+  return `${minutes}:${remainder}`;
+}
+
+function setMusicStatus(status) {
+  if (!el.musicPlayer) return;
+
+  el.musicPlayer.classList.toggle("is-loading", status === "loading");
+  el.musicPlayer.classList.toggle("is-playing", status === "playing");
+  el.musicPlayer.classList.toggle("is-error", status === "error");
+  setText(el.musicState, status);
+
+  if (el.musicToggle) {
+    el.musicToggle.setAttribute("aria-label", status === "playing" ? "Pause" : "Play");
+  }
+}
+
+function getMusicValue(method) {
+  try {
+    const value = youtubePlayer?.[method]?.();
+    return Number.isFinite(value) ? value : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function updateMusicProgress() {
+  if (!youtubeReady || !youtubePlayer) return;
+
+  const duration = getMusicValue("getDuration");
+  const current = getMusicValue("getCurrentTime");
+  setText(el.musicCurrent, formatTime(current));
+  setText(el.musicDuration, formatTime(duration));
+
+  if (el.musicProgress && duration > 0 && !musicSeeking) {
+    const percent = Math.min(100, Math.max(0, (current / duration) * 100));
+    el.musicProgress.value = percent.toFixed(1);
+  }
+}
+
+function startMusicProgressTimer() {
+  if (musicProgressTimer) return;
+  musicProgressTimer = window.setInterval(updateMusicProgress, MUSIC.progressMs);
+}
+
+function syncMusicMuted() {
+  let muted = Number(el.musicVolume?.value || 0) <= 0;
+
+  try {
+    muted = muted || Boolean(youtubeReady && youtubePlayer?.isMuted?.());
+  } catch {
+    muted = true;
+  }
+
+  if (el.musicPlayer) el.musicPlayer.classList.toggle("is-muted", muted);
+  if (el.musicMute) el.musicMute.setAttribute("aria-label", muted ? "Unmute" : "Mute");
+}
+
+function setMusicVolume(value) {
+  const volume = clampNumber(value, 0, 100, MUSIC.defaultVolume);
+  if (el.musicVolume) el.musicVolume.value = String(volume);
+  if (volume > 0) lastMusicVolume = volume;
+
+  try {
+    youtubePlayer?.setVolume?.(volume);
+    if (volume <= 0) {
+      youtubePlayer?.mute?.();
+    } else {
+      youtubePlayer?.unMute?.();
+    }
+  } catch {
+    setMusicStatus("error");
+  }
+
+  syncMusicMuted();
+}
+
+function setMusicMuted(muted) {
+  if (muted) {
+    lastMusicVolume = clampNumber(el.musicVolume?.value, 1, 100, lastMusicVolume);
+    setMusicVolume(0);
+    return;
+  }
+
+  setMusicVolume(lastMusicVolume || MUSIC.defaultVolume);
+}
+
+function onMusicReady(event) {
+  youtubeReady = true;
+  const volume = clampNumber(el.musicVolume?.value, 0, 100, MUSIC.defaultVolume);
+
+  try {
+    event.target.setVolume(volume);
+    if (volume <= 0) event.target.mute();
+  } catch {
+    setMusicStatus("error");
+    return;
+  }
+
+  startMusicProgressTimer();
+  updateMusicProgress();
+  syncMusicMuted();
+  setMusicStatus(musicWantsPlay ? "loading" : "ready");
+
+  if (musicWantsPlay) {
+    event.target.playVideo();
+  }
+}
+
+function onMusicStateChange(event) {
+  const states = window.YT?.PlayerState || {};
+
+  if (event.data === states.PLAYING) {
+    setMusicStatus("playing");
+  } else if (event.data === states.PAUSED) {
+    setMusicStatus("paused");
+  } else if (event.data === states.BUFFERING) {
+    setMusicStatus("loading");
+  } else if (event.data === states.ENDED && musicWantsPlay) {
+    youtubePlayer.seekTo(0, true);
+    youtubePlayer.playVideo();
+  } else if (event.data === states.CUED && !musicWantsPlay) {
+    setMusicStatus("ready");
+  }
+
+  updateMusicProgress();
+  syncMusicMuted();
+}
+
+function onMusicError() {
+  musicWantsPlay = false;
+  setMusicStatus("error");
+}
+
+function createYoutubePlayer() {
+  if (youtubePlayer || !el.youtubePlayer || !window.YT?.Player) return;
+
+  const playerVars = {
+    autoplay: 0,
+    controls: 0,
+    disablekb: 1,
+    fs: 0,
+    iv_load_policy: 3,
+    playsinline: 1,
+    rel: 0,
+  };
+
+  if (window.location.origin !== "null") {
+    playerVars.origin = window.location.origin;
+  }
+
+  setMusicStatus("loading");
+  youtubePlayer = new window.YT.Player(el.youtubePlayer, {
+    width: 200,
+    height: 200,
+    videoId: MUSIC.videoId,
+    playerVars,
+    events: {
+      onReady: onMusicReady,
+      onStateChange: onMusicStateChange,
+      onError: onMusicError,
+    },
+  });
+}
+
+function loadYouTubeApi() {
+  if (!el.musicPlayer) return;
+
+  if (window.YT?.Player) {
+    createYoutubePlayer();
+    return;
+  }
+
+  if (youtubeApiLoading) return;
+  youtubeApiLoading = true;
+
+  const previousReady = window.onYouTubeIframeAPIReady;
+  window.onYouTubeIframeAPIReady = () => {
+    if (typeof previousReady === "function") previousReady();
+    createYoutubePlayer();
+  };
+
+  const script = document.createElement("script");
+  script.src = YOUTUBE_API_SRC;
+  script.async = true;
+  script.onerror = onMusicError;
+  document.head.appendChild(script);
+}
+
+function playMusic() {
+  musicWantsPlay = true;
+
+  if (!youtubeReady || !youtubePlayer?.playVideo) {
+    setMusicStatus("loading");
+    loadYouTubeApi();
+    return;
+  }
+
+  try {
+    youtubePlayer.playVideo();
+    setMusicStatus("loading");
+  } catch {
+    setMusicStatus("error");
+  }
+}
+
+function pauseMusic() {
+  musicWantsPlay = false;
+
+  try {
+    youtubePlayer?.pauseVideo?.();
+  } catch {
+    setMusicStatus("error");
+    return;
+  }
+
+  setMusicStatus("paused");
+}
+
+function toggleMusic() {
+  const states = window.YT?.PlayerState || {};
+  const state = getMusicValue("getPlayerState");
+
+  if (state === states.PLAYING || state === states.BUFFERING) {
+    pauseMusic();
+  } else {
+    playMusic();
+  }
+}
+
+function seekMusicFromProgress() {
+  if (!youtubeReady || !youtubePlayer || !el.musicProgress) return;
+
+  const duration = getMusicValue("getDuration");
+  const percent = clampNumber(el.musicProgress.value, 0, 100, 0);
+  const nextTime = duration * (percent / 100);
+
+  try {
+    youtubePlayer.seekTo(nextTime, true);
+  } catch {
+    setMusicStatus("error");
+  }
+
+  musicSeeking = false;
+  updateMusicProgress();
+}
+
+function previewMusicProgress() {
+  if (!youtubeReady || !el.musicProgress) return;
+
+  musicSeeking = true;
+  const duration = getMusicValue("getDuration");
+  const percent = clampNumber(el.musicProgress.value, 0, 100, 0);
+  setText(el.musicCurrent, formatTime(duration * (percent / 100)));
+}
+
+function enterSite() {
+  document.body.classList.add("site-entered");
+
+  if (el.enterScreen) {
+    el.enterScreen.classList.add("is-hidden");
+    window.setTimeout(() => {
+      el.enterScreen.hidden = true;
+    }, 560);
+  }
+
+  playMusic();
+}
+
+function initMusicPlayer() {
+  if (!el.musicPlayer) return;
+
+  setMusicVolume(el.musicVolume?.value || MUSIC.defaultVolume);
+  setMusicStatus("ready");
+  loadYouTubeApi();
+
+  el.enterButton?.addEventListener("click", enterSite);
+  el.musicToggle?.addEventListener("click", toggleMusic);
+  el.musicMute?.addEventListener("click", () => {
+    setMusicMuted(!el.musicPlayer.classList.contains("is-muted"));
+  });
+  el.musicVolume?.addEventListener("input", (event) => {
+    setMusicVolume(event.target.value);
+  });
+  el.musicProgress?.addEventListener("input", previewMusicProgress);
+  el.musicProgress?.addEventListener("change", seekMusicFromProgress);
 }
 
 function escapeHtml(value) {
@@ -208,11 +536,19 @@ function updateDecoration(user) {
   if (!el.profileDecoration) return;
 
   if (!url) {
+    if (el.profileDecoration.dataset.src === "") return;
+    el.profileDecoration.dataset.src = "";
     el.profileDecoration.hidden = true;
     el.profileDecoration.removeAttribute("src");
     return;
   }
 
+  if (el.profileDecoration.dataset.src === url) {
+    el.profileDecoration.hidden = false;
+    return;
+  }
+
+  el.profileDecoration.dataset.src = url;
   el.profileDecoration.src = url;
   el.profileDecoration.hidden = false;
 }
@@ -396,6 +732,7 @@ async function loadViewCount() {
   }
 }
 
+initMusicPlayer();
 loadDiscordProfile();
 loadViewCount();
 setInterval(loadDiscordProfile, DISCORD.refreshMs);

@@ -9,3 +9,11 @@ routes = [
 [[kv_namespaces]]
 binding = "VIEW_COUNTER"
 id = "3955803c2fc542049cdc3145c8c447bf"
+
+[[durable_objects.bindings]]
+name = "DISCORD_PROFILE_STATE"
+class_name = "DiscordProfileState"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["DiscordProfileState"]

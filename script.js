@@ -4,16 +4,18 @@ const DISCORD = {
     || "",
   officialEndpoint: document.documentElement.dataset.discordApiEndpoint || "",
   viewsEndpoint: document.documentElement.dataset.viewsEndpoint || "",
-  refreshMs: 30_000,
+  refreshMs: 1_000,
 };
 
 const LANYARD_BASE = "https://api.lanyard.rest/v1/users";
 const CDN_BASE = "https://cdn.discordapp.com";
 
 const selectors = {
+  activity: ".activity",
   title: "#profile-title",
   bio: "#profile-bio",
   activityAvatar: "#activity-avatar",
+  activityDevice: ".activity-device",
   profileDecoration: "#profile-decoration",
   displayName: "#discord-display-name",
   badge: "#profile-badge",
@@ -32,6 +34,7 @@ const el = Object.fromEntries(
 );
 
 let hasLivePresence = false;
+let discordProfileRequest = null;
 
 const statusText = {
   online: "Online",
@@ -267,18 +270,29 @@ function updateUserIdentity(user, kv = {}) {
 }
 
 function updateActivityIcon(icon) {
-  if (!el.activityIcon) return;
+  const setDeviceVisible = (visible) => {
+    if (el.activityDevice) el.activityDevice.hidden = !visible;
+    if (el.activity) el.activity.classList.toggle("activity--no-device", !visible);
+  };
+
+  if (!el.activityIcon) {
+    setDeviceVisible(false);
+    return;
+  }
 
   if (!icon) {
     el.activityIcon.hidden = true;
     el.activityIcon.removeAttribute("src");
+    setDeviceVisible(false);
     return;
   }
 
   el.activityIcon.onerror = () => {
     el.activityIcon.hidden = true;
     el.activityIcon.removeAttribute("src");
+    setDeviceVisible(false);
   };
+  setDeviceVisible(true);
   el.activityIcon.src = icon;
   el.activityIcon.hidden = false;
 }
@@ -311,6 +325,7 @@ async function loadOfficialUser() {
   try {
     const url = new URL(DISCORD.officialEndpoint, window.location.origin);
     url.searchParams.set("userId", DISCORD.userId);
+    url.searchParams.set("fresh", String(Math.floor(Date.now() / DISCORD.refreshMs)));
 
     const response = await fetch(url, { cache: "no-store" });
     const payload = await response.json();
@@ -347,9 +362,16 @@ async function loadLanyardPresence(allowIdentityFallback) {
 
 async function loadDiscordProfile() {
   if (!validDiscordId(DISCORD.userId)) return;
+  if (discordProfileRequest) return discordProfileRequest;
 
-  const official = await loadOfficialUser();
-  if (!official.presenceLoaded) await loadLanyardPresence(!official.identityLoaded);
+  discordProfileRequest = (async () => {
+    const official = await loadOfficialUser();
+    if (!official.presenceLoaded) await loadLanyardPresence(!official.identityLoaded);
+  })().finally(() => {
+    discordProfileRequest = null;
+  });
+
+  return discordProfileRequest;
 }
 
 async function loadViewCount() {

@@ -24,6 +24,7 @@ html {
 }
 
 body {
+  position: relative;
   min-height: 100svh;
   margin: 0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -31,8 +32,21 @@ body {
   color: var(--text);
   background:
     linear-gradient(rgba(5, 0, 0, 0.42), rgba(5, 0, 0, 0.68)),
-    url("assets/resident-evil-banner.jpg?v=20260606-8") center center / cover no-repeat fixed,
+    url("assets/resident-evil-banner.jpg?v=20260606-9") center center / cover no-repeat fixed,
     var(--bg);
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  content: "";
+  background: rgba(0, 0, 0, 0);
+}
+
+[hidden] {
+  display: none !important;
 }
 
 a {
@@ -49,6 +63,8 @@ svg {
 
 .page-shell {
   display: grid;
+  position: relative;
+  z-index: 1;
   width: min(100%, 1040px);
   min-height: 100svh;
   margin: 0 auto;
@@ -148,9 +164,9 @@ h1,
 .avatar-decoration {
   position: absolute;
   z-index: 2;
-  inset: -20px;
-  width: 200px;
-  height: 200px;
+  inset: -14px;
+  width: 188px;
+  height: 188px;
   pointer-events: none;
   object-fit: contain;
 }
@@ -213,6 +229,11 @@ h1 {
     0 16px 36px rgba(0, 0, 0, 0.18);
   backdrop-filter: blur(18px) saturate(140%);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+.activity--no-device {
+  grid-template-columns: 84px minmax(0, 1fr);
+  width: min(100%, 386px);
 }
 
 .activity-avatar-frame {
@@ -477,40 +498,72 @@ h1 {
 }
 
 @media (max-width: 720px) {
+  body {
+    background-attachment: scroll;
+    background-position: 48% center;
+  }
+
+  body::before {
+    background: rgba(0, 0, 0, 0.18);
+  }
+
   .page-shell {
-    padding: 24px 14px;
+    width: 100%;
+    padding: max(18px, env(safe-area-inset-top)) 12px max(18px, env(safe-area-inset-bottom));
+    place-content: center;
   }
 
   .profile-panel {
-    padding: 30px 16px 16px;
+    width: 100%;
+    padding: 28px 14px 16px;
+    border-radius: 8px;
   }
 
   h1 {
-    font-size: 38px;
+    font-size: 36px;
   }
 
   .tagline {
+    max-width: 100%;
     font-size: 14px;
   }
 
   .activity {
-    grid-template-columns: 70px minmax(0, 1fr) 58px;
+    grid-template-columns: 68px minmax(0, 1fr) 56px;
+    width: min(100%, 382px);
     min-height: 96px;
-    padding: 12px;
+    margin-top: 22px;
+    margin-bottom: 24px;
+    padding: 12px 10px;
+  }
+
+  .activity--no-device {
+    grid-template-columns: 68px minmax(0, 1fr);
+    width: min(100%, 328px);
   }
 
   .activity-avatar {
-    width: 70px;
-    height: 70px;
+    width: 68px;
+    height: 68px;
   }
 
   .activity-avatar-frame {
-    width: 70px;
-    height: 70px;
+    width: 68px;
+    height: 68px;
+  }
+
+  .status-dot {
+    right: -1px;
+    bottom: 1px;
+  }
+
+  .activity-copy {
+    padding: 0 10px;
   }
 
   .activity-copy p {
     font-size: 13px;
+    line-height: 1.32;
   }
 
   .activity-name,
@@ -519,47 +572,82 @@ h1 {
   }
 
   .activity-device {
-    width: 58px;
-    height: 58px;
+    width: 56px;
+    height: 56px;
   }
 
   .activity-device svg,
   .activity-icon {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
   }
 
+  .quick-links {
+    max-width: 330px;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .quick-links a {
+    width: 42px;
+    height: 42px;
+  }
+
+  .quick-links svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .views {
+    justify-self: center;
+  }
 }
 
 @media (max-width: 420px) {
+  .page-shell {
+    padding-inline: 10px;
+  }
+
+  .profile-panel {
+    padding: 24px 10px 14px;
+  }
+
   .avatar {
-    width: 122px;
-    height: 122px;
+    width: 116px;
+    height: 116px;
   }
 
   .avatar-frame {
-    width: 144px;
-    height: 144px;
+    width: 136px;
+    height: 136px;
+    margin-bottom: 10px;
   }
 
   .avatar-decoration {
-    inset: -18px;
-    width: 180px;
-    height: 180px;
+    inset: -10px;
+    width: 156px;
+    height: 156px;
+  }
+
+  h1 {
+    font-size: 34px;
   }
 
   .activity {
-    grid-template-columns: 58px minmax(0, 1fr);
+    grid-template-columns: 56px minmax(0, 1fr);
+    width: min(100%, 318px);
+    min-height: 84px;
+    padding: 10px;
   }
 
   .activity-avatar {
-    width: 58px;
-    height: 58px;
+    width: 56px;
+    height: 56px;
   }
 
   .activity-avatar-frame {
-    width: 58px;
-    height: 58px;
+    width: 56px;
+    height: 56px;
   }
 
   .status-dot {
@@ -571,13 +659,86 @@ h1 {
     display: none;
   }
 
+  .activity-copy {
+    padding: 0 0 0 10px;
+  }
+
+  .activity-name {
+    gap: 6px;
+  }
+
+  .activity-copy p {
+    font-size: 12.5px;
+  }
+
+  .guild-tag {
+    max-width: 86px;
+  }
+
   .quick-links {
+    max-width: 270px;
     gap: 8px;
   }
 
   .quick-links a {
     width: 38px;
     height: 38px;
+  }
+
+  .quick-links svg {
+    width: 23px;
+    height: 23px;
+  }
+}
+
+@media (max-width: 360px) {
+  .page-shell {
+    padding-inline: 8px;
+  }
+
+  .profile-panel {
+    padding-inline: 8px;
+  }
+
+  .activity {
+    grid-template-columns: 50px minmax(0, 1fr);
+    width: 100%;
+    min-height: 78px;
+    padding: 9px;
+  }
+
+  .activity-avatar,
+  .activity-avatar-frame {
+    width: 50px;
+    height: 50px;
+  }
+
+  .activity-copy {
+    padding-left: 9px;
+  }
+
+  .activity-name,
+  .guild-tag {
+    font-size: 15px;
+  }
+
+  .guild-tag {
+    max-width: 78px;
+  }
+
+  .quick-links {
+    max-width: 246px;
+    gap: 7px;
+  }
+
+  .quick-links a {
+    width: 36px;
+    height: 36px;
+  }
+
+  .quick-links svg {
+    width: 22px;
+    height: 22px;
   }
 }
 

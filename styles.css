@@ -496,20 +496,11 @@ h1 {
   color: #ff4f9e;
 }
 
-.quick-links a:nth-child(2),
-.quick-links a:nth-child(3) {
-  color: #f8f8f8;
-}
-
-.quick-links a:nth-child(4) {
-  color: #ff8f8f;
-}
-
-.quick-links a:nth-child(5) {
+.quick-links a:nth-child(2) {
   color: #dfefff;
 }
 
-.quick-links a:nth-child(6) {
+.quick-links a:nth-child(3) {
   color: #ff7d86;
 }
 

@@ -1,0 +1,7 @@
+name = "reyliar-discord-user"
+main = "workers/discord-user.js"
+compatibility_date = "2026-06-06"
+
+routes = [
+  { pattern = "reyliar.xyz/api/discord-user", zone_name = "reyliar.xyz" }
+]

@@ -4,6 +4,7 @@ const DISCORD = {
   userId: new URLSearchParams(window.location.search).get("discordId")
     || document.documentElement.dataset.discordUserId
     || "",
+  officialEndpoint: document.documentElement.dataset.discordApiEndpoint || "",
   fallbackBio: "its reyli! | TR | editor",
   fallbackBadge: "AEP",
   refreshMs: 30_000,
@@ -171,24 +172,21 @@ function updateGuildTag(user, kv) {
   el.badgeIcon.hidden = false;
 }
 
-function updateProfile(data) {
-  const user = data.discord_user;
+function updateUserIdentity(user, kv = {}) {
+  if (!user) return;
+
   const displayName = user.display_name || user.global_name || user.username || "reyliar";
-  const bio = data.kv?.bio || data.kv?.about || DISCORD.fallbackBio;
-  const currentActivity = pickActivity(data);
+  const bio = kv?.bio || kv?.about || DISCORD.fallbackBio;
   const avatar = avatarUrl(user);
 
   setText(el.title, displayName);
   setText(el.bio, bio);
-  setText(el.verb, currentActivity.verb);
-  setText(el.activityTitle, currentActivity.name);
-  setText(el.state, currentActivity.state);
 
   if (el.name) {
     el.name.firstChild.textContent = `${displayName}`;
   }
 
-  updateGuildTag(user, data.kv);
+  updateGuildTag(user, kv);
 
   for (const node of [el.profileAvatar, el.activityAvatar]) {
     if (!node) continue;
@@ -198,11 +196,43 @@ function updateProfile(data) {
 
   updateDecoration(user);
   updateFavicon(avatarUrl(user, 128));
+}
+
+function updatePresence(data) {
+  const currentActivity = pickActivity(data);
+
+  setText(el.verb, currentActivity.verb);
+  setText(el.activityTitle, currentActivity.name);
+  setText(el.state, currentActivity.state);
   updateStatus(data.discord_status);
+}
+
+async function loadOfficialUser() {
+  if (!validDiscordId(DISCORD.userId) || !DISCORD.officialEndpoint) return false;
+
+  try {
+    const url = new URL(DISCORD.officialEndpoint, window.location.origin);
+    url.searchParams.set("userId", DISCORD.userId);
+
+    const response = await fetch(url, { cache: "no-store" });
+    const payload = await response.json();
+
+    if (!response.ok || !payload.success || !payload.user) {
+      throw new Error("Official Discord profile response failed");
+    }
+
+    updateUserIdentity(payload.user, payload.kv);
+    return true;
+  } catch (error) {
+    console.warn("Official Discord profile could not be loaded:", error);
+    return false;
+  }
 }
 
 async function loadDiscordProfile() {
   if (!validDiscordId(DISCORD.userId)) return;
+
+  const officialLoaded = await loadOfficialUser();
 
   try {
     const response = await fetch(`${LANYARD_BASE}/${DISCORD.userId}`, { cache: "no-store" });
@@ -212,9 +242,10 @@ async function loadDiscordProfile() {
       throw new Error("Lanyard profile response failed");
     }
 
-    updateProfile(payload.data);
+    if (!officialLoaded) updateUserIdentity(payload.data.discord_user, payload.data.kv);
+    updatePresence(payload.data);
   } catch (error) {
-    console.warn("Discord profile could not be loaded:", error);
+    console.warn("Discord presence could not be loaded:", error);
   }
 }
 

@@ -21,6 +21,27 @@ Site, Discord presence icin Lanyard kullanir: `https://api.lanyard.rest/v1/users
 
 Hizli deneme icin URL sonuna `?discordId=USER_ID` de eklenebilir.
 
-`script.js`, profil fotografini ve favicon'u Discord CDN avatarina, avatar decoration'i varsa decoration assetine, activity/status alanini da Lanyard verisine gore gunceller. Discord `primary_guild`/`clan` verisi varsa kullanicinin server tag badge'i de isim yaninda gosterilir. `kv.bio` veya `kv.about` varsa bio olarak kullanilir; yoksa fallback metin gosterilir.
+### Resmi Discord API proxy
+
+Frontend'e Discord bot token koyma. Resmi Discord REST API icin `workers/discord-user.js` Cloudflare Worker olarak deploy edilebilir.
+
+Bot token chat'e, commit'e veya client-side JavaScript'e girdiyse Discord Developer Portal'dan token'i resetle ve yeni token'i secret olarak kaydet.
+
+Worker ayari:
+
+- Route: `reyliar.xyz/api/discord-user`
+- Secret: `DISCORD_BOT_TOKEN`
+- Endpoint: `https://discord.com/api/v10/users/:user_id`
+
+Deploy:
+
+```powershell
+wrangler secret put DISCORD_BOT_TOKEN
+wrangler deploy
+```
+
+`script.js`, once `/api/discord-user` uzerinden resmi Discord user object verisini dener. Buradan profil fotografi, avatar decoration ve `primary_guild` server tag badge'i gelir. Activity/status icin Lanyard fallback kalir; cunku Discord REST API kullanicinin "Playing" presence verisini vermez.
+
+`kv.bio` veya `kv.about` varsa bio olarak kullanilir; yoksa fallback metin gosterilir.
 
 GitHub Pages icin `CNAME` dosyasi hazir: `reyliar.xyz`.

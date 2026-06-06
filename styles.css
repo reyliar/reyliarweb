@@ -29,8 +29,8 @@ body {
   letter-spacing: 0;
   color: var(--text);
   background:
-    linear-gradient(rgba(5, 0, 0, 0.46), rgba(5, 0, 0, 0.7)),
-    url("assets/kiss-bg.svg") center center / cover no-repeat fixed,
+    linear-gradient(rgba(5, 0, 0, 0.42), rgba(5, 0, 0, 0.68)),
+    url("assets/resident-evil-banner.jpg") center center / cover no-repeat fixed,
     var(--bg);
 }
 
@@ -82,7 +82,7 @@ svg {
   opacity: 0.8;
 }
 
-.avatar,
+.avatar-frame,
 .activity,
 .quick-links,
 .views,
@@ -92,12 +92,29 @@ h1,
   z-index: 1;
 }
 
+.avatar-frame {
+  display: grid;
+  width: 160px;
+  height: 160px;
+  margin-bottom: 8px;
+  place-items: center;
+}
+
 .avatar {
   width: 136px;
   height: 136px;
-  margin-bottom: 8px;
   border-radius: 50%;
+  object-fit: cover;
   filter: drop-shadow(0 16px 26px rgba(255, 91, 128, 0.22));
+}
+
+.avatar-decoration {
+  position: absolute;
+  inset: 0;
+  width: 160px;
+  height: 160px;
+  pointer-events: none;
+  object-fit: contain;
 }
 
 h1 {
@@ -131,21 +148,55 @@ h1 {
   background: rgba(55, 9, 9, 0.54);
 }
 
+.activity-avatar-frame {
+  position: relative;
+  display: grid;
+  width: 84px;
+  height: 84px;
+  place-items: center;
+}
+
 .activity-avatar {
   width: 84px;
   height: 84px;
   border-radius: 50%;
+  object-fit: cover;
+}
+
+.activity-decoration {
+  position: absolute;
+  inset: -10px;
+  width: 104px;
+  height: 104px;
+  pointer-events: none;
+  object-fit: contain;
 }
 
 .status-dot {
   position: absolute;
-  left: 72px;
-  bottom: 26px;
+  right: 0;
+  bottom: 3px;
   width: 20px;
   height: 20px;
   border: 3px solid #481010;
   border-radius: 50%;
   background: #22c46b;
+}
+
+.status-dot--online {
+  background: #22c46b;
+}
+
+.status-dot--idle {
+  background: #f0a83a;
+}
+
+.status-dot--dnd {
+  background: #f04444;
+}
+
+.status-dot--offline {
+  background: #747f8d;
 }
 
 .activity-copy {
@@ -173,16 +224,33 @@ h1 {
   font-weight: 800;
 }
 
-.activity-name span {
-  display: inline-block;
+.guild-tag {
+  display: inline-flex;
+  align-items: center;
+  max-width: 96px;
   margin-left: 6px;
-  padding: 2px 7px;
-  color: #d0b5ff;
+  padding: 2px 7px 2px 5px;
+  gap: 4px;
+  color: #ffd1d1;
   font-size: 12px;
+  line-height: 1.2;
   vertical-align: 2px;
-  border: 1px solid rgba(208, 181, 255, 0.26);
+  border: 1px solid rgba(255, 192, 192, 0.24);
   border-radius: 999px;
-  background: rgba(85, 63, 125, 0.34);
+  background: rgba(96, 24, 24, 0.48);
+}
+
+.guild-tag-icon {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.guild-tag span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .activity-device {
@@ -368,9 +436,15 @@ h1 {
     height: 70px;
   }
 
-  .status-dot {
-    left: 61px;
-    bottom: 24px;
+  .activity-avatar-frame {
+    width: 70px;
+    height: 70px;
+  }
+
+  .activity-decoration {
+    inset: -9px;
+    width: 88px;
+    height: 88px;
   }
 
   .activity-copy p {
@@ -402,6 +476,16 @@ h1 {
     height: 122px;
   }
 
+  .avatar-frame {
+    width: 144px;
+    height: 144px;
+  }
+
+  .avatar-decoration {
+    width: 144px;
+    height: 144px;
+  }
+
   .activity {
     grid-template-columns: 58px minmax(0, 1fr);
   }
@@ -411,9 +495,18 @@ h1 {
     height: 58px;
   }
 
+  .activity-avatar-frame {
+    width: 58px;
+    height: 58px;
+  }
+
+  .activity-decoration {
+    inset: -8px;
+    width: 74px;
+    height: 74px;
+  }
+
   .status-dot {
-    left: 52px;
-    bottom: 26px;
     width: 16px;
     height: 16px;
   }

@@ -31,6 +31,8 @@ const el = Object.fromEntries(
   Object.entries(selectors).map(([key, selector]) => [key, document.querySelector(selector)])
 );
 
+let hasLivePresence = false;
+
 const statusText = {
   online: "Online",
   idle: "Idling",
@@ -225,6 +227,10 @@ function updateActivityIcon(icon) {
     return;
   }
 
+  el.activityIcon.onerror = () => {
+    el.activityIcon.hidden = true;
+    el.activityIcon.removeAttribute("src");
+  };
   el.activityIcon.src = icon;
   el.activityIcon.hidden = false;
 }
@@ -237,10 +243,13 @@ function updatePresence(data = {}) {
   setText(el.state, currentActivity.state);
   updateActivityIcon(currentActivity.icon);
   updateStatus(data.discord_status || data.status || "offline");
+  hasLivePresence = Boolean(data.discord_status || data.status || currentActivity.name);
 }
 
 async function loadOfficialUser() {
-  if (!validDiscordId(DISCORD.userId) || !DISCORD.officialEndpoint) return false;
+  if (!validDiscordId(DISCORD.userId) || !DISCORD.officialEndpoint) {
+    return { identityLoaded: false, presenceLoaded: false };
+  }
 
   try {
     const url = new URL(DISCORD.officialEndpoint, window.location.origin);
@@ -255,10 +264,10 @@ async function loadOfficialUser() {
 
     updateUserIdentity(payload.user, payload.kv);
     if (payload.presence) updatePresence(payload.presence);
-    return true;
+    return { identityLoaded: true, presenceLoaded: Boolean(payload.presence) };
   } catch (error) {
     console.warn("Official Discord profile could not be loaded:", error);
-    return false;
+    return { identityLoaded: false, presenceLoaded: false };
   }
 }
 
@@ -275,15 +284,15 @@ async function loadLanyardPresence(allowIdentityFallback) {
     updatePresence(payload.data);
   } catch (error) {
     console.warn("Live Discord presence could not be loaded:", error);
-    updatePresence({ discord_status: "offline", activities: [] });
+    if (!hasLivePresence) updatePresence({ discord_status: "offline", activities: [] });
   }
 }
 
 async function loadDiscordProfile() {
   if (!validDiscordId(DISCORD.userId)) return;
 
-  const officialLoaded = await loadOfficialUser();
-  await loadLanyardPresence(!officialLoaded);
+  const official = await loadOfficialUser();
+  if (!official.presenceLoaded) await loadLanyardPresence(!official.identityLoaded);
 }
 
 async function loadViewCount() {

@@ -1,34 +1,34 @@
 # reyliar.xyz
 
-Statik Linktree tarzi tek sayfalik site tabani. Tasarim kirmizi/siyah bio-link profili, Discord status alani ve sosyal link kartlari uzerine kurulu.
+A static Linktree-style single-page site base. The design is built around a red and black bio-link profile, a live Discord status card, social links, email contact, and a custom music player.
 
-## Duzenleme
+## Editing
 
-- Profil metni ve linkler: `index.html`
-- Renkler, layout ve responsive ayarlar: `styles.css`
-- Discord API baglantisi: `script.js`
-- Ana profil gorseli: `assets/ada-wong-icon.jpg`
-- Discord karti fallback gorseli: `assets/avatar.svg`
-- Arka plan gorseli: `assets/resident-evil-banner.jpg`
+- Profile text and links: `index.html`
+- Colors, layout, and responsive rules: `styles.css`
+- Discord API and music player behavior: `script.js`
+- Main profile image: `assets/ada-wong-icon.jpg`
+- Discord card fallback image: `assets/avatar.svg`
+- Background image: `assets/resident-evil-banner.jpg`
 
 ## Discord API
 
-Site, profil bilgileri icin Cloudflare Worker uzerinden resmi Discord REST API'yi, status/activity icin Discord Gateway presence verisini kullanir. Lanyard yalnizca ek fallback olarak denenir.
+The site uses a Cloudflare Worker for official Discord REST API profile data and Discord Gateway presence data for status/activity updates. Lanyard is only used as an extra fallback.
 
-1. Discord'da Developer Mode ac.
-2. reyliar kullanicisina sag tikla ve Copy User ID yap.
-3. `index.html` icindeki `data-discord-user-id=""` alanina ID'yi yaz.
-4. Presence gorunmesi icin botun hedef kullaniciyla ortak bir sunucuda olmasi ve `Presence Intent` ayarinin acik olmasi gerekir.
+1. Enable Developer Mode in Discord.
+2. Right-click the target Discord user and choose Copy User ID.
+3. Put the ID in the `data-discord-user-id=""` field in `index.html`.
+4. For presence to appear, the bot must share a server with the target user and `Presence Intent` must be enabled.
 
-Hizli deneme icin URL sonuna `?discordId=USER_ID` de eklenebilir.
+For quick testing, append `?discordId=USER_ID` to the URL.
 
-### Resmi Discord API proxy
+### Official Discord API Proxy
 
-Frontend'e Discord bot token koyma. Resmi Discord REST API icin `workers/discord-user.js` Cloudflare Worker olarak deploy edilebilir.
+Do not put a Discord bot token in frontend code. `workers/discord-user.js` can be deployed as a Cloudflare Worker to proxy the official Discord REST API.
 
-Bot token chat'e, commit'e veya client-side JavaScript'e girdiyse Discord Developer Portal'dan token'i resetle ve yeni token'i secret olarak kaydet.
+If the bot token was ever pasted into chat, committed, or placed in client-side JavaScript, reset it from the Discord Developer Portal and store the new token as a secret.
 
-Worker ayari:
+Worker setup:
 
 - Route: `reyliar.xyz/api/*`
 - Secret: `DISCORD_BOT_TOKEN`
@@ -43,15 +43,15 @@ wrangler secret put DISCORD_BOT_TOKEN
 wrangler deploy
 ```
 
-`script.js`, once `/api/discord-user` uzerinden resmi Discord user object verisini dener. Buradan profil fotografi, avatar decoration ve `primary_guild` server tag badge'i gelir. Activity/status ayni Worker payload'indaki Discord Gateway presence verisinden guncellenir.
+`script.js` first tries `/api/discord-user` for the official Discord user object. That response provides the profile photo, avatar decoration, and `primary_guild` server tag badge. Activity/status are updated from the Discord Gateway presence payload returned by the same Worker.
 
-Worker ayrica Discord Gateway ile presence okumayi dener. Bunun calismasi icin:
+The Worker also attempts to read presence through Discord Gateway. For that to work:
 
-- Bot token gecerli olmali.
-- Bot, hedef kullaniciyla ortak bir sunucuda olmali.
-- Developer Portal'da `Presence Intent` acik olmali.
-- Gerekirse Worker env olarak `DISCORD_PRESENCE_GUILD_ID` verilebilir.
+- The bot token must be valid.
+- The bot must share a server with the target user.
+- `Presence Intent` must be enabled in the Developer Portal.
+- If needed, provide `DISCORD_PRESENCE_GUILD_ID` as a Worker environment variable.
 
-Presence bulunursa status, activity ve activity icon'u Discord Gateway verisinden gosterilir. Profil bio resmi REST user object icinde gelmezse bos birakilir; eski default bio otomatik gosterilmez.
+If presence is found, status, activity, and activity icon are rendered from Discord Gateway data. If the profile bio is not available in the official REST user object, it is left blank and no old default bio is shown.
 
-GitHub Pages icin `CNAME` dosyasi hazir: `reyliar.xyz`.
+The `CNAME` file is ready for GitHub Pages: `reyliar.xyz`.

@@ -12,9 +12,40 @@ const CDN_BASE = "https://cdn.discordapp.com";
 const YOUTUBE_API_SRC = "https://www.youtube.com/iframe_api";
 
 const MUSIC = {
-  videoId: "LHLumo6sDG4",
   defaultVolume: 55,
   progressMs: 500,
+  playlist: [
+    {
+      videoId: "LHLumo6sDG4",
+      title: "ice - super slowed",
+      artist: "ZERTAL - Topic",
+      thumbnail: "https://i.ytimg.com/vi/LHLumo6sDG4/hqdefault.jpg",
+    },
+    {
+      videoId: "RTUr_ZD0niQ",
+      title: "esdeekid - mist // slowed & reverb",
+      artist: "lilreverbgod.",
+      thumbnail: "https://i.ytimg.com/vi/RTUr_ZD0niQ/hqdefault.jpg",
+    },
+    {
+      videoId: "eMOKD-RUfIg",
+      title: "pinkpantheress - pain (slowed + reverb)",
+      artist: "koreancofee",
+      thumbnail: "https://i.ytimg.com/vi/eMOKD-RUfIg/hqdefault.jpg",
+    },
+    {
+      videoId: "ZGSl0qBifII",
+      title: "cult member - u weren't here i really miss you (slowed x reverb)",
+      artist: "lusheyenne",
+      thumbnail: "https://i.ytimg.com/vi/ZGSl0qBifII/hqdefault.jpg",
+    },
+    {
+      videoId: "76kMS0DzXIQ",
+      title: "ECSTACY (SLOWED + REVERB)",
+      artist: "Aerimuse",
+      thumbnail: "https://i.ytimg.com/vi/76kMS0DzXIQ/hqdefault.jpg",
+    },
+  ],
 };
 
 const selectors = {
@@ -38,7 +69,11 @@ const selectors = {
   viewCount: "#view-count",
   musicPlayer: "#music-player-card",
   youtubePlayer: "#youtube-player",
+  musicCover: "#music-cover",
+  musicTitle: "#music-title",
+  musicArtist: "#music-artist",
   musicToggle: "#music-toggle",
+  musicNext: "#music-next",
   musicMute: "#music-mute",
   musicVolume: "#music-volume",
   musicProgress: "#music-progress",
@@ -60,6 +95,7 @@ let musicWantsPlay = false;
 let musicSeeking = false;
 let musicProgressTimer = null;
 let lastMusicVolume = MUSIC.defaultVolume;
+let musicIndex = 0;
 
 const statusText = {
   online: "Online",
@@ -102,6 +138,34 @@ function formatTime(value) {
   }
 
   return `${minutes}:${remainder}`;
+}
+
+function currentTrack() {
+  return MUSIC.playlist[musicIndex] || MUSIC.playlist[0];
+}
+
+function normalizeTrackIndex(index) {
+  const total = MUSIC.playlist.length;
+  if (total <= 0) return 0;
+  return ((index % total) + total) % total;
+}
+
+function resetMusicProgress() {
+  if (el.musicProgress) el.musicProgress.value = "0";
+  setText(el.musicCurrent, "0:00");
+  setText(el.musicDuration, "0:00");
+}
+
+function updateMusicTrackUi() {
+  const track = currentTrack();
+  if (!track) return;
+
+  setText(el.musicTitle, track.title);
+  setText(el.musicArtist, track.artist);
+
+  if (el.musicCover && el.musicCover.src !== track.thumbnail) {
+    el.musicCover.src = track.thumbnail;
+  }
 }
 
 function setMusicStatus(status) {
@@ -200,12 +264,19 @@ function onMusicReady(event) {
   }
 
   startMusicProgressTimer();
+  updateMusicTrackUi();
   updateMusicProgress();
   syncMusicMuted();
   setMusicStatus(musicWantsPlay ? "loading" : "ready");
 
-  if (musicWantsPlay) {
-    event.target.playVideo();
+  try {
+    if (musicWantsPlay) {
+      event.target.loadVideoById(currentTrack().videoId);
+    } else {
+      event.target.cueVideoById(currentTrack().videoId);
+    }
+  } catch {
+    setMusicStatus("error");
   }
 }
 
@@ -219,8 +290,7 @@ function onMusicStateChange(event) {
   } else if (event.data === states.BUFFERING) {
     setMusicStatus("loading");
   } else if (event.data === states.ENDED && musicWantsPlay) {
-    youtubePlayer.seekTo(0, true);
-    youtubePlayer.playVideo();
+    nextMusic(true);
   } else if (event.data === states.CUED && !musicWantsPlay) {
     setMusicStatus("ready");
   }
@@ -255,7 +325,7 @@ function createYoutubePlayer() {
   youtubePlayer = new window.YT.Player(el.youtubePlayer, {
     width: 200,
     height: 200,
-    videoId: MUSIC.videoId,
+    videoId: currentTrack().videoId,
     playerVars,
     events: {
       onReady: onMusicReady,
@@ -330,6 +400,41 @@ function toggleMusic() {
   }
 }
 
+function loadMusicTrack(index, autoplay = musicWantsPlay) {
+  musicIndex = normalizeTrackIndex(index);
+  musicWantsPlay = Boolean(autoplay);
+  musicSeeking = false;
+  updateMusicTrackUi();
+  resetMusicProgress();
+
+  if (!youtubeReady || !youtubePlayer) {
+    setMusicStatus(autoplay ? "loading" : "ready");
+    loadYouTubeApi();
+    return;
+  }
+
+  const track = currentTrack();
+
+  try {
+    if (autoplay) {
+      youtubePlayer.loadVideoById(track.videoId);
+      setMusicStatus("loading");
+    } else {
+      youtubePlayer.cueVideoById(track.videoId);
+      setMusicStatus("ready");
+    }
+  } catch {
+    setMusicStatus("error");
+  }
+}
+
+function nextMusic(forceAutoplay) {
+  const states = window.YT?.PlayerState || {};
+  const state = getMusicValue("getPlayerState");
+  const shouldAutoplay = forceAutoplay ?? (musicWantsPlay || state === states.PLAYING || state === states.BUFFERING);
+  loadMusicTrack(musicIndex + 1, shouldAutoplay);
+}
+
 function seekMusicFromProgress() {
   if (!youtubeReady || !youtubePlayer || !el.musicProgress) return;
 
@@ -372,12 +477,15 @@ function enterSite() {
 function initMusicPlayer() {
   if (!el.musicPlayer) return;
 
+  updateMusicTrackUi();
+  resetMusicProgress();
   setMusicVolume(el.musicVolume?.value || MUSIC.defaultVolume);
   setMusicStatus("ready");
   loadYouTubeApi();
 
   el.enterButton?.addEventListener("click", enterSite);
   el.musicToggle?.addEventListener("click", toggleMusic);
+  el.musicNext?.addEventListener("click", () => nextMusic());
   el.musicMute?.addEventListener("click", () => {
     setMusicMuted(!el.musicPlayer.classList.contains("is-muted"));
   });
@@ -599,7 +707,7 @@ function updateUserIdentity(user, kv = {}) {
 
   if (el.activityAvatar) {
     el.activityAvatar.src = avatar;
-    el.activityAvatar.alt = `${displayName} Discord profil fotografi`;
+    el.activityAvatar.alt = `${displayName} Discord profile photo`;
   }
 
   updateDecoration(user);
@@ -725,7 +833,7 @@ async function loadViewCount() {
       throw new Error("View counter response failed");
     }
 
-    setText(el.viewCount, new Intl.NumberFormat("tr-TR").format(payload.count || 0));
+    setText(el.viewCount, new Intl.NumberFormat("en-US").format(payload.count || 0));
   } catch (error) {
     console.warn("View count could not be loaded:", error);
     setText(el.viewCount, "0");

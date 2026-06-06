@@ -14,7 +14,7 @@ const selectors = {
   title: "#profile-title",
   bio: "#profile-bio",
   activityAvatar: "#activity-avatar",
-  activityDecoration: "#activity-decoration",
+  profileDecoration: "#profile-decoration",
   displayName: "#discord-display-name",
   badge: "#profile-badge",
   badgeIcon: "#guild-badge-icon",
@@ -55,6 +55,47 @@ const wellKnownActivityIcons = {
 
 function setText(node, value) {
   if (node) node.textContent = value || "";
+}
+
+function escapeHtml(value) {
+  return String(value || "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  })[char]);
+}
+
+function safeHttpUrl(value) {
+  try {
+    const url = new URL(value, window.location.origin);
+    return url.protocol === "http:" || url.protocol === "https:" ? url.href : "";
+  } catch {
+    return "";
+  }
+}
+
+function renderMarkdown(value) {
+  let html = escapeHtml(String(value || "").trim());
+
+  html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s<]+)\)/g, (match, label, url) => {
+    const href = safeHttpUrl(url.replace(/&amp;/g, "&"));
+    if (!href) return label;
+    return `<a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+  });
+
+  html = html
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>")
+    .replace(/\r?\n/g, "<br>");
+
+  return html;
+}
+
+function setMarkdown(node, value) {
+  if (node) node.innerHTML = renderMarkdown(value);
 }
 
 function validDiscordId(value) {
@@ -110,7 +151,14 @@ function guildTagBadgeUrl(guild, size = 64) {
 }
 
 function publicBio(user, kv = {}) {
-  return user?.bio || user?.about_me || user?.about || kv?.bio || kv?.about || "";
+  return user?.bio
+    || user?.profile?.bio
+    || user?.about_me
+    || user?.about
+    || kv?.discord_bio
+    || kv?.bio
+    || kv?.about
+    || "";
 }
 
 function pickActivity(data = {}) {
@@ -154,16 +202,16 @@ function pickActivity(data = {}) {
 
 function updateDecoration(user) {
   const url = decorationUrl(user);
-  if (!el.activityDecoration) return;
+  if (!el.profileDecoration) return;
 
   if (!url) {
-    el.activityDecoration.hidden = true;
-    el.activityDecoration.removeAttribute("src");
+    el.profileDecoration.hidden = true;
+    el.profileDecoration.removeAttribute("src");
     return;
   }
 
-  el.activityDecoration.src = url;
-  el.activityDecoration.hidden = false;
+  el.profileDecoration.src = url;
+  el.profileDecoration.hidden = false;
 }
 
 function updateStatus(status) {
@@ -201,10 +249,10 @@ function updateUserIdentity(user, kv = {}) {
   setText(el.displayName, displayName);
 
   if (bio) {
-    setText(el.bio, bio);
+    setMarkdown(el.bio, bio);
     el.bio.hidden = false;
   } else if (el.bio) {
-    setText(el.bio, "");
+    el.bio.innerHTML = "";
     el.bio.hidden = true;
   }
 
@@ -235,7 +283,16 @@ function updateActivityIcon(icon) {
   el.activityIcon.hidden = false;
 }
 
+function clearPresenceUi() {
+  setText(el.verb, "");
+  setText(el.activityTitle, "");
+  setText(el.state, "");
+  updateActivityIcon("");
+  updateStatus("offline");
+}
+
 function updatePresence(data = {}) {
+  clearPresenceUi();
   const currentActivity = pickActivity(data);
 
   setText(el.verb, currentActivity.verb);

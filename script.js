@@ -18,31 +18,26 @@ const MUSIC = {
     {
       videoId: "LHLumo6sDG4",
       title: "ice - super slowed",
-      artist: "ZERTAL - Topic",
       thumbnail: "https://i.ytimg.com/vi/LHLumo6sDG4/hqdefault.jpg",
     },
     {
       videoId: "RTUr_ZD0niQ",
       title: "esdeekid - mist // slowed & reverb",
-      artist: "lilreverbgod.",
       thumbnail: "https://i.ytimg.com/vi/RTUr_ZD0niQ/hqdefault.jpg",
     },
     {
       videoId: "eMOKD-RUfIg",
       title: "pinkpantheress - pain (slowed + reverb)",
-      artist: "koreancofee",
       thumbnail: "https://i.ytimg.com/vi/eMOKD-RUfIg/hqdefault.jpg",
     },
     {
       videoId: "ZGSl0qBifII",
       title: "cult member - u weren't here i really miss you (slowed x reverb)",
-      artist: "lusheyenne",
       thumbnail: "https://i.ytimg.com/vi/ZGSl0qBifII/hqdefault.jpg",
     },
     {
       videoId: "76kMS0DzXIQ",
       title: "ECSTACY (SLOWED + REVERB)",
-      artist: "Aerimuse",
       thumbnail: "https://i.ytimg.com/vi/76kMS0DzXIQ/hqdefault.jpg",
     },
   ],
@@ -51,6 +46,7 @@ const MUSIC = {
 const selectors = {
   enterScreen: "#enter-screen",
   enterButton: "#enter-button",
+  profilePanel: ".profile-panel",
   activity: ".activity",
   title: "#profile-title",
   bio: "#profile-bio",
@@ -71,7 +67,6 @@ const selectors = {
   youtubePlayer: "#youtube-player",
   musicCover: "#music-cover",
   musicTitle: "#music-title",
-  musicArtist: "#music-artist",
   musicToggle: "#music-toggle",
   musicNext: "#music-next",
   musicMute: "#music-mute",
@@ -161,7 +156,6 @@ function updateMusicTrackUi() {
   if (!track) return;
 
   setText(el.musicTitle, track.title);
-  setText(el.musicArtist, track.artist);
 
   if (el.musicCover && el.musicCover.src !== track.thumbnail) {
     el.musicCover.src = track.thumbnail;
@@ -494,6 +488,79 @@ function initMusicPlayer() {
   });
   el.musicProgress?.addEventListener("input", previewMusicProgress);
   el.musicProgress?.addEventListener("change", seekMusicFromProgress);
+}
+
+function setPanelTiltStyle(values = {}) {
+  if (!el.profilePanel) return;
+
+  const {
+    rotateX = "0deg",
+    rotateY = "0deg",
+    shiftX = "0px",
+    shiftY = "0px",
+    glareX = "50%",
+    glareY = "50%",
+    glow = "0",
+  } = values;
+
+  el.profilePanel.style.setProperty("--panel-tilt-x", rotateX);
+  el.profilePanel.style.setProperty("--panel-tilt-y", rotateY);
+  el.profilePanel.style.setProperty("--panel-shift-x", shiftX);
+  el.profilePanel.style.setProperty("--panel-shift-y", shiftY);
+  el.profilePanel.style.setProperty("--panel-glare-x", glareX);
+  el.profilePanel.style.setProperty("--panel-glare-y", glareY);
+  el.profilePanel.style.setProperty("--panel-glow", glow);
+}
+
+function initProfilePanelTilt() {
+  if (!el.profilePanel) return;
+
+  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+  if (reducedMotion?.matches) return;
+
+  let frame = 0;
+  let nextTilt = null;
+
+  const applyTilt = () => {
+    frame = 0;
+    setPanelTiltStyle(nextTilt);
+  };
+
+  const queueTilt = (tilt) => {
+    nextTilt = tilt;
+    if (!frame) frame = window.requestAnimationFrame(applyTilt);
+  };
+
+  const resetTilt = () => {
+    if (frame) window.cancelAnimationFrame(frame);
+    frame = 0;
+    nextTilt = null;
+    setPanelTiltStyle();
+  };
+
+  el.profilePanel.addEventListener("pointermove", (event) => {
+    if (event.pointerType === "touch") return;
+
+    const rect = el.profilePanel.getBoundingClientRect();
+    const x = clampNumber((event.clientX - rect.left) / rect.width, 0, 1, 0.5);
+    const y = clampNumber((event.clientY - rect.top) / rect.height, 0, 1, 0.5);
+    const offsetX = (x * 2) - 1;
+    const offsetY = (y * 2) - 1;
+    const glow = Math.min(1, Math.hypot(offsetX, offsetY) / Math.SQRT2);
+
+    queueTilt({
+      rotateX: `${(-offsetY * 8).toFixed(2)}deg`,
+      rotateY: `${(offsetX * 10).toFixed(2)}deg`,
+      shiftX: `${(offsetX * 4).toFixed(2)}px`,
+      shiftY: `${(offsetY * 3).toFixed(2)}px`,
+      glareX: `${(x * 100).toFixed(1)}%`,
+      glareY: `${(y * 100).toFixed(1)}%`,
+      glow: glow.toFixed(3),
+    });
+  });
+
+  el.profilePanel.addEventListener("pointerleave", resetTilt);
+  el.profilePanel.addEventListener("pointercancel", resetTilt);
 }
 
 function escapeHtml(value) {
@@ -841,6 +908,7 @@ async function loadViewCount() {
 }
 
 initMusicPlayer();
+initProfilePanelTilt();
 loadDiscordProfile();
 loadViewCount();
 setInterval(loadDiscordProfile, DISCORD.refreshMs);

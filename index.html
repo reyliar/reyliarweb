@@ -21,7 +21,7 @@
 
     <link id="site-icon" rel="icon" href="assets/ada-wong-icon.jpg?v=20260606-9" type="image/jpeg">
     <link rel="preload" href="assets/resident-evil-banner.jpg?v=20260606-9" as="image">
-    <link rel="stylesheet" href="styles.css?v=20260606-23">
+    <link rel="stylesheet" href="styles.css?v=20260607-1">
   </head>
   <body>
     <div id="enter-screen" class="enter-screen" role="dialog" aria-modal="true" aria-label="Enter site">
@@ -101,11 +101,12 @@
 
         <div id="music-player-card" class="music-player" aria-label="Music player">
           <div id="youtube-player" class="youtube-player" aria-hidden="true"></div>
-          <img id="music-cover" class="music-cover" src="https://i.ytimg.com/vi/LHLumo6sDG4/hqdefault.jpg" width="72" height="72" alt="">
+          <span class="music-cover-frame" aria-hidden="true">
+            <img id="music-cover" class="music-cover" src="https://i.ytimg.com/vi/LHLumo6sDG4/hqdefault.jpg" width="72" height="72" alt="">
+          </span>
           <div class="music-main">
             <div class="music-copy">
               <strong id="music-title">ice - super slowed</strong>
-              <span id="music-artist">ZERTAL - Topic</span>
             </div>
             <div class="music-progress-row">
               <span id="music-current">0:00</span>
@@ -143,6 +144,6 @@
 
       <footer class="site-footer" aria-label="Site information">&copy; 2026 reyli</footer>
     </main>
-    <script src="script.js?v=20260606-24" defer></script>
+    <script src="script.js?v=20260607-1" defer></script>
   </body>
 </html>

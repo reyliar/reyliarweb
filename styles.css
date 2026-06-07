@@ -81,6 +81,7 @@ svg {
   place-content: center;
   justify-items: center;
   gap: 16px;
+  perspective: 1200px;
   transition: filter 420ms ease, transform 420ms ease;
 }
 
@@ -157,12 +158,21 @@ svg {
 }
 
 .profile-panel {
+  --panel-tilt-x: 0deg;
+  --panel-tilt-y: 0deg;
+  --panel-shift-x: 0px;
+  --panel-shift-y: 0px;
+  --panel-glare-x: 50%;
+  --panel-glare-y: 50%;
+  --panel-glow: 0;
   position: relative;
   isolation: isolate;
+  z-index: 2;
   display: grid;
   justify-items: center;
   justify-self: center;
-  width: min(100%, 940px);
+  width: 940px;
+  max-width: 100%;
   padding: 54px 34px 24px;
   overflow: hidden;
   text-align: center;
@@ -179,9 +189,16 @@ svg {
     0 0 42px rgba(255, 68, 68, 0.08);
   backdrop-filter: blur(24px) saturate(145%);
   -webkit-backdrop-filter: blur(24px) saturate(145%);
+  transform: perspective(1000px) translate3d(var(--panel-shift-x), var(--panel-shift-y), 0) rotateX(var(--panel-tilt-x)) rotateY(var(--panel-tilt-y));
+  transform-style: preserve-3d;
+  will-change: transform;
   animation:
     panel-enter 760ms cubic-bezier(0.16, 1, 0.3, 1) both,
     panel-gradient 13s ease-in-out infinite;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .profile-panel::before {
@@ -191,11 +208,13 @@ svg {
   pointer-events: none;
   content: "";
   background:
+    radial-gradient(circle at var(--panel-glare-x) var(--panel-glare-y), rgba(255, 245, 245, 0.26), transparent 18%),
     linear-gradient(118deg, rgba(255, 255, 255, 0.2) 0%, transparent 18%, transparent 62%, rgba(255, 166, 166, 0.1) 100%),
     radial-gradient(circle at 50% 18%, rgba(255, 172, 172, 0.22), transparent 24%),
     linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-  opacity: 0.74;
+  opacity: calc(0.68 + (var(--panel-glow) * 0.22));
   mix-blend-mode: screen;
+  transition: opacity 180ms ease, background 180ms ease;
 }
 
 .profile-panel::after {
@@ -224,6 +243,10 @@ h1,
 .tagline {
   position: relative;
   z-index: 1;
+}
+
+.profile-panel > :is(.avatar-frame, .activity, .email-link, .quick-links, .views, .music-player, h1, .tagline) {
+  transform: translateZ(18px);
 }
 
 .avatar-frame {
@@ -603,10 +626,17 @@ h1 {
 }
 
 .music-player {
+  --music-cover-size: 72px;
+  --music-player-height: 116px;
+  --music-main-height: 90px;
+  --music-controls-height: 34px;
   position: relative;
-  width: min(100%, 430px);
+  justify-self: center;
+  width: 430px;
+  max-width: 100%;
+  height: var(--music-player-height);
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
+  grid-template-columns: var(--music-cover-size) minmax(0, 1fr);
   align-items: center;
   gap: 12px;
   margin-top: 18px;
@@ -637,31 +667,48 @@ h1 {
   border: 0;
 }
 
-.music-cover {
-  width: 72px;
-  height: 72px;
+.music-cover-frame {
+  display: block;
+  width: var(--music-cover-size);
+  height: var(--music-cover-size);
+  overflow: hidden;
   border-radius: 8px;
-  object-fit: cover;
+  background: rgba(35, 0, 0, 0.42);
   box-shadow:
     0 12px 24px rgba(0, 0, 0, 0.28),
     0 0 22px rgba(255, 74, 74, 0.12);
 }
 
+.music-cover {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.28);
+  transform-origin: center;
+}
+
 .music-main {
   display: grid;
+  grid-template-rows: 24px 16px var(--music-controls-height);
+  align-content: center;
   min-width: 0;
+  height: var(--music-main-height);
   gap: 8px;
 }
 
 .music-copy {
-  display: grid;
+  display: flex;
+  align-items: center;
   min-width: 0;
-  gap: 2px;
+  min-height: 24px;
   text-align: left;
 }
 
-.music-copy strong,
-.music-copy span {
+.music-copy strong {
+  display: block;
+  max-width: 100%;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -670,10 +717,9 @@ h1 {
 .music-copy strong {
   color: #ffe1e1;
   font-size: 16px;
-  line-height: 1.2;
+  line-height: 20px;
 }
 
-.music-copy span,
 .music-progress-row,
 .music-state {
   color: rgba(255, 216, 216, 0.68);
@@ -686,6 +732,7 @@ h1 {
   grid-template-columns: 32px minmax(0, 1fr) 32px;
   align-items: center;
   gap: 8px;
+  height: 16px;
 }
 
 .music-progress,
@@ -704,6 +751,7 @@ h1 {
 }
 
 .music-volume {
+  flex: 0 0 92px;
   width: 92px;
 }
 
@@ -746,10 +794,12 @@ h1 {
 
 .music-controls {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 8px;
   min-width: 0;
+  height: var(--music-controls-height);
+  overflow: hidden;
 }
 
 .music-button {
@@ -803,8 +853,12 @@ h1 {
 }
 
 .music-state {
-  flex: 0 0 auto;
+  flex: 0 0 46px;
+  overflow: hidden;
   text-transform: lowercase;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .music-player.is-loading .music-state {
@@ -827,6 +881,7 @@ h1 {
 }
 
 .site-footer {
+  z-index: 0;
   color: rgba(255, 216, 216, 0.72);
   font-size: 13px;
   font-weight: 700;
@@ -837,13 +892,15 @@ h1 {
 @keyframes panel-enter {
   from {
     opacity: 0;
-    transform: translateY(22px) scale(0.985);
+    translate: 0 22px;
+    scale: 0.985;
     filter: blur(8px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    translate: 0 0;
+    scale: 1;
     filter: blur(0);
   }
 }
@@ -972,13 +1029,15 @@ h1 {
   }
 
   .music-player {
-    width: min(100%, 360px);
-    grid-template-columns: 64px minmax(0, 1fr);
+    --music-cover-size: 64px;
+    --music-player-height: 112px;
+    --music-main-height: 88px;
+    width: 360px;
     margin-top: 16px;
     padding: 11px;
   }
 
-  .music-cover {
+  .music-cover-frame {
     width: 64px;
     height: 64px;
   }
@@ -988,6 +1047,7 @@ h1 {
   }
 
   .music-volume {
+    flex-basis: 82px;
     width: 82px;
   }
 }
@@ -1087,14 +1147,17 @@ h1 {
   }
 
   .music-player {
-    width: min(100%, 300px);
-    grid-template-columns: 58px minmax(0, 1fr);
+    --music-cover-size: 58px;
+    --music-player-height: 108px;
+    --music-main-height: 86px;
+    --music-controls-height: 32px;
+    width: 300px;
     gap: 10px;
     margin-top: 14px;
     padding: 10px;
   }
 
-  .music-cover {
+  .music-cover-frame {
     width: 58px;
     height: 58px;
   }
@@ -1114,6 +1177,7 @@ h1 {
   }
 
   .music-volume {
+    flex-basis: 72px;
     width: 72px;
   }
 
@@ -1177,12 +1241,12 @@ h1 {
   }
 
   .music-player {
+    --music-cover-size: 52px;
     width: 100%;
-    grid-template-columns: 52px minmax(0, 1fr);
     gap: 9px;
   }
 
-  .music-cover {
+  .music-cover-frame {
     width: 52px;
     height: 52px;
   }
@@ -1192,6 +1256,7 @@ h1 {
   }
 
   .music-volume {
+    flex-basis: 66px;
     width: 66px;
   }
 }

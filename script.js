@@ -4,6 +4,7 @@ const DISCORD = {
     || "",
   officialEndpoint: document.documentElement.dataset.discordApiEndpoint || "",
   viewsEndpoint: document.documentElement.dataset.viewsEndpoint || "",
+  socialAccessEndpoint: document.documentElement.dataset.socialAccessEndpoint || "",
   refreshMs: 1_000,
 };
 
@@ -66,6 +67,7 @@ const selectors = {
   state: "#activity-state",
   statusDot: "#status-dot",
   activityIcon: "#activity-icon",
+  quickLinks: ".quick-links",
   viewCount: "#view-count",
   musicPlayer: "#music-player-card",
   youtubePlayer: "#youtube-player",
@@ -1030,8 +1032,63 @@ async function loadViewCount() {
   }
 }
 
+function socialLinks() {
+  return el.quickLinks ? [...el.quickLinks.querySelectorAll("a")] : [];
+}
+
+function setSocialLinksDisabled(disabled) {
+  for (const link of socialLinks()) {
+    if (disabled) {
+      const href = link.getAttribute("href");
+      if (href) link.dataset.enabledHref = href;
+      link.removeAttribute("href");
+      link.setAttribute("aria-disabled", "true");
+      link.setAttribute("tabindex", "-1");
+      continue;
+    }
+
+    if (link.dataset.enabledHref) {
+      link.setAttribute("href", link.dataset.enabledHref);
+      delete link.dataset.enabledHref;
+    }
+    link.removeAttribute("aria-disabled");
+    link.removeAttribute("tabindex");
+  }
+}
+
+function stopDisabledSocialLink(event) {
+  const link = event.target.closest?.(".quick-links a[aria-disabled=\"true\"]");
+  if (!link) return;
+
+  event.preventDefault();
+  event.stopPropagation();
+}
+
+async function initSocialLinkGuard() {
+  if (!el.quickLinks) return;
+
+  el.quickLinks.addEventListener("click", stopDisabledSocialLink);
+
+  if (!DISCORD.socialAccessEndpoint) return;
+
+  try {
+    const response = await fetch(DISCORD.socialAccessEndpoint, {
+      cache: "no-store",
+      credentials: "same-origin",
+    });
+    const payload = await response.json();
+
+    if (response.ok && payload.success) {
+      setSocialLinksDisabled(Boolean(payload.blocked));
+    }
+  } catch (error) {
+    console.warn("Social link access could not be checked:", error);
+  }
+}
+
 initMusicPlayer();
 initProfilePanelTilt();
+initSocialLinkGuard();
 schedulePageFit();
 window.addEventListener("resize", schedulePageFit);
 window.addEventListener("orientationchange", schedulePageFit);

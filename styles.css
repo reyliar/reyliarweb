@@ -616,6 +616,18 @@ h1 {
   transform: translateY(-2px);
 }
 
+.quick-links a[aria-disabled="true"],
+.quick-links a[aria-disabled="true"]:hover,
+.quick-links a[aria-disabled="true"]:focus-visible {
+  color: rgba(255, 205, 205, 0.36);
+  border-color: rgba(255, 210, 210, 0.05);
+  background: rgba(48, 10, 10, 0.24);
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
 .quick-links a:focus-visible {
   outline: 3px solid rgba(255, 190, 190, 0.72);
   outline-offset: 3px;

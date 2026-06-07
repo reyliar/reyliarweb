@@ -9,6 +9,13 @@ const PROFILE_CACHE_SECONDS = 1;
 const PROFILE_CACHE_MS = PROFILE_CACHE_SECONDS * 1000;
 const PRESENCE_WAIT_MS = 1500;
 const VIEW_COUNTER_KEY = "views:home";
+const BLOCKED_SOCIAL_IPS = new Set(["85.107.67.209"]);
+const SOCIAL_LINKS = {
+  instagram: "https://instagram.com/reyli.vfx",
+  tiktok: "https://tiktok.com/@reyliffx",
+  steam: "https://steamcommunity.com/id/reyliar",
+  discord: "https://discord.com/invite/dWb9FcamKu",
+};
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -43,6 +50,72 @@ function validDiscordId(value) {
 
 function hasViewCookie(request) {
   return /(?:^|;\s*)reyliar_viewed=1(?:;|$)/.test(request.headers.get("Cookie") || "");
+}
+
+function clientIp(request) {
+  return request.headers.get("CF-Connecting-IP")
+    || request.headers.get("X-Forwarded-For")?.split(",")[0]?.trim()
+    || "";
+}
+
+function isSocialBlocked(request) {
+  return BLOCKED_SOCIAL_IPS.has(clientIp(request));
+}
+
+function socialBlockedResponse() {
+  return new Response(
+    "<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Unavailable</title></head><body><p>Social links are unavailable.</p></body></html>",
+    {
+      status: 403,
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Cache-Control": "no-store",
+      },
+    }
+  );
+}
+
+function handleSocialAccess(request) {
+  if (request.method !== "GET") {
+    return json({ success: false, error: "Method not allowed" }, { status: 405 });
+  }
+
+  return json(
+    {
+      success: true,
+      blocked: isSocialBlocked(request),
+    },
+    {
+      headers: {
+        "Cache-Control": "no-store",
+      },
+    }
+  );
+}
+
+function handleSocialRedirect(request, url) {
+  if (request.method !== "GET") {
+    return json({ success: false, error: "Method not allowed" }, { status: 405 });
+  }
+
+  const key = decodeURIComponent(url.pathname.split("/").pop() || "").toLowerCase();
+  const target = SOCIAL_LINKS[key];
+
+  if (!target) {
+    return json({ success: false, error: "Unknown social link" }, { status: 404 });
+  }
+
+  if (isSocialBlocked(request)) {
+    return socialBlockedResponse();
+  }
+
+  return new Response(null, {
+    status: 302,
+    headers: {
+      Location: target,
+      "Cache-Control": "no-store",
+    },
+  });
 }
 
 async function handleViews(request, env) {
@@ -477,6 +550,14 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === "/api/views") {
       return handleViews(request, env);
+    }
+
+    if (url.pathname === "/api/social-access") {
+      return handleSocialAccess(request);
+    }
+
+    if (url.pathname.startsWith("/api/social/")) {
+      return handleSocialRedirect(request, url);
     }
 
     if (request.method !== "GET") {

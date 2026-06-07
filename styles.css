@@ -20,13 +20,22 @@
 }
 
 html {
+  width: 100%;
+  height: 100%;
   min-height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 body {
   position: relative;
+  width: 100%;
+  height: 100%;
   min-height: 100svh;
+  max-height: 100svh;
   margin: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   letter-spacing: 0;
   color: var(--text);
@@ -71,18 +80,24 @@ svg {
 }
 
 .page-shell {
+  --page-fit-scale: 1;
   display: grid;
   position: relative;
   z-index: 1;
   width: min(100%, 1040px);
-  min-height: 100svh;
+  height: 100svh;
+  min-height: 0;
+  max-height: 100svh;
   margin: 0 auto;
-  padding: 32px 18px;
+  padding: clamp(8px, 2.6svh, 32px) 18px;
   place-content: center;
   justify-items: center;
-  gap: 16px;
+  gap: clamp(6px, 1.4svh, 16px);
+  overflow: visible;
   perspective: 1200px;
-  transition: filter 420ms ease, transform 420ms ease;
+  scale: var(--page-fit-scale);
+  transform-origin: center;
+  transition: filter 420ms ease, transform 420ms ease, scale 180ms ease;
 }
 
 .enter-screen {
@@ -751,8 +766,9 @@ h1 {
 }
 
 .music-volume {
-  flex: 0 0 92px;
+  flex: 1 1 74px;
   width: 92px;
+  max-width: 92px;
 }
 
 .music-progress::-webkit-slider-runnable-track,
@@ -1047,7 +1063,7 @@ h1 {
   }
 
   .music-volume {
-    flex-basis: 82px;
+    flex-basis: 72px;
     width: 82px;
   }
 }
@@ -1176,9 +1192,22 @@ h1 {
     height: 32px;
   }
 
+  .music-controls {
+    gap: 4px;
+  }
+
+  .music-controls .music-button {
+    width: 31px;
+  }
+
+  .music-controls .music-button svg {
+    width: 17px;
+    height: 17px;
+  }
+
   .music-volume {
-    flex-basis: 72px;
-    width: 72px;
+    flex-basis: 54px;
+    width: 54px;
   }
 
   .music-state {
@@ -1252,12 +1281,12 @@ h1 {
   }
 
   .music-controls {
-    gap: 7px;
+    gap: 4px;
   }
 
   .music-volume {
-    flex-basis: 66px;
-    width: 66px;
+    flex-basis: 48px;
+    width: 48px;
   }
 }
 

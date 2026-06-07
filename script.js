@@ -590,9 +590,10 @@ function fitPageToViewport() {
   const paddingY = (parseFloat(shellStyle.paddingTop) || 0) + (parseFloat(shellStyle.paddingBottom) || 0);
   const gap = parseFloat(shellStyle.rowGap || shellStyle.gap) || 0;
   const footerHeight = el.siteFooter?.offsetHeight || 0;
-  const requiredHeight = el.profilePanel.offsetHeight + footerHeight + gap + paddingY;
+  const panelHeight = Math.max(el.profilePanel.offsetHeight, el.profilePanel.scrollHeight);
+  const requiredHeight = panelHeight + footerHeight + gap + paddingY;
   const viewportHeight = window.innerHeight || document.documentElement.clientHeight || requiredHeight;
-  const nextScale = Math.min(1, Math.max(0.62, (viewportHeight - 2) / requiredHeight));
+  const nextScale = Math.min(1, Math.max(0.62, (viewportHeight - 48) / requiredHeight));
   const currentScale = Number(el.pageShell.style.getPropertyValue("--page-fit-scale")) || 1;
 
   if (Math.abs(nextScale - currentScale) > 0.003) {

@@ -85,9 +85,7 @@ svg {
   position: relative;
   z-index: 1;
   width: min(100%, 1040px);
-  height: 100svh;
-  min-height: 0;
-  max-height: 100svh;
+  min-height: 100svh;
   margin: 0 auto;
   padding: clamp(8px, 2.6svh, 32px) 18px;
   place-content: center;
@@ -262,6 +260,10 @@ h1,
 
 .profile-panel > :is(.avatar-frame, .activity, .email-link, .quick-links, .views, .music-player, h1, .tagline) {
   transform: translateZ(18px);
+}
+
+.profile-panel > .music-player {
+  transform: none;
 }
 
 .avatar-frame {
@@ -641,21 +643,21 @@ h1 {
 }
 
 .music-player {
-  --music-cover-size: 72px;
-  --music-player-height: 116px;
-  --music-main-height: 90px;
-  --music-controls-height: 34px;
+  --music-cover-size: 58px;
+  --music-player-height: 96px;
+  --music-main-height: 74px;
+  --music-controls-height: 28px;
   position: relative;
   justify-self: center;
-  width: 430px;
+  width: 390px;
   max-width: 100%;
   height: var(--music-player-height);
   display: grid;
   grid-template-columns: var(--music-cover-size) minmax(0, 1fr);
   align-items: center;
-  gap: 12px;
-  margin-top: 18px;
-  padding: 12px;
+  gap: 9px;
+  margin-top: 12px;
+  padding: 10px;
   overflow: hidden;
   border: 1px solid rgba(255, 210, 210, 0.1);
   border-radius: 8px;
@@ -705,18 +707,18 @@ h1 {
 
 .music-main {
   display: grid;
-  grid-template-rows: 24px 16px var(--music-controls-height);
+  grid-template-rows: 20px 14px var(--music-controls-height);
   align-content: center;
   min-width: 0;
   height: var(--music-main-height);
-  gap: 8px;
+  gap: 5px;
 }
 
 .music-copy {
   display: flex;
   align-items: center;
   min-width: 0;
-  min-height: 24px;
+  min-height: 20px;
   text-align: left;
 }
 
@@ -731,29 +733,29 @@ h1 {
 
 .music-copy strong {
   color: #ffe1e1;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .music-progress-row,
 .music-state {
   color: rgba(255, 216, 216, 0.68);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 }
 
 .music-progress-row {
   display: grid;
-  grid-template-columns: 32px minmax(0, 1fr) 32px;
+  grid-template-columns: 30px minmax(0, 1fr) 30px;
   align-items: center;
-  gap: 8px;
-  height: 16px;
+  gap: 6px;
+  height: 14px;
 }
 
 .music-progress,
 .music-volume {
   min-width: 0;
-  height: 16px;
+  height: 14px;
   margin: 0;
   background: transparent;
   accent-color: var(--hot);
@@ -766,23 +768,23 @@ h1 {
 }
 
 .music-volume {
-  flex: 1 1 74px;
-  width: 92px;
-  max-width: 92px;
+  flex: 1 1 70px;
+  width: 70px;
+  max-width: 70px;
 }
 
 .music-progress::-webkit-slider-runnable-track,
 .music-volume::-webkit-slider-runnable-track {
-  height: 5px;
+  height: 4px;
   border-radius: 999px;
   background: rgba(255, 216, 216, 0.18);
 }
 
 .music-progress::-webkit-slider-thumb,
 .music-volume::-webkit-slider-thumb {
-  width: 14px;
-  height: 14px;
-  margin-top: -4.5px;
+  width: 12px;
+  height: 12px;
+  margin-top: -4px;
   border: 0;
   border-radius: 50%;
   background: #ff8c8c;
@@ -793,15 +795,15 @@ h1 {
 
 .music-progress::-moz-range-track,
 .music-volume::-moz-range-track {
-  height: 5px;
+  height: 4px;
   border-radius: 999px;
   background: rgba(255, 216, 216, 0.18);
 }
 
 .music-progress::-moz-range-thumb,
 .music-volume::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border: 0;
   border-radius: 50%;
   background: #ff8c8c;
@@ -812,7 +814,7 @@ h1 {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
   min-width: 0;
   height: var(--music-controls-height);
   overflow: hidden;
@@ -821,9 +823,9 @@ h1 {
 .music-button {
   display: grid;
   flex: 0 0 auto;
-  width: 34px;
-  height: 34px;
-  padding: 8px;
+  width: 28px;
+  height: 28px;
+  padding: 7px;
   place-items: center;
   color: #ff9b9b;
   cursor: pointer;
@@ -852,8 +854,8 @@ h1 {
 }
 
 .music-button svg {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
 }
 
 .icon-pause,
@@ -1045,26 +1047,26 @@ h1 {
   }
 
   .music-player {
-    --music-cover-size: 64px;
-    --music-player-height: 112px;
-    --music-main-height: 88px;
-    width: 360px;
-    margin-top: 16px;
-    padding: 11px;
+    --music-cover-size: 54px;
+    --music-player-height: 92px;
+    --music-main-height: 70px;
+    width: 330px;
+    margin-top: 12px;
+    padding: 9px;
   }
 
   .music-cover-frame {
-    width: 64px;
-    height: 64px;
+    width: 54px;
+    height: 54px;
   }
 
   .music-copy strong {
-    font-size: 15px;
+    font-size: 13.5px;
   }
 
   .music-volume {
-    flex-basis: 72px;
-    width: 82px;
+    flex-basis: 58px;
+    width: 58px;
   }
 }
 
@@ -1163,33 +1165,33 @@ h1 {
   }
 
   .music-player {
-    --music-cover-size: 58px;
-    --music-player-height: 108px;
-    --music-main-height: 86px;
-    --music-controls-height: 32px;
-    width: 300px;
-    gap: 10px;
-    margin-top: 14px;
-    padding: 10px;
+    --music-cover-size: 48px;
+    --music-player-height: 88px;
+    --music-main-height: 68px;
+    --music-controls-height: 28px;
+    width: 282px;
+    gap: 7px;
+    margin-top: 10px;
+    padding: 8px;
   }
 
   .music-cover-frame {
-    width: 58px;
-    height: 58px;
+    width: 48px;
+    height: 48px;
   }
 
   .music-copy strong {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .music-progress-row {
-    grid-template-columns: 28px minmax(0, 1fr) 28px;
-    gap: 6px;
+    grid-template-columns: 26px minmax(0, 1fr) 26px;
+    gap: 5px;
   }
 
   .music-button {
-    width: 32px;
-    height: 32px;
+    width: 27px;
+    height: 27px;
   }
 
   .music-controls {
@@ -1197,17 +1199,17 @@ h1 {
   }
 
   .music-controls .music-button {
-    width: 31px;
+    width: 27px;
   }
 
   .music-controls .music-button svg {
-    width: 17px;
-    height: 17px;
+    width: 14px;
+    height: 14px;
   }
 
   .music-volume {
-    flex-basis: 54px;
-    width: 54px;
+    flex-basis: 44px;
+    width: 44px;
   }
 
   .music-state {
@@ -1270,14 +1272,16 @@ h1 {
   }
 
   .music-player {
-    --music-cover-size: 52px;
+    --music-cover-size: 44px;
+    --music-player-height: 84px;
+    --music-main-height: 64px;
     width: 100%;
-    gap: 9px;
+    gap: 7px;
   }
 
   .music-cover-frame {
-    width: 52px;
-    height: 52px;
+    width: 44px;
+    height: 44px;
   }
 
   .music-controls {
@@ -1285,8 +1289,8 @@ h1 {
   }
 
   .music-volume {
-    flex-basis: 48px;
-    width: 48px;
+    flex-basis: 38px;
+    width: 38px;
   }
 }
 

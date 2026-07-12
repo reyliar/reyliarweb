@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>404 — Page not found | reyliar</title>
+    <meta name="description" content="The page you are looking for does not exist.">
+    <meta name="theme-color" content="#080b10">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+    <link rel="stylesheet" href="styles.css?v=20260712-3">
+    <style>
+      .notfound-shell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 24px;
+        text-align: center;
+      }
+
+      .notfound-code {
+        margin: 0;
+        color: transparent;
+        background: linear-gradient(180deg, var(--hero-heading-from) 8%, var(--hero-heading-mid) 42%, var(--hero-heading-to) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        font-size: clamp(80px, 18vw, 200px);
+        line-height: 1;
+        font-weight: 860;
+        letter-spacing: -0.03em;
+      }
+
+      .notfound-title {
+        margin: 10px 0 0;
+        color: var(--foreground);
+        font-size: clamp(22px, 4vw, 36px);
+        font-weight: 720;
+        letter-spacing: -0.01em;
+      }
+
+      .notfound-desc {
+        max-width: 420px;
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.7;
+        text-wrap: pretty;
+      }
+
+      .notfound-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .notfound-logo {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 18px;
+        border-radius: 50%;
+        object-fit: contain;
+      }
+
+      @media (max-width: 720px) {
+        .notfound-shell {
+          padding: 18px;
+        }
+
+        .notfound-logo {
+          width: 48px;
+          height: 48px;
+        }
+
+        .notfound-desc {
+          font-size: 14px;
+        }
+
+        .notfound-actions {
+          flex-direction: column;
+          width: 100%;
+          max-width: 280px;
+        }
+
+        .notfound-actions .button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="starfield" aria-hidden="true"></div>
+
+    <main class="notfound-shell">
+      <img class="notfound-logo" src="assets/logo.png" alt="reyliar logo" width="64" height="64">
+      <h1 class="notfound-code">404</h1>
+      <p class="notfound-title">Page not found</p>
+      <p class="notfound-desc">
+        The page you are looking for doesn't exist or has been moved.
+        Let's get you back to a place that works.
+      </p>
+      <div class="notfound-actions">
+        <a class="button button-primary" href="/">Back to home</a>
+        <a class="button button-outline" href="mailto:alkim@reyliar.xyz">Contact</a>
+      </div>
+    </main>
+
+    <script>
+      (function() {
+        const THEME_KEY = "portfolio-theme";
+        try {
+          var saved = localStorage.getItem(THEME_KEY);
+          if (saved === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+          }
+        } catch(e) {}
+      })();
+    </script>
+  </body>
+</html>

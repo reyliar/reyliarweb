@@ -1,159 +1,149 @@
 const COPY = {
   en: {
     title: "reyliar | Webmaster Portfolio",
-    description: "Webmaster portfolio for website builds, maintenance, performance, SEO, hosting, and bilingual English/Turkish web support.",
-    skip: "Skip to portfolio work",
+    description: "Webmaster portfolio for corporate websites, institutional web projects, maintenance, performance, SEO, hosting, and bilingual English/Turkish web support.",
+    skip: "Skip to content",
     siteHeaderLabel: "Primary navigation",
     brandLabel: "reyliar home",
     navLabel: "Portfolio sections",
     languageLabel: "Language",
-    navWork: "Work",
+    headerMail: "Email",
+    navAbout: "About",
+    navProjects: "Projects",
     navServices: "Services",
-    navProcess: "Process",
     navContact: "Contact",
-    heroEyebrow: "Webmaster for fast, cared-for sites",
-    heroTitle: "Webmaster Portfolio",
-    heroLead: "I build, repair, optimize, and maintain modern websites for people who need their online presence to feel sharp every day.",
+    heroEyebrow: "webmaster portfolio",
+    heroTitle: "Websites built clean, fast, and ready to grow.",
+    heroLead: "I build and maintain websites for people, companies, and institutions that need a structured online presence without the clutter.",
+    heroChipCorporate: "corporate",
+    heroChipInstitutional: "institutional",
+    heroChipMaintenance: "maintenance",
     heroActionsLabel: "Primary actions",
     ctaStart: "Start a project",
-    ctaWork: "View work",
-    signalsLabel: "Portfolio highlights",
-    signalFocusLabel: "Focus",
-    signalFocus: "Speed, clarity, upkeep",
-    signalStackLabel: "Stack",
-    signalStack: "HTML, CSS, JS, Cloudflare",
-    signalLangLabel: "Languages",
-    signalLang: "English + Turkish",
-    workKicker: "Selected Builds",
-    workTitle: "Selected webmaster work",
-    workLead: "A portfolio-style snapshot of the websites, care plans, and web systems I shape for practical everyday use.",
-    projectOneKicker: "Launch Build",
-    projectOneTitle: "Conversion-ready storefront",
-    projectOneDesc: "A responsive commerce front with product storytelling, fast loading pages, and clean handoff docs.",
-    projectTwoKicker: "Care Plan",
-    projectTwoTitle: "Maintenance dashboard",
-    projectTwoDesc: "Ongoing updates, uptime checks, backups, and issue tracking for a growing local service brand.",
-    projectThreeKicker: "Portfolio System",
-    projectThreeTitle: "Creator website",
-    projectThreeDesc: "A lightweight personal site with case-study sections, a custom contact flow, and bilingual content.",
-    projectTagsLabel: "Project tags",
-    tagPerformance: "Performance",
-    tagResponsive: "Responsive",
-    tagLaunch: "Launch",
-    tagUptime: "Uptime",
-    tagBackups: "Backups",
-    tagSupport: "Support",
-    tagBilingual: "Bilingual",
-    tagContent: "Content",
-    tagIdentity: "Identity",
-    servicesKicker: "Services",
+    ctaWork: "View projects",
+    statsLabel: "Portfolio highlights",
+    statProjects: "Live Projects",
+    statCare: "Site Care",
+    statSpeedValue: "Fast",
+    statSpeed: "Performance Focus",
+    statHosting: "Hosting Setup",
+    aboutKicker: "our story",
+    aboutTitle: "Built for websites that need a proper home.",
+    aboutLead: "My work brings structure, maintenance, and technical clarity into one organised webmaster service.",
+    aboutStory: "I create websites for individuals, creators, businesses, and institutions that need a strong and professional online presence. From responsive page structure to DNS, SSL, hosting, SEO basics, performance, backups, and ongoing edits, I handle the visible design details and the technical work that keeps everything running smoothly.",
+    summaryTitle: "In short",
+    summaryOne: "Corporate and institutional websites with a clean, reliable structure.",
+    summaryTwo: "Performance, SEO basics, hosting, SSL, DNS, redirects, and analytics.",
+    summaryThree: "Ongoing content updates, backups, maintenance, and practical support.",
+    summaryFour: "Bilingual English and Turkish web support for broader audiences.",
+    missionKicker: "mission",
+    missionText: "To deliver professional websites that are easy to understand, easy to manage, and strong enough to support real work.",
+    visionKicker: "vision",
+    visionText: "A web presence where design, speed, hosting, and maintenance work together without confusion.",
+    projectsSectionLabel: "Website projects",
+    projectsCarouselLabel: "Website projects carousel",
+    projectsIconGridLabel: "Website project icons",
+    servicesKicker: "services",
     servicesTitle: "Webmaster services",
-    servicesLead: "From first build to long-term care, every part of the site is shaped around speed, trust, and simple ownership.",
+    servicesLead: "A practical service stack for launch, maintenance, speed, SEO, and reliable ownership.",
     serviceBuildTitle: "Website builds",
-    serviceBuildDesc: "Custom responsive pages, portfolios, and landing pages from structure to launch.",
+    serviceBuildDesc: "Custom responsive pages, portfolios, corporate sites, institution-specific pages, and landing pages.",
     serviceCareTitle: "Maintenance",
-    serviceCareDesc: "Updates, content edits, uptime checks, backups, and small fixes before they become visible problems.",
+    serviceCareDesc: "Updates, content edits, accessibility checks, backups, and small fixes before they become visible problems.",
     serviceSeoTitle: "Performance and SEO",
     serviceSeoDesc: "Core web vitals, metadata, crawl basics, image weight, and page structure tuned for real visitors.",
     serviceHostingTitle: "Hosting and security",
-    serviceHostingDesc: "Domain setup, DNS, SSL, Cloudflare, redirects, forms, analytics, and practical hardening.",
-    processKicker: "Process",
-    processTitle: "A clear path from idea to maintained site",
-    processLead: "Compact, direct, and built so the site can keep improving after launch.",
-    processOneTitle: "Audit and plan",
-    processOneDesc: "Goals, pages, content, technical risks, and launch needs are mapped before design decisions harden.",
-    processTwoTitle: "Build and refine",
-    processTwoDesc: "Responsive implementation, visual polish, speed checks, and content cleanup happen together.",
-    processThreeTitle: "Launch and support",
-    processThreeDesc: "Deployment, DNS, monitoring, analytics, and upkeep are handled with a practical handoff.",
-    contactKicker: "Contact",
+    serviceHostingDesc: "Domain setup, DNS, SSL, redirects, forms, analytics, and practical hardening.",
+    contactKicker: "contact",
     contactTitle: "Need a webmaster who can keep the site alive after launch?",
     contactLead: "Send the goal, current URL if there is one, and the fastest way to reach you.",
-    contactLinksLabel: "Contact links",
-    contactDiscord: "Discord",
+    emailTitle: "Email Support",
+    emailDesc: "For projects, partnerships, revisions, or anything that needs a written reply.",
+    bionlukTitle: "Bionluk Profile",
+    bionlukDesc: "For freelance service requests and project offers through Bionluk.",
+    footerTagline: "Professional websites and ongoing webmaster support.",
+    footerSites: "Sites",
+    footerContact: "Contact",
+    footerEmail: "Email",
     footerText: "\u00a9 2026 reyliar. Webmaster portfolio.",
   },
   tr: {
     title: "reyliar | Webmaster Portfolyosu",
-    description: "Web site kurulumu, bakım, performans, SEO, hosting ve İngilizce/Türkçe webmaster desteği için portfolyo.",
-    skip: "Portfolyo çalışmalarına geç",
+    description: "Kurumsal web siteleri, kurumlara özel web projeleri, bakım, performans, SEO, hosting ve İngilizce/Türkçe webmaster desteği için portfolyo.",
+    skip: "İçeriğe geç",
     siteHeaderLabel: "Ana navigasyon",
     brandLabel: "reyliar ana sayfa",
     navLabel: "Portfolyo bölümleri",
     languageLabel: "Dil",
-    navWork: "İşler",
+    headerMail: "E-posta",
+    navAbout: "Hakkında",
+    navProjects: "Projeler",
     navServices: "Hizmetler",
-    navProcess: "Süreç",
     navContact: "İletişim",
-    heroEyebrow: "Hızlı ve özenli siteler için webmaster",
-    heroTitle: "Webmaster Portfolyosu",
-    heroLead: "Modern web siteleri kurar, düzeltir, hızlandırır ve düzenli bakımını yaparım; online varlığın her gün net ve güçlü hissettirsin.",
+    heroEyebrow: "webmaster portfolyosu",
+    heroTitle: "Temiz, hızlı ve büyümeye hazır web siteleri.",
+    heroLead: "Düzenli ve güvenilir bir dijital varlığa ihtiyaç duyan kişiler, şirketler ve kurumlar için web siteleri kurar ve bakımını yaparım.",
+    heroChipCorporate: "kurumsal",
+    heroChipInstitutional: "kurumlara özel",
+    heroChipMaintenance: "bakım",
     heroActionsLabel: "Birincil eylemler",
     ctaStart: "Proje başlat",
-    ctaWork: "İşleri gör",
-    signalsLabel: "Portfolyo öne çıkanları",
-    signalFocusLabel: "Odak",
-    signalFocus: "Hız, netlik, bakım",
-    signalStackLabel: "Teknoloji",
-    signalStack: "HTML, CSS, JS, Cloudflare",
-    signalLangLabel: "Diller",
-    signalLang: "İngilizce + Türkçe",
-    workKicker: "Seçili İşler",
-    workTitle: "Seçili webmaster çalışmaları",
-    workLead: "Günlük kullanıma uygun web siteleri, bakım planları ve web sistemleri için portfolyo tarzı bir özet.",
-    projectOneKicker: "Lansman Kurulumu",
-    projectOneTitle: "Dönüşüme hazır mağaza vitrini",
-    projectOneDesc: "Ürün anlatımı, hızlı yüklenen sayfalar ve temiz teslim dokümanlarıyla responsive bir ticaret vitrini.",
-    projectTwoKicker: "Bakım Planı",
-    projectTwoTitle: "Bakım panosu",
-    projectTwoDesc: "Büyüyen yerel bir hizmet markası için güncellemeler, erişilebilirlik kontrolleri, yedekler ve iş takibi.",
-    projectThreeKicker: "Portfolyo Sistemi",
-    projectThreeTitle: "İçerik üretici sitesi",
-    projectThreeDesc: "Vaka çalışması bölümleri, özel iletişim akışı ve çift dilli içerikle hafif bir kişisel site.",
-    projectTagsLabel: "Proje etiketleri",
-    tagPerformance: "Performans",
-    tagResponsive: "Responsive",
-    tagLaunch: "Lansman",
-    tagUptime: "Erişilebilirlik",
-    tagBackups: "Yedekler",
-    tagSupport: "Destek",
-    tagBilingual: "Çift dilli",
-    tagContent: "İçerik",
-    tagIdentity: "Kimlik",
-    servicesKicker: "Hizmetler",
+    ctaWork: "Projeleri gör",
+    statsLabel: "Portfolyo öne çıkanları",
+    statProjects: "Canlı Proje",
+    statCare: "Site Bakımı",
+    statSpeedValue: "Hızlı",
+    statSpeed: "Performans Odağı",
+    statHosting: "Hosting Kurulumu",
+    aboutKicker: "hikaye",
+    aboutTitle: "Düzenli bir yuvaya ihtiyacı olan web siteleri için.",
+    aboutLead: "Çalışma tarzımın merkezinde düzen, bakım ve teknik netlik olan pratik bir webmaster hizmeti var.",
+    aboutStory: "Güçlü ve profesyonel bir dijital varlığa ihtiyaç duyan bireyler, içerik üreticileri, işletmeler ve kurumlar için web siteleri hazırlıyorum. Responsive sayfa yapısından DNS, SSL, hosting, temel SEO, performans, yedekleme ve düzenli içerik güncellemelerine kadar hem görünen tasarım detaylarıyla hem de sitenin sorunsuz çalışmasını sağlayan teknik kısımlarla ilgileniyorum.",
+    summaryTitle: "Kısaca",
+    summaryOne: "Temiz ve güvenilir yapıda kurumsal ve kurumlara özel web siteleri.",
+    summaryTwo: "Performans, temel SEO, hosting, SSL, DNS, yönlendirmeler ve analitik.",
+    summaryThree: "Düzenli içerik güncellemeleri, yedekler, bakım ve pratik destek.",
+    summaryFour: "Daha geniş kitleler için İngilizce ve Türkçe web desteği.",
+    missionKicker: "misyon",
+    missionText: "Anlaşılması kolay, yönetilebilir ve gerçek iş ihtiyaçlarını taşıyabilecek profesyonel web siteleri sunmak.",
+    visionKicker: "vizyon",
+    visionText: "Tasarım, hız, hosting ve bakımın karışıklık yaratmadan birlikte çalıştığı bir web varlığı.",
+    projectsSectionLabel: "Website projeleri",
+    projectsCarouselLabel: "Website projeleri şeridi",
+    projectsIconGridLabel: "Website proje ikonları",
+    servicesKicker: "hizmetler",
     servicesTitle: "Webmaster hizmetleri",
-    servicesLead: "İlk kurulumdan uzun vadeli bakıma kadar sitenin her parçası hız, güven ve sade sahiplik için şekillenir.",
+    servicesLead: "Yayın, bakım, hız, SEO ve güvenilir site sahipliği için pratik hizmet yapısı.",
     serviceBuildTitle: "Web site kurulumu",
-    serviceBuildDesc: "Yapıdan yayına kadar özel responsive sayfalar, portfolyolar ve landing page tasarımları.",
+    serviceBuildDesc: "Özel responsive sayfalar, portfolyolar, kurumsal siteler, kurumlara özel sayfalar ve landing page tasarımları.",
     serviceCareTitle: "Bakım",
     serviceCareDesc: "Güncellemeler, içerik düzenlemeleri, erişilebilirlik kontrolleri, yedekler ve görünür olmadan çözülen küçük sorunlar.",
     serviceSeoTitle: "Performans ve SEO",
     serviceSeoDesc: "Core web vitals, meta veriler, taranabilirlik, görsel ağırlığı ve sayfa yapısı gerçek ziyaretçiler için ayarlanır.",
     serviceHostingTitle: "Hosting ve güvenlik",
-    serviceHostingDesc: "Alan adı kurulumu, DNS, SSL, Cloudflare, yönlendirmeler, formlar, analitik ve pratik güvenlik sıkılaştırmaları.",
-    processKicker: "Süreç",
-    processTitle: "Fikirden bakımı yapılan siteye net bir yol",
-    processLead: "Kompakt, doğrudan ve sitenin yayından sonra da gelişebilmesi için kurulu bir süreç.",
-    processOneTitle: "Analiz ve plan",
-    processOneDesc: "Hedefler, sayfalar, içerik, teknik riskler ve yayın ihtiyaçları tasarım kararları netleşmeden önce belirlenir.",
-    processTwoTitle: "Kurulum ve iyileştirme",
-    processTwoDesc: "Responsive geliştirme, görsel son dokunuşlar, hız kontrolleri ve içerik temizliği birlikte ilerler.",
-    processThreeTitle: "Yayın ve destek",
-    processThreeDesc: "Dağıtım, DNS, izleme, analitik ve bakım pratik bir teslim süreciyle ele alınır.",
-    contactKicker: "İletişim",
+    serviceHostingDesc: "Alan adı kurulumu, DNS, SSL, yönlendirmeler, formlar, analitik ve pratik güvenlik sıkılaştırmaları.",
+    contactKicker: "iletişim",
     contactTitle: "Yayından sonra da siteyi canlı tutacak bir webmaster mı gerekiyor?",
     contactLead: "Hedefi, varsa mevcut URL'yi ve sana en hızlı ulaşılacak yolu gönder.",
-    contactLinksLabel: "İletişim bağlantıları",
-    contactDiscord: "Discord",
+    emailTitle: "E-posta Desteği",
+    emailDesc: "Projeler, iş birlikleri, revizyonlar veya yazılı yanıt gerektiren her konu için.",
+    bionlukTitle: "Bionluk Profili",
+    bionlukDesc: "Bionluk üzerinden freelance hizmet talepleri ve proje teklifleri için.",
+    footerTagline: "Profesyonel web siteleri ve sürekli webmaster desteği.",
+    footerSites: "Siteler",
+    footerContact: "İletişim",
+    footerEmail: "E-posta",
     footerText: "\u00a9 2026 reyliar. Webmaster portfolyosu.",
   },
 };
 
 const DEFAULT_LANGUAGE = "en";
 const STORAGE_KEY = "portfolio-language";
+const THEME_KEY = "portfolio-theme";
 const doc = document.documentElement;
 const metaDescription = document.querySelector("meta[name='description']");
 const header = document.querySelector(".site-header");
+const themeToggle = document.getElementById("theme-toggle");
 const languageButtons = [...document.querySelectorAll("[data-lang-button]")];
 const navLinks = [...document.querySelectorAll("[data-nav-link]")];
 const sections = navLinks
@@ -250,6 +240,49 @@ function initActiveNavigation() {
 }
 
 initLanguageSwitch();
+initThemeToggle();
 initActiveNavigation();
 updateHeaderState();
 window.addEventListener("scroll", updateHeaderState, { passive: true });
+
+/* ── Theme toggle ── */
+
+function readStoredTheme() {
+  try {
+    return localStorage.getItem(THEME_KEY);
+  } catch {
+    return "";
+  }
+}
+
+function writeStoredTheme(theme) {
+  try {
+    localStorage.setItem(THEME_KEY, theme);
+  } catch {
+    // Theme still applies for current view.
+  }
+}
+
+function applyTheme(theme) {
+  if (theme === "light") {
+    doc.setAttribute("data-theme", "light");
+  } else {
+    doc.removeAttribute("data-theme");
+  }
+}
+
+function toggleTheme() {
+  const current = doc.getAttribute("data-theme") === "light" ? "light" : "dark";
+  const next = current === "light" ? "dark" : "light";
+  applyTheme(next);
+  writeStoredTheme(next);
+}
+
+function initThemeToggle() {
+  const saved = readStoredTheme();
+  applyTheme(saved || "dark");
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", toggleTheme);
+  }
+}

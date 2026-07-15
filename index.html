@@ -1,274 +1,337 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>reyliar | Webmaster Portfolio</title>
-    <meta name="description" content="Webmaster portfolio for corporate websites, institutional web projects, maintenance, performance, SEO, hosting, and bilingual English/Turkish web support.">
-    <meta name="theme-color" content="#080b10">
-    <link rel="canonical" href="https://reyliar.xyz/">
 
-    <meta property="og:title" content="reyliar | Webmaster Portfolio">
-    <meta property="og:description" content="Corporate websites, institutional web projects, maintenance, performance, hosting, and bilingual webmaster support.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://reyliar.xyz/">
-    <meta property="og:image" content="https://reyliar.xyz/assets/webmaster-workspace-hero.png">
-    <meta property="og:site_name" content="reyliar">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="reyliar | Webmaster Portfolio">
-    <meta name="twitter:description" content="Corporate websites, institutional web projects, maintenance, performance, hosting, and bilingual webmaster support.">
-    <meta name="twitter:image" content="https://reyliar.xyz/assets/webmaster-workspace-hero.png">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>reyliar</title>
+  <meta name="description"
+    content="I build, design, and maintain fast, clean websites. I handle the hosting, DNS, performance, and updates so you don't have to.">
+  <meta name="theme-color" content="#080b10">
+  <link rel="canonical" href="https://reyliar.xyz/">
 
-    <link id="site-icon" rel="icon" href="assets/logo.png" type="image/png">
-    <link rel="preload" href="assets/oyunabisi.png" as="image">
-    <link rel="preload" href="assets/almed.png" as="image">
-    <link rel="stylesheet" href="styles.css?v=20260712-3">
-  </head>
-  <body>
-    <a class="skip-link" href="#about" data-i18n="skip">Skip to content</a>
+  <meta property="og:title" content="reyliar">
+  <meta property="og:description"
+    content="I build, design, and maintain fast, clean websites. I handle the hosting, DNS, performance, and updates.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://reyliar.xyz/">
+  <meta property="og:image" content="https://reyliar.xyz/assets/webmaster-workspace-hero.png">
+  <meta property="og:site_name" content="reyliar">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="reyliar">
+  <meta name="twitter:description"
+    content="I build, design, and maintain fast, clean websites. I handle the hosting, DNS, performance, and updates.">
+  <meta name="twitter:image" content="https://reyliar.xyz/assets/webmaster-workspace-hero.png">
 
-    <div class="starfield" aria-hidden="true"></div>
+  <link id="site-icon" rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="preload" href="assets/oyunabisi.png" as="image">
+  <link rel="preload" href="assets/almed.png" as="image">
+  <link rel="stylesheet" href="styles.css?v=20260714-2">
+</head>
 
-    <header class="site-header" aria-label="Primary navigation" data-i18n-aria-label="siteHeaderLabel">
-      <div class="header-content">
-        <a class="brand pill" href="#top" aria-label="reyliar home" data-i18n-aria-label="brandLabel">
-          <img class="brand-logo" src="assets/logo.png" alt="reyliar logo" width="34" height="34">
-          <span class="brand-name">reyliar</span>
+<body>
+  <div class="custom-cursor" id="custom-cursor"></div>
+  <a class="skip-link" href="#about" data-i18n="skip">Skip to content</a>
+
+  <div class="starfield" aria-hidden="true"></div>
+
+  <header class="site-header" aria-label="Primary navigation" data-i18n-aria-label="siteHeaderLabel">
+    <div class="header-content">
+      <a class="brand pill" href="#top" aria-label="reyliar home" data-i18n-aria-label="brandLabel">
+        <img class="brand-logo" src="assets/logo.png" alt="reyliar logo" width="34" height="34">
+        <span class="brand-name">reyliar</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Portfolio sections" data-i18n-aria-label="navLabel">
+        <a href="#about" data-nav-link data-i18n="navAbout">About</a>
+        <a href="#projects" data-nav-link data-i18n="navProjects">Projects</a>
+        <a href="#services" data-nav-link data-i18n="navServices">Services</a>
+        <a href="#contact" data-nav-link data-i18n="navContact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-mail pill" href="mailto:alkim@reyliar.xyz" data-i18n="headerMail">Email</a>
+        <div class="language-switch pill" role="group" aria-label="Language" data-i18n-aria-label="languageLabel">
+          <button class="language-button" type="button" data-lang-button="en" aria-pressed="true">EN</button>
+          <button class="language-button" type="button" data-lang-button="tr" aria-pressed="false">TR</button>
+        </div>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark/light mode" id="theme-toggle">
+          <svg class="icon-sun" viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <path
+              d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10ZM12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42Z" />
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="site-main">
+    <section class="hero-shell" aria-labelledby="hero-title">
+      <div class="hero-copy reveal">
+        <p class="chip" data-i18n="heroEyebrow">reyliar</p>
+        <h1 id="hero-title" data-i18n="heroTitle">I build eye-catching and high-performance websites.</h1>
+        <p class="hero-lead" data-i18n="heroLead">
+          No clutter, no complicated jargon. I build clean, fast websites for creators and small businesses, and make
+          sure they stay online, secure, and updated.
+        </p>
+
+        <div class="hero-actions" aria-label="Primary actions" data-i18n-aria-label="heroActionsLabel">
+          <a class="button button-primary" href="mailto:alkim@reyliar.xyz" data-i18n="ctaStart">Start a project</a>
+          <a class="button button-outline" href="#projects" data-i18n="ctaWork">View projects</a>
+        </div>
+      </div>
+
+      <div class="hero-side reveal delay-100" aria-hidden="true">
+        <div class="hero-mark-wrap">
+          <img class="hero-logo" src="assets/logo.png" alt="reyliar" width="160" height="160">
+        </div>
+        <div class="hero-chips">
+          <span data-i18n="heroChipCorporate">corporate</span>
+          <span data-i18n="heroChipInstitutional">institutional</span>
+          <span data-i18n="heroChipMaintenance">maintenance</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="Portfolio highlights" data-i18n-aria-label="statsLabel">
+      <article class="stat-card reveal">
+        <span class="stat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img">
+            <path
+              d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v13A2.5 2.5 0 0 1 17.5 21h-11A2.5 2.5 0 0 1 4 18.5v-13Zm2.5-.7a.7.7 0 0 0-.7.7v2h12.4v-2a.7.7 0 0 0-.7-.7h-11Zm-.7 4.5v9.2c0 .39.31.7.7.7h11c.39 0 .7-.31.7-.7V9.3H5.8Z" />
+          </svg>
+        </span>
+        <strong>2</strong>
+        <span data-i18n="statProjects">Live Projects</span>
+      </article>
+      <article class="stat-card reveal delay-100">
+        <span class="stat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img">
+            <path d="M12 2.5a9.5 9.5 0 1 0 9.5 9.5h-1.8A7.7 7.7 0 1 1 12 4.3V2.5Zm.9 1.1v6.1h6.1v1.8h-7.9V3.6h1.8Z" />
+          </svg>
+        </span>
+        <strong>24/7</strong>
+        <span data-i18n="statCare">Site Care</span>
+      </article>
+      <article class="stat-card reveal delay-200">
+        <span class="stat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img">
+            <path d="M13 3 4 14h6l-1 7 9-11h-6l1-7Z" />
+          </svg>
+        </span>
+        <strong data-i18n="statSpeedValue">Fast</strong>
+        <span data-i18n="statSpeed">Performance Focus</span>
+      </article>
+      <article class="stat-card reveal delay-300">
+        <span class="stat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img">
+            <path d="M12 2 4.5 5v6.2c0 4.8 3.1 9.1 7.5 10.8 4.4-1.7 7.5-6 7.5-10.8V5L12 2Z" />
+          </svg>
+        </span>
+        <strong>DNS</strong>
+        <span data-i18n="statHosting">Hosting Setup</span>
+      </article>
+    </section>
+
+    <section id="about" class="section about-section" aria-labelledby="about-title">
+      <div class="section-head reveal">
+        <h2 id="about-title" data-i18n="aboutTitle">Websites need looking after.</h2>
+        <p data-i18n="aboutLead">
+          Designing a site is just the first step. Keeping it running, fast, and secure is where most people get stuck.
+        </p>
+      </div>
+
+      <div class="story-card reveal">
+        <p data-i18n="aboutStory">
+          I help creators and small businesses run their websites without the stress. Instead of just delivering a
+          design and walking away, I handle the setup, hosting, DNS, speed optimizations, backups, and regular content
+          updates. You get a fast website that works, and a direct line to someone who can update it whenever you need.
+        </p>
+
+        <div class="summary-box">
+          <h3 data-i18n="summaryTitle">In short</h3>
+          <ul>
+            <li data-i18n="summaryOne">Corporate and institutional websites with a clean, reliable structure.</li>
+            <li data-i18n="summaryTwo">Performance, SEO basics, hosting, SSL, DNS, redirects, and analytics.</li>
+            <li data-i18n="summaryThree">Ongoing content updates, backups, maintenance, and practical support.</li>
+            <li data-i18n="summaryFour">Bilingual English and Turkish web support for broader audiences.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mission-grid">
+        <article class="mission-card reveal">
+          <p class="chip" data-i18n="missionKicker">mission</p>
+          <p data-i18n="missionText">To deliver visually stunning, aesthetic, and highly engaging websites that
+            captivate visitors at first glance.</p>
+        </article>
+        <article class="mission-card reveal delay-100">
+          <p class="chip" data-i18n="visionKicker">vision</p>
+          <p data-i18n="visionText">Designing unique interfaces with custom details, ensuring every corner of the site
+            feels premium and captivating.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects-section" aria-label="Website projects"
+      data-i18n-aria-label="projectsSectionLabel">
+      <div class="project-marquee reveal" aria-label="Website projects carousel" data-i18n-aria-label="projectsCarouselLabel">
+        <div class="marquee-track">
+          <!-- First half (unique set, needs to be wider than container to prevent gaps) -->
+          <a class="marquee-card project-icon-card" href="https://oyunabisianimasyon.com" target="_blank"
+            rel="noopener noreferrer" aria-label="Oyun Abisi Animasyon">
+            <span class="marquee-logo"><img src="assets/oyunabisi.png" width="360" height="260" alt=""></span>
+          </a>
+          <a class="marquee-card project-icon-card" href="https://almedmedikal.com.tr" target="_blank"
+            rel="noopener noreferrer" aria-label="Almed Medikal">
+            <span class="marquee-logo"><img src="assets/almed.png" width="360" height="120" alt=""></span>
+          </a>
+          <a class="marquee-card project-icon-card" href="https://oyunabisianimasyon.com" target="_blank"
+            rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+            <span class="marquee-logo"><img src="assets/oyunabisi.png" width="360" height="260" alt=""></span>
+          </a>
+          <a class="marquee-card project-icon-card" href="https://almedmedikal.com.tr" target="_blank"
+            rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+            <span class="marquee-logo"><img src="assets/almed.png" width="360" height="120" alt=""></span>
+          </a>
+          <a class="marquee-card project-icon-card" href="https://oyunabisianimasyon.com" target="_blank"
+            rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+            <span class="marquee-logo"><img src="assets/oyunabisi.png" width="360" height="260" alt=""></span>
+          </a>
+          <a class="marquee-card project-icon-card" href="https://almedmedikal.com.tr" target="_blank"
+            rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+            <span class="marquee-logo"><img src="assets/almed.png" width="360" height="120" alt=""></span>
+          </a>
+          <!-- Second half (duplicate set for seamless looping) -->
+          <a class="marquee-card project-icon-card" href="https://oyunabisianimasyon.com" target="_blank"
+            rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+            <span class="marquee-logo"><img src="assets/oyunabisi.png" width="360" height="260" alt=""></span>
+          </a>
+          <a class="marquee-card project-icon-card" href="https://almedmedikal.com.tr" target="_blank"
+            rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+            <span class="marquee-logo"><img src="assets/almed.png" width="360" height="120" alt=""></span>
+          </a>
+          <a class="marquee-card project-icon-card" href="https://oyunabisianimasyon.com" target="_blank"
+            rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+            <span class="marquee-logo"><img src="assets/oyunabisi.png" width="360" height="260" alt=""></span>
+          </a>
+          <a class="marquee-card project-icon-card" href="https://almedmedikal.com.tr" target="_blank"
+            rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+            <span class="marquee-logo"><img src="assets/almed.png" width="360" height="120" alt=""></span>
+          </a>
+          <a class="marquee-card project-icon-card" href="https://oyunabisianimasyon.com" target="_blank"
+            rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+            <span class="marquee-logo"><img src="assets/oyunabisi.png" width="360" height="260" alt=""></span>
+          </a>
+          <a class="marquee-card project-icon-card" href="https://almedmedikal.com.tr" target="_blank"
+            rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+            <span class="marquee-logo"><img src="assets/almed.png" width="360" height="120" alt=""></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section services-section" aria-labelledby="services-title">
+      <div class="section-head reveal">
+        <h2 id="services-title" data-i18n="servicesTitle">How I can help</h2>
+        <p data-i18n="servicesLead">From the first line of code to monthly updates, I've got your site covered.</p>
+      </div>
+
+      <div class="service-grid">
+        <article class="service-card reveal">
+          <h3 data-i18n="serviceBuildTitle">Website builds</h3>
+          <p data-i18n="serviceBuildDesc">Custom responsive pages, portfolios, corporate sites, institutional pages, and
+            landing pages.</p>
+        </article>
+        <article class="service-card reveal delay-100">
+          <h3 data-i18n="serviceCareTitle">Maintenance</h3>
+          <p data-i18n="serviceCareDesc">Updates, content edits, uptime checks, backups, and small fixes before they
+            become visible problems.</p>
+        </article>
+        <article class="service-card reveal delay-200">
+          <h3 data-i18n="serviceSeoTitle">Performance and SEO</h3>
+          <p data-i18n="serviceSeoDesc">Core web vitals, metadata, crawl basics, image weight, and page structure tuned
+            for real visitors.</p>
+        </article>
+        <article class="service-card reveal delay-300">
+          <h3 data-i18n="serviceHostingTitle">Hosting and security</h3>
+          <p data-i18n="serviceHostingDesc">Domain setup, DNS, SSL, redirects, forms, analytics, and practical
+            hardening.</p>
+        </article>
+        <article class="service-card reveal delay-400">
+          <h3 data-i18n="serviceVideoTitle">Video Editing & Motion</h3>
+          <p data-i18n="serviceVideoDesc">Professional After Effects editing, motion design, and formatting for social media or corporate use.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section" aria-labelledby="contact-title">
+      <div class="section-head reveal">
+        <p class="chip" data-i18n="contactKicker">contact</p>
+        <h2 id="contact-title" data-i18n="contactTitle">Need help with a website project?</h2>
+        <p data-i18n="contactLead">Tell me what you're building, your current site if you have one, and the best way to
+          reach you. I'll get back to you quickly.</p>
+      </div>
+
+      <div class="contact-grid">
+        <a class="contact-card reveal" href="mailto:alkim@reyliar.xyz">
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img">
+              <path
+                d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 3.1V17h16V8.1l-7.4 5.1a1 1 0 0 1-1.2 0L4 8.1ZM5.2 7l6.8 4.7L18.8 7H5.2Z" />
+            </svg>
+          </span>
+          <strong data-i18n="emailTitle">Email Support</strong>
+          <p data-i18n="emailDesc">For projects, partnerships, revisions, or anything that needs a written reply.</p>
+          <span>alkim@reyliar.xyz &rarr;</span>
         </a>
 
-        <nav class="site-nav" aria-label="Portfolio sections" data-i18n-aria-label="navLabel">
-          <a href="#about" data-nav-link data-i18n="navAbout">About</a>
-          <a href="#projects" data-nav-link data-i18n="navProjects">Projects</a>
-          <a href="#services" data-nav-link data-i18n="navServices">Services</a>
-          <a href="#contact" data-nav-link data-i18n="navContact">Contact</a>
-        </nav>
-
-        <div class="header-actions">
-          <a class="header-mail pill" href="mailto:alkim@reyliar.xyz" data-i18n="headerMail">Email</a>
-          <div class="language-switch pill" role="group" aria-label="Language" data-i18n-aria-label="languageLabel">
-            <button class="language-button" type="button" data-lang-button="en" aria-pressed="true">EN</button>
-            <button class="language-button" type="button" data-lang-button="tr" aria-pressed="false">TR</button>
-          </div>
-          <button class="theme-toggle" type="button" aria-label="Toggle dark/light mode" id="theme-toggle">
-            <svg class="icon-sun" viewBox="0 0 24 24" role="img" aria-hidden="true">
-              <path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10ZM12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42Z"/>
-            </svg>
-            <svg class="icon-moon" viewBox="0 0 24 24" role="img" aria-hidden="true">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/>
-            </svg>
-          </button>
-        </div>
+        <a class="contact-card reveal delay-100" href="https://bionluk.com/rey7iar" target="_blank" rel="noopener noreferrer">
+          <span class="contact-icon contact-icon-image" aria-hidden="true">
+            <img src="assets/bionluk.svg" alt="">
+          </span>
+          <strong data-i18n="bionlukTitle">Bionluk Profile</strong>
+          <p data-i18n="bionlukDesc">For freelance service requests and project offers through Bionluk.</p>
+          <span>bionluk.com/rey7iar &rarr;</span>
+        </a>
       </div>
-    </header>
+    </section>
+  </main>
 
-    <main id="top" class="site-main">
-      <section class="hero-shell" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="chip" data-i18n="heroEyebrow">webmaster portfolio</p>
-          <h1 id="hero-title" data-i18n="heroTitle">Websites built clean, fast, and ready to grow.</h1>
-          <p class="hero-lead" data-i18n="heroLead">
-            I build and maintain websites for people, companies, and institutions that need a structured online presence without the clutter.
-          </p>
-
-          <div class="hero-actions" aria-label="Primary actions" data-i18n-aria-label="heroActionsLabel">
-            <a class="button button-primary" href="mailto:alkim@reyliar.xyz" data-i18n="ctaStart">Start a project</a>
-            <a class="button button-outline" href="#projects" data-i18n="ctaWork">View projects</a>
-          </div>
-        </div>
-
-        <div class="hero-side" aria-hidden="true">
-          <div class="hero-mark-wrap">
-            <img class="hero-logo" src="assets/logo.png" alt="reyliar" width="160" height="160">
-          </div>
-          <div class="hero-chips">
-            <span data-i18n="heroChipCorporate">corporate</span>
-            <span data-i18n="heroChipInstitutional">institutional</span>
-            <span data-i18n="heroChipMaintenance">maintenance</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="stats-grid" aria-label="Portfolio highlights" data-i18n-aria-label="statsLabel">
-        <article class="stat-card">
-          <span class="stat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="img">
-              <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v13A2.5 2.5 0 0 1 17.5 21h-11A2.5 2.5 0 0 1 4 18.5v-13Zm2.5-.7a.7.7 0 0 0-.7.7v2h12.4v-2a.7.7 0 0 0-.7-.7h-11Zm-.7 4.5v9.2c0 .39.31.7.7.7h11c.39 0 .7-.31.7-.7V9.3H5.8Z"/>
-            </svg>
-          </span>
-          <strong>2</strong>
-          <span data-i18n="statProjects">Live Projects</span>
-        </article>
-        <article class="stat-card">
-          <span class="stat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="img">
-              <path d="M12 2.5a9.5 9.5 0 1 0 9.5 9.5h-1.8A7.7 7.7 0 1 1 12 4.3V2.5Zm.9 1.1v6.1h6.1v1.8h-7.9V3.6h1.8Z"/>
-            </svg>
-          </span>
-          <strong>24/7</strong>
-          <span data-i18n="statCare">Site Care</span>
-        </article>
-        <article class="stat-card">
-          <span class="stat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="img">
-              <path d="M13 3 4 14h6l-1 7 9-11h-6l1-7Z"/>
-            </svg>
-          </span>
-          <strong data-i18n="statSpeedValue">Fast</strong>
-          <span data-i18n="statSpeed">Performance Focus</span>
-        </article>
-        <article class="stat-card">
-          <span class="stat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="img">
-              <path d="M12 2 4.5 5v6.2c0 4.8 3.1 9.1 7.5 10.8 4.4-1.7 7.5-6 7.5-10.8V5L12 2Z"/>
-            </svg>
-          </span>
-          <strong>DNS</strong>
-          <span data-i18n="statHosting">Hosting Setup</span>
-        </article>
-      </section>
-
-      <section id="about" class="section about-section" aria-labelledby="about-title">
-        <div class="section-head">
-          <h2 id="about-title" data-i18n="aboutTitle">Built for websites that need a proper home.</h2>
-          <p data-i18n="aboutLead">
-            My work brings structure, maintenance, and technical clarity into one organised webmaster service.
-          </p>
-        </div>
-
-        <div class="story-card">
-          <p data-i18n="aboutStory">
-            I create websites for individuals, creators, businesses, and institutions that need a strong and professional online presence. From responsive page structure to DNS, SSL, hosting, SEO basics, performance, backups, and ongoing edits, I handle the visible design details and the technical work that keeps everything running smoothly.
-          </p>
-
-          <div class="summary-box">
-            <h3 data-i18n="summaryTitle">In short</h3>
-            <ul>
-              <li data-i18n="summaryOne">Corporate and institutional websites with a clean, reliable structure.</li>
-              <li data-i18n="summaryTwo">Performance, SEO basics, hosting, SSL, DNS, redirects, and analytics.</li>
-              <li data-i18n="summaryThree">Ongoing content updates, backups, maintenance, and practical support.</li>
-              <li data-i18n="summaryFour">Bilingual English and Turkish web support for broader audiences.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="mission-grid">
-          <article class="mission-card">
-            <p class="chip" data-i18n="missionKicker">mission</p>
-            <p data-i18n="missionText">To deliver professional websites that are easy to understand, easy to manage, and strong enough to support real work.</p>
-          </article>
-          <article class="mission-card">
-            <p class="chip" data-i18n="visionKicker">vision</p>
-            <p data-i18n="visionText">A web presence where design, speed, hosting, and maintenance work together without confusion.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="projects" class="section projects-section" aria-label="Website projects" data-i18n-aria-label="projectsSectionLabel">
-        <div class="project-marquee" aria-label="Website projects carousel" data-i18n-aria-label="projectsCarouselLabel">
-          <div class="marquee-track">
-            <a class="marquee-card project-icon-card" href="https://oyunabisianimasyon.com" target="_blank" rel="noopener noreferrer" aria-label="Oyun Abisi Animasyon">
-              <span class="marquee-logo"><img src="assets/oyunabisi.png" width="360" height="260" alt=""></span>
-            </a>
-            <a class="marquee-card project-icon-card" href="https://almedmedikal.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Almed Medikal">
-              <span class="marquee-logo"><img src="assets/almed.png" width="360" height="120" alt=""></span>
-            </a>
-            <a class="marquee-card project-icon-card" href="https://oyunabisianimasyon.com" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-              <span class="marquee-logo"><img src="assets/oyunabisi.png" width="360" height="260" alt=""></span>
-            </a>
-            <a class="marquee-card project-icon-card" href="https://almedmedikal.vercel.app" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-              <span class="marquee-logo"><img src="assets/almed.png" width="360" height="120" alt=""></span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section id="services" class="section services-section" aria-labelledby="services-title">
-        <div class="section-head">
-          <h2 id="services-title" data-i18n="servicesTitle">Webmaster services</h2>
-          <p data-i18n="servicesLead">A practical service stack for launch, maintenance, speed, SEO, and reliable ownership.</p>
-        </div>
-
-        <div class="service-grid">
-          <article class="service-card">
-            <h3 data-i18n="serviceBuildTitle">Website builds</h3>
-            <p data-i18n="serviceBuildDesc">Custom responsive pages, portfolios, corporate sites, institutional pages, and landing pages.</p>
-          </article>
-          <article class="service-card">
-            <h3 data-i18n="serviceCareTitle">Maintenance</h3>
-            <p data-i18n="serviceCareDesc">Updates, content edits, uptime checks, backups, and small fixes before they become visible problems.</p>
-          </article>
-          <article class="service-card">
-            <h3 data-i18n="serviceSeoTitle">Performance and SEO</h3>
-            <p data-i18n="serviceSeoDesc">Core web vitals, metadata, crawl basics, image weight, and page structure tuned for real visitors.</p>
-          </article>
-          <article class="service-card">
-            <h3 data-i18n="serviceHostingTitle">Hosting and security</h3>
-            <p data-i18n="serviceHostingDesc">Domain setup, DNS, SSL, redirects, forms, analytics, and practical hardening.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="contact" class="section contact-section" aria-labelledby="contact-title">
-        <div class="section-head">
-          <p class="chip" data-i18n="contactKicker">contact</p>
-          <h2 id="contact-title" data-i18n="contactTitle">Need a webmaster who can keep the site alive after launch?</h2>
-          <p data-i18n="contactLead">Send the goal, current URL if there is one, and the fastest way to reach you.</p>
-        </div>
-
-        <div class="contact-grid">
-          <a class="contact-card" href="mailto:alkim@reyliar.xyz">
-            <span class="contact-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" role="img">
-                <path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 3.1V17h16V8.1l-7.4 5.1a1 1 0 0 1-1.2 0L4 8.1ZM5.2 7l6.8 4.7L18.8 7H5.2Z"/>
-              </svg>
-            </span>
-            <strong data-i18n="emailTitle">Email Support</strong>
-            <p data-i18n="emailDesc">For projects, partnerships, revisions, or anything that needs a written reply.</p>
-            <span>alkim@reyliar.xyz &rarr;</span>
-          </a>
-
-          <a class="contact-card" href="https://bionluk.com/rey7iar" target="_blank" rel="noopener noreferrer">
-            <span class="contact-icon contact-icon-image" aria-hidden="true">
-              <img src="assets/bionluk.svg" alt="">
-            </span>
-            <strong data-i18n="bionlukTitle">Bionluk Profile</strong>
-            <p data-i18n="bionlukDesc">For freelance service requests and project offers through Bionluk.</p>
-            <span>bionluk.com/rey7iar &rarr;</span>
-          </a>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <img class="footer-logo" src="assets/yatay logo.png" alt="reyliar" height="42">
-          <div>
-            <h3>reyliar</h3>
-            <p data-i18n="footerTagline">Professional websites and ongoing webmaster support.</p>
-          </div>
-        </div>
-
-        <div class="footer-links">
-          <div>
-            <h4 data-i18n="footerSites">Sites</h4>
-            <a href="#projects" data-i18n="navProjects">Projects</a>
-            <a href="#services" data-i18n="navServices">Services</a>
-          </div>
-          <div>
-            <h4 data-i18n="footerContact">Contact</h4>
-            <a href="mailto:alkim@reyliar.xyz" data-i18n="footerEmail">Email</a>
-            <a href="https://bionluk.com/rey7iar" target="_blank" rel="noopener noreferrer">Bionluk</a>
-            <a href="#about" data-i18n="navAbout">About</a>
-          </div>
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img class="footer-logo" src="assets/yatay logo.png" alt="reyliar" height="42">
+        <div>
+          <h3>reyliar</h3>
+          <p data-i18n="footerTagline">Building and maintaining clean websites.</p>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <p data-i18n="footerText">&copy; 2026 reyliar. Webmaster portfolio.</p>
+      <div class="footer-links">
+        <div>
+          <h4 data-i18n="footerSites">Sites</h4>
+          <a href="#projects" data-i18n="navProjects">Projects</a>
+          <a href="#services" data-i18n="navServices">Services</a>
+        </div>
+        <div>
+          <h4 data-i18n="footerContact">Contact</h4>
+          <a href="mailto:alkim@reyliar.xyz" data-i18n="footerEmail">Email</a>
+          <a href="https://bionluk.com/rey7iar" target="_blank" rel="noopener noreferrer">Bionluk</a>
+          <a href="#about" data-i18n="navAbout">About</a>
+        </div>
       </div>
-    </footer>
+    </div>
 
-    <script src="script.js?v=20260712-3" defer></script>
-  </body>
+    <div class="footer-bottom">
+      <p data-i18n="footerText">&copy; 2026 reyliar.</p>
+    </div>
+  </footer>
+
+  <script src="script.js?v=20260714-2" defer></script>
+</body>
+
 </html>

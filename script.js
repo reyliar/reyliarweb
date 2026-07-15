@@ -1,7 +1,7 @@
 const COPY = {
   en: {
-    title: "reyliar | Webmaster Portfolio",
-    description: "Webmaster portfolio for corporate websites, institutional web projects, maintenance, performance, SEO, hosting, and bilingual English/Turkish web support.",
+    title: "reyliar",
+    description: "Hi, I'm reyliar. I build clean, fast websites and edit engaging videos for social media. I handle the technical details so you can focus on your work.",
     skip: "Skip to content",
     siteHeaderLabel: "Primary navigation",
     brandLabel: "reyliar home",
@@ -12,64 +12,66 @@ const COPY = {
     navProjects: "Projects",
     navServices: "Services",
     navContact: "Contact",
-    heroEyebrow: "webmaster portfolio",
-    heroTitle: "Websites built clean, fast, and ready to grow.",
-    heroLead: "I build and maintain websites for people, companies, and institutions that need a structured online presence without the clutter.",
-    heroChipCorporate: "corporate",
-    heroChipInstitutional: "institutional",
-    heroChipMaintenance: "maintenance",
+    heroEyebrow: "reyliar",
+    heroTitle: "I build clean websites and edit videos for social media.",
+    heroLead: "No corporate jargon, no complications. I design fast sites for creators and small businesses, keep them updated, and edit video content using After Effects.",
+    heroChipCorporate: "web design",
+    heroChipInstitutional: "maintenance",
+    heroChipMaintenance: "video editing",
     heroActionsLabel: "Primary actions",
-    ctaStart: "Start a project",
+    ctaStart: "Let's chat",
     ctaWork: "View projects",
     statsLabel: "Portfolio highlights",
     statProjects: "Live Projects",
-    statCare: "Site Care",
+    statCare: "Daily Care",
     statSpeedValue: "Fast",
     statSpeed: "Performance Focus",
-    statHosting: "Hosting Setup",
-    aboutKicker: "our story",
-    aboutTitle: "Built for websites that need a proper home.",
-    aboutLead: "My work brings structure, maintenance, and technical clarity into one organised webmaster service.",
-    aboutStory: "I create websites for individuals, creators, businesses, and institutions that need a strong and professional online presence. From responsive page structure to DNS, SSL, hosting, SEO basics, performance, backups, and ongoing edits, I handle the visible design details and the technical work that keeps everything running smoothly.",
-    summaryTitle: "In short",
-    summaryOne: "Corporate and institutional websites with a clean, reliable structure.",
-    summaryTwo: "Performance, SEO basics, hosting, SSL, DNS, redirects, and analytics.",
-    summaryThree: "Ongoing content updates, backups, maintenance, and practical support.",
-    summaryFour: "Bilingual English and Turkish web support for broader audiences.",
-    missionKicker: "mission",
-    missionText: "To deliver professional websites that are easy to understand, easy to manage, and strong enough to support real work.",
-    visionKicker: "vision",
-    visionText: "A web presence where design, speed, hosting, and maintenance work together without confusion.",
+    statHosting: "Setup & Hosting",
+    aboutKicker: "my story",
+    aboutTitle: "Taking the stress out of tech and video.",
+    aboutLead: "Keeping a website secure or editing a raw video takes time. I'm here to handle the technical details and the editing desk for you.",
+    aboutStory: "I help creators and small businesses grow their digital presence. I build fast, custom websites, manage all the domain and hosting setup, and keep everything updated. On top of that, I edit social media videos using After Effects. You get a direct point of contact for both your web updates and video projects—no middleman, no hassle.",
+    summaryTitle: "How I can help",
+    summaryOne: "Custom, lightweight websites built to look great and load instantly.",
+    summaryTwo: "Handling the technical setup: domains, SSL, hosting, and optimizations.",
+    summaryThree: "Social media video editing and motion graphics (After Effects).",
+    summaryFour: "Ongoing updates, site care, and direct, friendly support.",
+    missionKicker: "my focus",
+    missionText: "To deliver professional, clean websites and polished video content that connects with people instantly.",
+    visionKicker: "how I work",
+    visionText: "A simple workflow where web design, hosting, and video editing come together smoothly.",
     projectsSectionLabel: "Website projects",
     projectsCarouselLabel: "Website projects carousel",
     projectsIconGridLabel: "Website project icons",
     servicesKicker: "services",
-    servicesTitle: "Webmaster services",
-    servicesLead: "A practical service stack for launch, maintenance, speed, SEO, and reliable ownership.",
-    serviceBuildTitle: "Website builds",
-    serviceBuildDesc: "Custom responsive pages, portfolios, corporate sites, institution-specific pages, and landing pages.",
-    serviceCareTitle: "Maintenance",
-    serviceCareDesc: "Updates, content edits, accessibility checks, backups, and small fixes before they become visible problems.",
-    serviceSeoTitle: "Performance and SEO",
-    serviceSeoDesc: "Core web vitals, metadata, crawl basics, image weight, and page structure tuned for real visitors.",
-    serviceHostingTitle: "Hosting and security",
-    serviceHostingDesc: "Domain setup, DNS, SSL, redirects, forms, analytics, and practical hardening.",
+    servicesTitle: "What we can do",
+    servicesLead: "From the first line of code to the final video render, I've got your back.",
+    serviceBuildTitle: "Web Design & Builds",
+    serviceBuildDesc: "Responsive, lightweight websites, portfolios, and landing pages designed to read beautifully on any screen.",
+    serviceCareTitle: "Updates & Support",
+    serviceCareDesc: "Need to edit text, swap images, or add a page? Just send a message and I'll update it. I also run regular backups and monitor uptime.",
+    serviceSeoTitle: "Speed & Performance",
+    serviceSeoDesc: "Making sure your site loads in under a second and is correctly structured for search engines.",
+    serviceHostingTitle: "Hosting & Setup",
+    serviceHostingDesc: "Managing DNS, securing your site with SSL certificates, and setting up contact forms.",
+    serviceVideoTitle: "Video Editing & After Effects",
+    serviceVideoDesc: "Polished video editing, custom motion graphics, and styling for your social media channels.",
     contactKicker: "contact",
-    contactTitle: "Need a webmaster who can keep the site alive after launch?",
-    contactLead: "Send the goal, current URL if there is one, and the fastest way to reach you.",
-    emailTitle: "Email Support",
-    emailDesc: "For projects, partnerships, revisions, or anything that needs a written reply.",
+    contactTitle: "Let's build something together",
+    contactLead: "Tell me about your project and the best way to reach you. I'll get back to you quickly.",
+    emailTitle: "Send me an email",
+    emailDesc: "For project ideas, questions, or if you just want to chat details.",
     bionlukTitle: "Bionluk Profile",
-    bionlukDesc: "For freelance service requests and project offers through Bionluk.",
-    footerTagline: "Professional websites and ongoing webmaster support.",
+    bionlukDesc: "If you prefer working through Bionluk, you can order a service directly from my profile.",
+    footerTagline: "Building websites and editing social media videos.",
     footerSites: "Sites",
     footerContact: "Contact",
     footerEmail: "Email",
-    footerText: "\u00a9 2026 reyliar. Webmaster portfolio.",
+    footerText: "\u00a9 2026 reyliar.",
   },
   tr: {
-    title: "reyliar | Webmaster Portfolyosu",
-    description: "Kurumsal web siteleri, kurumlara özel web projeleri, bakım, performans, SEO, hosting ve İngilizce/Türkçe webmaster desteği için portfolyo.",
+    title: "reyliar",
+    description: "Selam, ben reyliar. Hızlı web siteleri tasarlıyor ve sosyal medya videoları kurguluyorum. Teknik detaylar ve kurgu işleri bende, siz işinize odaklanın.",
     skip: "İçeriğe geç",
     siteHeaderLabel: "Ana navigasyon",
     brandLabel: "reyliar ana sayfa",
@@ -80,60 +82,62 @@ const COPY = {
     navProjects: "Projeler",
     navServices: "Hizmetler",
     navContact: "İletişim",
-    heroEyebrow: "webmaster portfolyosu",
-    heroTitle: "Temiz, hızlı ve büyümeye hazır web siteleri.",
-    heroLead: "Düzenli ve güvenilir bir dijital varlığa ihtiyaç duyan kişiler, şirketler ve kurumlar için web siteleri kurar ve bakımını yaparım.",
-    heroChipCorporate: "kurumsal",
-    heroChipInstitutional: "kurumlara özel",
-    heroChipMaintenance: "bakım",
+    heroEyebrow: "reyliar",
+    heroTitle: "Hem hızlı web siteleri kuruyorum hem de sosyal medya videoları kurguluyorum.",
+    heroLead: "Gereksiz teknik terimler ve karmaşa yok. İçerik üreticileri ve işletmeler için temiz tasarımlar yapıyor, sitelerin yayında ve güncel kalmasını sağlıyorum. Aynı zamanda After Effects ile videolarını hazırlıyorum.",
+    heroChipCorporate: "web tasarım",
+    heroChipInstitutional: "destek & bakım",
+    heroChipMaintenance: "video kurgu",
     heroActionsLabel: "Birincil eylemler",
-    ctaStart: "Proje başlat",
+    ctaStart: "Konuşalım",
     ctaWork: "Projeleri gör",
     statsLabel: "Portfolyo öne çıkanları",
-    statProjects: "Canlı Proje",
-    statCare: "Site Bakımı",
+    statProjects: "Aktif Proje",
+    statCare: "Günlük Bakım",
     statSpeedValue: "Hızlı",
-    statSpeed: "Performans Odağı",
-    statHosting: "Hosting Kurulumu",
-    aboutKicker: "hikaye",
-    aboutTitle: "Düzenli bir yuvaya ihtiyacı olan web siteleri için.",
-    aboutLead: "Çalışma tarzımın merkezinde düzen, bakım ve teknik netlik olan pratik bir webmaster hizmeti var.",
-    aboutStory: "Güçlü ve profesyonel bir dijital varlığa ihtiyaç duyan bireyler, içerik üreticileri, işletmeler ve kurumlar için web siteleri hazırlıyorum. Responsive sayfa yapısından DNS, SSL, hosting, temel SEO, performans, yedekleme ve düzenli içerik güncellemelerine kadar hem görünen tasarım detaylarıyla hem de sitenin sorunsuz çalışmasını sağlayan teknik kısımlarla ilgileniyorum.",
-    summaryTitle: "Kısaca",
-    summaryOne: "Temiz ve güvenilir yapıda kurumsal ve kurumlara özel web siteleri.",
-    summaryTwo: "Performans, temel SEO, hosting, SSL, DNS, yönlendirmeler ve analitik.",
-    summaryThree: "Düzenli içerik güncellemeleri, yedekler, bakım ve pratik destek.",
-    summaryFour: "Daha geniş kitleler için İngilizce ve Türkçe web desteği.",
-    missionKicker: "misyon",
-    missionText: "Anlaşılması kolay, yönetilebilir ve gerçek iş ihtiyaçlarını taşıyabilecek profesyonel web siteleri sunmak.",
-    visionKicker: "vizyon",
-    visionText: "Tasarım, hız, hosting ve bakımın karışıklık yaratmadan birlikte çalıştığı bir web varlığı.",
-    projectsSectionLabel: "Website projeleri",
-    projectsCarouselLabel: "Website projeleri şeridi",
-    projectsIconGridLabel: "Website proje ikonları",
+    statSpeed: "Hız Odaklı",
+    statHosting: "Kurulum & Hosting",
+    aboutKicker: "hikayem",
+    aboutTitle: "Dijital dünyada kafanız rahat olsun.",
+    aboutLead: "Bir web sitesini kurmak ya da ham bir videoyu kurgulamak yorucu olabilir. Teknik tarafta ve kurgu masasında yanınızdayım.",
+    aboutStory: "İçerik üreticilerinin ve küçük işletmelerin dijital işlerini sırtlanıyorum. Hızlı yüklenen web siteleri hazırlayıp hosting, alan adı, hız optimizasyonları ve yedeklemeleriyle ilgileniyorum. Bir yandan da After Effects ile sosyal medya videoları kurguluyorum. Sitenizde bir güncelleme gerektiğinde veya yeni bir video projesinde doğrudan bana yazabiliyorsunuz, aracı olmadan hallediyoruz.",
+    summaryTitle: "Kısaca Neler Yapıyorum?",
+    summaryOne: "Her cihazda anında açılan, sade ve şık web tasarımları.",
+    summaryTwo: "Teknik işlerin tamamı: hosting, domain, SSL ve yönlendirmeler.",
+    summaryThree: "Sosyal medya için After Effects ile video kurgusu ve animasyonlar.",
+    summaryFour: "Güncellemeler, bakım ve her zaman ulaşabileceğiniz doğrudan destek.",
+    missionKicker: "odak noktam",
+    missionText: "Ziyaretçiyi yormayan, hızlı açılan ve ilk bakışta kaliteli hissettiren işler çıkarmak.",
+    visionKicker: "çalışma tarzım",
+    visionText: "Tasarım, hız ve video kurgunun karmaşa yaratmadan, uyum içinde çalıştığı bir süreç sunmak.",
+    projectsSectionLabel: "Web sitesi projeleri",
+    projectsCarouselLabel: "Web sitesi projeleri şeridi",
+    projectsIconGridLabel: "Web sitesi proje ikonları",
     servicesKicker: "hizmetler",
-    servicesTitle: "Webmaster hizmetleri",
-    servicesLead: "Yayın, bakım, hız, SEO ve güvenilir site sahipliği için pratik hizmet yapısı.",
-    serviceBuildTitle: "Web site kurulumu",
-    serviceBuildDesc: "Özel responsive sayfalar, portfolyolar, kurumsal siteler, kurumlara özel sayfalar ve landing page tasarımları.",
-    serviceCareTitle: "Bakım",
-    serviceCareDesc: "Güncellemeler, içerik düzenlemeleri, erişilebilirlik kontrolleri, yedekler ve görünür olmadan çözülen küçük sorunlar.",
-    serviceSeoTitle: "Performans ve SEO",
-    serviceSeoDesc: "Core web vitals, meta veriler, taranabilirlik, görsel ağırlığı ve sayfa yapısı gerçek ziyaretçiler için ayarlanır.",
-    serviceHostingTitle: "Hosting ve güvenlik",
-    serviceHostingDesc: "Alan adı kurulumu, DNS, SSL, yönlendirmeler, formlar, analitik ve pratik güvenlik sıkılaştırmaları.",
+    servicesTitle: "Neler Yapabiliriz?",
+    servicesLead: "Kod satırlarından video kurgu masasına kadar dijital süreçlerinizde destek oluyorum.",
+    serviceBuildTitle: "Web Tasarım & Kurulum",
+    serviceBuildDesc: "Sıfırdan yazılmış, hızlı ve mobil uyumlu web siteleri, portfolyolar ve açılış sayfaları.",
+    serviceCareTitle: "Güncelleme & Destek",
+    serviceCareDesc: "Sitede yazı mı değişecek, yeni görsel mi eklenecek? Bir mesajla halledelim. Yedekleri ve sitenin durumunu da sürekli takip ederim.",
+    serviceSeoTitle: "Performans & SEO",
+    serviceSeoDesc: "Sitenizin bir saniyenin altında açılmasını ve arama motorlarında doğru şekilde görünmesini sağlıyorum.",
+    serviceHostingTitle: "Hosting & Domain",
+    serviceHostingDesc: "Alan adı ayarları, SSL sertifikası kurulumu ve iletişim formlarının çalışır hale getirilmesi.",
+    serviceVideoTitle: "Video Kurgu & After Effects",
+    serviceVideoDesc: "Sosyal medya kanallarınız için profesyonel montaj, After Effects ile özel geçişler ve hareketli grafikler.",
     contactKicker: "iletişim",
-    contactTitle: "Yayından sonra da siteyi canlı tutacak bir webmaster mı gerekiyor?",
-    contactLead: "Hedefi, varsa mevcut URL'yi ve sana en hızlı ulaşılacak yolu gönder.",
-    emailTitle: "E-posta Desteği",
-    emailDesc: "Projeler, iş birlikleri, revizyonlar veya yazılı yanıt gerektiren her konu için.",
-    bionlukTitle: "Bionluk Profili",
-    bionlukDesc: "Bionluk üzerinden freelance hizmet talepleri ve proje teklifleri için.",
-    footerTagline: "Profesyonel web siteleri ve sürekli webmaster desteği.",
+    contactTitle: "Birlikte çalışalım mı?",
+    contactLead: "Nasıl bir projeye ihtiyacınız olduğunu ve size nasıl ulaşabileceğimi yazın, hemen konuşalım.",
+    emailTitle: "E-posta ile Ulaşın",
+    emailDesc: "Sorularınız, proje fikirleriniz veya detaylı iş birlikleri için bana doğrudan yazabilirsiniz.",
+    bionlukTitle: "Bionluk Profilim",
+    bionlukDesc: "Eğer iş süreçlerini Bionluk üzerinden yürütmeyi tercih ederseniz, oradan da iletişime geçebilirsiniz.",
+    footerTagline: "Web siteleri tasarlıyor ve videolar kurguluyorum.",
     footerSites: "Siteler",
     footerContact: "İletişim",
     footerEmail: "E-posta",
-    footerText: "\u00a9 2026 reyliar. Webmaster portfolyosu.",
+    footerText: "\u00a9 2026 reyliar.",
   },
 };
 
@@ -243,6 +247,8 @@ initLanguageSwitch();
 initThemeToggle();
 initActiveNavigation();
 updateHeaderState();
+initCustomCursor();
+initScrollReveal();
 window.addEventListener("scroll", updateHeaderState, { passive: true });
 
 /* ── Theme toggle ── */
@@ -286,3 +292,92 @@ function initThemeToggle() {
     themeToggle.addEventListener("click", toggleTheme);
   }
 }
+
+/* ── Custom Cursor ── */
+
+function initCustomCursor() {
+  const cursor = document.getElementById("custom-cursor");
+  if (!cursor) return;
+
+  // Disable custom cursor on touch devices
+  if (window.matchMedia("(pointer: coarse)").matches) {
+    cursor.style.display = "none";
+    return;
+  }
+
+  let mouseX = -100;
+  let mouseY = -100;
+  let cursorX = -100;
+  let cursorY = -100;
+  let isVisible = false;
+
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!isVisible) {
+      cursor.style.opacity = "1";
+      isVisible = true;
+    }
+  });
+
+  document.addEventListener("mouseleave", () => {
+    cursor.style.opacity = "0";
+    isVisible = false;
+  });
+
+  document.addEventListener("mouseenter", () => {
+    cursor.style.opacity = "1";
+    isVisible = true;
+  });
+
+  function animate() {
+    const dx = mouseX - cursorX;
+    const dy = mouseY - cursorY;
+    cursorX += dx * 0.22;
+    cursorY += dy * 0.22;
+    cursor.style.left = `${cursorX}px`;
+    cursor.style.top = `${cursorY}px`;
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Set up event delegation for hover state cursor shifts
+  document.body.addEventListener("mouseover", (e) => {
+    const target = e.target.closest("a, button, input, select, textarea, [role='button'], .language-button");
+    if (target) {
+      if ((target.tagName === "INPUT" && (target.type === "text" || target.type === "email" || target.type === "search")) || target.tagName === "TEXTAREA") {
+        cursor.className = "custom-cursor cursor-text";
+      } else {
+        cursor.className = "custom-cursor cursor-pointer";
+      }
+    } else {
+      cursor.className = "custom-cursor";
+    }
+  });
+}
+
+/* ── Scroll Reveal ── */
+
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll(".reveal");
+  if (revealElements.length === 0) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      root: null,
+      threshold: 0.08,
+      rootMargin: "0px 0px -40px 0px",
+    }
+  );
+
+  revealElements.forEach((el) => observer.observe(el));
+}
+

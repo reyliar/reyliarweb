@@ -43,7 +43,7 @@
 
   --marquee-fade: rgba(8, 11, 16, 0.94);
 
-  --logo-bg: rgba(255, 255, 255, 0.94);
+  --logo-bg: radial-gradient(circle, rgba(167, 216, 255, 0.22) 0%, rgba(167, 216, 255, 0.03) 50%, transparent 70%);
   --icon-bg: rgba(255, 255, 255, 0.93);
 }
 
@@ -88,7 +88,7 @@
 
   --marquee-fade: rgba(244, 246, 250, 0.94);
 
-  --logo-bg: rgba(255, 255, 255, 0.96);
+  --logo-bg: radial-gradient(circle, rgba(26, 111, 181, 0.15) 0%, rgba(26, 111, 181, 0.02) 50%, transparent 70%);
   --icon-bg: rgba(255, 255, 255, 0.96);
 }
 
@@ -744,11 +744,6 @@ select {
   animation: marquee-left 20s linear infinite;
 }
 
-.project-marquee:hover .marquee-track,
-.project-marquee:focus-within .marquee-track {
-  animation-play-state: paused;
-}
-
 @keyframes marquee-left {
   from {
     transform: translateX(0);
@@ -1296,6 +1291,86 @@ select {
   .footer-logo {
     height: 28px;
   }
+}
+
+/* Custom Cursor styles */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  pointer-events: none;
+  z-index: 99999;
+  background-image: url('bluepromisewf2/Normal Selectb.cur');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: translate(-2px, -2px); /* Align cursor tip with click hotspot */
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+  will-change: left, top, transform;
+}
+
+/* For interactive elements, scale on hover */
+.custom-cursor.cursor-pointer {
+  transform: translate(-2px, -2px) scale(1.22);
+}
+
+.custom-cursor.cursor-text {
+  transform: translate(-2px, -2px) scale(0.92);
+}
+
+/* Hide default cursor on desktop */
+@media (hover: hover) and (pointer: fine) {
+  body, a, button, input, select, textarea, [role="button"], .language-button {
+    cursor: none !important;
+  }
+}
+
+/* Fallback for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+  body, a, button, input, select, textarea, [role="button"], .language-button {
+    cursor: auto !important;
+  }
+}
+
+/* Scroll Reveal Smooth Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay classes for staggered animations */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+
+/* Infinite Spinning Marquee Cards & Logo Background transparency */
+.project-icon-card {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.project-icon-card .marquee-logo {
+  background: transparent !important;
+  border-radius: 0;
+  box-shadow: none !important;
+}
+
+.project-icon-card .marquee-logo img {
+  background: transparent !important;
+  filter: drop-shadow(0 4px 12px rgba(167, 216, 255, 0.18));
 }
 
 @media (prefers-reduced-motion: reduce) {

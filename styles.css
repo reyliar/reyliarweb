@@ -980,9 +980,10 @@ select {
 }
 
 .footer-logo {
-  height: 42px;
+  height: 56px;
   width: auto;
   object-fit: contain;
+  margin-left: 20px;
 }
 
 .footer-brand h3 {
@@ -1208,7 +1209,8 @@ select {
   }
 
   .footer-logo {
-    height: 32px;
+    height: 44px;
+    margin-left: 10px;
   }
 
   .footer-brand {
@@ -1289,7 +1291,8 @@ select {
   }
 
   .footer-logo {
-    height: 28px;
+    height: 38px;
+    margin-left: 6px;
   }
 }
 

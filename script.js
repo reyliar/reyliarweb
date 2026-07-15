@@ -10,6 +10,7 @@ const COPY = {
     headerMail: "Email",
     navAbout: "About",
     navProjects: "Projects",
+    navPortfolios: "Portfolios",
     navServices: "Services",
     navContact: "Contact",
     heroEyebrow: "reyliar",
@@ -21,6 +22,9 @@ const COPY = {
     heroActionsLabel: "Primary actions",
     ctaStart: "Let's chat",
     ctaWork: "View projects",
+    portfoliosKicker: "bionluk",
+    portfoliosTitle: "My Portfolios",
+    portfoliosLead: "Projects pulled directly from my active freelancer profile.",
     statsLabel: "Portfolio highlights",
     statProjects: "Live Projects",
     statCare: "Daily Care",
@@ -80,6 +84,7 @@ const COPY = {
     headerMail: "E-posta",
     navAbout: "Hakkında",
     navProjects: "Projeler",
+    navPortfolios: "Portfolyolarım",
     navServices: "Hizmetler",
     navContact: "İletişim",
     heroEyebrow: "reyliar",
@@ -91,6 +96,9 @@ const COPY = {
     heroActionsLabel: "Birincil eylemler",
     ctaStart: "Konuşalım",
     ctaWork: "Projeleri gör",
+    portfoliosKicker: "bionluk",
+    portfoliosTitle: "Bionluk Portfolyolarım",
+    portfoliosLead: "Aktif freelancer profilimden otomatik çekilen güncel çalışmalarım.",
     statsLabel: "Portfolyo öne çıkanları",
     statProjects: "Aktif Proje",
     statCare: "Günlük Bakım",
@@ -182,6 +190,7 @@ function setLanguage(language) {
   });
 
   writeStoredLanguage(nextLanguage);
+  renderPortfolios();
 }
 
 function readStoredLanguage() {
@@ -249,6 +258,7 @@ initActiveNavigation();
 updateHeaderState();
 initCustomCursor();
 initScrollReveal();
+initPortfolios();
 window.addEventListener("scroll", updateHeaderState, { passive: true });
 
 /* ── Theme toggle ── */
@@ -379,5 +389,74 @@ function initScrollReveal() {
   );
 
   revealElements.forEach((el) => observer.observe(el));
+}
+
+/* ── Portfolios Loader ── */
+
+let portfoliosData = [];
+
+function initPortfolios() {
+  const grid = document.getElementById("portfolios-grid");
+  if (!grid) return;
+
+  fetch("assets/portfolios.json")
+    .then((res) => res.json())
+    .then((data) => {
+      portfoliosData = data;
+      renderPortfolios();
+    })
+    .catch((err) => console.error("Error loading portfolios:", err));
+}
+
+function renderPortfolios() {
+  const grid = document.getElementById("portfolios-grid");
+  if (!grid) return;
+
+  const currentLang = readStoredLanguage() || "en";
+  grid.innerHTML = "";
+
+  if (!portfoliosData || !portfoliosData.length) return;
+
+  portfoliosData.forEach((p, idx) => {
+    const title = currentLang === "tr" ? p.title_tr : p.title_en;
+    const desc = currentLang === "tr" ? p.desc_tr : p.desc_en;
+    const cat = currentLang === "tr" ? p.category_tr : p.category_en;
+    const bionlukText = currentLang === "tr" ? "Bionluk'ta Gör" : "View on Bionluk";
+    
+    const card = document.createElement("article");
+    card.className = `portfolio-card reveal delay-${(idx + 1) * 100}`;
+    
+    card.innerHTML = `
+      <a class="portfolio-link" href="${p.link}" target="_blank" rel="noopener noreferrer">
+        <div class="portfolio-image-wrapper">
+          <img class="portfolio-image" src="${p.image}" alt="${title}" loading="lazy">
+          <span class="portfolio-badge">${cat}</span>
+        </div>
+        <div class="portfolio-info">
+          <h3 class="portfolio-card-title">${title}</h3>
+          <p class="portfolio-card-desc">${desc}</p>
+          <span class="portfolio-action-link">${bionlukText} &rarr;</span>
+        </div>
+      </a>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Observe newly loaded reveal elements
+  const revealElements = grid.querySelectorAll(".reveal");
+  if (window.IntersectionObserver) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+    );
+    revealElements.forEach((el) => observer.observe(el));
+  }
 }
 

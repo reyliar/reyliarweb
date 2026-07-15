@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "title_tr": "Medikal Web Sitesi Tasarımı",
+    "title_en": "Medical Website Design",
+    "desc_tr": "Almed Medikal için hazırlanan modern, mobil uyumlu ve kurumsal web tasarım çalışması.",
+    "desc_en": "Modern, responsive, and corporate web design study prepared for Almed Medical.",
+    "image": "assets/almed.png",
+    "category_tr": "Web Tasarım",
+    "category_en": "Web Design",
+    "link": "https://bionluk.com/rey7iar"
+  },
+  {
+    "id": 2,
+    "title_tr": "Entertainment Şirketi Web Sitesi Tasarımı",
+    "title_en": "Entertainment Company Website Design",
+    "desc_tr": "Oyun Abisi markası için tasarlanan kurumsal kimliğe uygun, sade ve şık web tasarım çalışması.",
+    "desc_en": "Clean, custom website design styled for the corporate identity of Oyun Abisi.",
+    "image": "assets/oyunabisi.png",
+    "category_tr": "Web Tasarım",
+    "category_en": "Web Design",
+    "link": "https://bionluk.com/rey7iar"
+  }
+]

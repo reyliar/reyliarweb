@@ -1,6 +1,6 @@
 const COPY = {
   en: {
-    title: "reyliar | welcome to my page",
+    title: "reyliar",
     description: "Hi, I'm reyliar. I build clean, custom websites and edit engaging videos for social media. I handle the technical details so you can focus on your work.",
     skip: "Skip to content",
     siteHeaderLabel: "Primary navigation",
@@ -13,7 +13,7 @@ const COPY = {
     navServices: "Services",
     navContact: "Contact",
     heroEyebrow: "reyliar",
-    heroTitle: "I build clean websites and edit videos for social media.",
+    heroTitle: "Welcome to my page.",
     heroLead: "I design responsive sites for creators and small businesses, keep them updated, and edit video content using After Effects.",
     heroChipCorporate: "web design",
     heroChipInstitutional: "maintenance",
@@ -70,7 +70,7 @@ const COPY = {
     footerText: "\u00a9 2026 reyliar.",
   },
   tr: {
-    title: "reyliar | sayfama hoş geldiniz",
+    title: "reyliar",
     description: "Selam, ben reyliar. Temiz web siteleri tasarlıyor ve sosyal medya videoları kurguluyorum. Teknik detaylar ve kurgu işleri bende, siz işinize odaklanın.",
     skip: "İçeriğe geç",
     siteHeaderLabel: "Ana navigasyon",
@@ -83,7 +83,7 @@ const COPY = {
     navServices: "Hizmetler",
     navContact: "İletişim",
     heroEyebrow: "reyliar",
-    heroTitle: "Hem sade web siteleri kuruyorum hem de sosyal medya videoları kurguluyorum.",
+    heroTitle: "Sayfama hoş geldiniz.",
     heroLead: "İçerik üreticileri ve işletmeler için temiz tasarımlar yapıyor, sitelerin yayında ve güncel kalmasını sağlıyorum. Aynı zamanda After Effects ile videolarını hazırlıyorum.",
     heroChipCorporate: "web tasarım",
     heroChipInstitutional: "destek & bakım",

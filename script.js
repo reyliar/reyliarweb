@@ -1,6 +1,6 @@
 const COPY = {
   en: {
-    title: "reyliar",
+    title: "reyliar | welcome to my page",
     description: "Hi, I'm reyliar. I build clean, custom websites and edit engaging videos for social media. I handle the technical details so you can focus on your work.",
     skip: "Skip to content",
     siteHeaderLabel: "Primary navigation",
@@ -70,7 +70,7 @@ const COPY = {
     footerText: "\u00a9 2026 reyliar.",
   },
   tr: {
-    title: "reyliar",
+    title: "reyliar | sayfama hoş geldiniz",
     description: "Selam, ben reyliar. Temiz web siteleri tasarlıyor ve sosyal medya videoları kurguluyorum. Teknik detaylar ve kurgu işleri bende, siz işinize odaklanın.",
     skip: "İçeriğe geç",
     siteHeaderLabel: "Ana navigasyon",

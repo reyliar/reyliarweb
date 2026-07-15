@@ -1,7 +1,7 @@
 const COPY = {
   en: {
     title: "reyliar",
-    description: "Hi, I'm reyliar. I build clean, custom websites and edit engaging videos for social media. I handle the technical details so you can focus on your work.",
+    description: "Hi, I'm reyliar. I offer two separate freelance services: I build custom websites and edit social media videos. I handle the technical details and kurgu so you can focus on your work.",
     skip: "Skip to content",
     siteHeaderLabel: "Primary navigation",
     brandLabel: "reyliar home",
@@ -14,7 +14,7 @@ const COPY = {
     navContact: "Contact",
     heroEyebrow: "reyliar",
     heroTitle: "Welcome to my page.",
-    heroLead: "I design responsive sites for creators and small businesses, keep them updated, and edit video content using After Effects.",
+    heroLead: "I offer two distinct freelance services: I build and maintain custom websites for creators and small businesses, and I edit video content using After Effects.",
     heroChipCorporate: "web design",
     heroChipInstitutional: "maintenance",
     heroChipMaintenance: "video editing",
@@ -71,7 +71,7 @@ const COPY = {
   },
   tr: {
     title: "reyliar",
-    description: "Selam, ben reyliar. Temiz web siteleri tasarlıyor ve sosyal medya videoları kurguluyorum. Teknik detaylar ve kurgu işleri bende, siz işinize odaklanın.",
+    description: "Selam, ben reyliar. İki ayrı alanda bağımsız destek sunuyorum: Hem temiz web siteleri kuruyorum hem de sosyal medya videoları kurguluyorum. Teknik süreçler ve kurgu işleri bende, siz işinize odaklanın.",
     skip: "İçeriğe geç",
     siteHeaderLabel: "Ana navigasyon",
     brandLabel: "reyliar ana sayfa",
@@ -84,7 +84,7 @@ const COPY = {
     navContact: "İletişim",
     heroEyebrow: "reyliar",
     heroTitle: "Sayfama hoş geldiniz.",
-    heroLead: "İçerik üreticileri ve işletmeler için temiz tasarımlar yapıyor, sitelerin yayında ve güncel kalmasını sağlıyorum. Aynı zamanda After Effects ile videolarını hazırlıyorum.",
+    heroLead: "İçerik üreticileri ve işletmeler için iki bağımsız alanda destek oluyorum: Web tasarım süreçlerini (kurulum, hosting, bakım) üstleniyor ve sosyal medya için After Effects ile video kurguları hazırlıyorum.",
     heroChipCorporate: "web tasarım",
     heroChipInstitutional: "destek & bakım",
     heroChipMaintenance: "video kurgu",

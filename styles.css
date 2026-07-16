@@ -137,11 +137,12 @@ svg {
   fill: currentColor;
 }
 
-/* Prevent inline text SVGs (like the After Effects icon) from expanding to fill the container */
-.service-card p svg,
-p svg {
-  width: auto;
-  height: auto;
+/* Inline text icon — matches surrounding text size */
+.ae-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: text-bottom;
 }
 
 button,

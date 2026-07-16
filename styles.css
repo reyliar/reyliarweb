@@ -491,15 +491,10 @@ select {
 .hero-mark-wrap {
   position: relative;
   display: grid;
-  width: min(100%, 240px);
-  aspect-ratio: 1;
   place-items: center;
   border: none;
-  border-radius: var(--radius-2xl);
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
-    var(--card);
-  box-shadow: var(--shadow-glow), var(--shadow-card);
+  background: transparent;
+  box-shadow: none;
   animation: hero-float 3.2s ease-in-out infinite;
 }
 

@@ -71,7 +71,18 @@
 
   <main id="top" class="site-main">
     <section class="hero-shell" aria-labelledby="hero-title">
-      <div class="hero-copy reveal">
+      <div class="hero-side reveal" aria-hidden="true">
+        <div class="hero-mark-wrap">
+          <img class="hero-logo" src="assets/logo.png" alt="reyliar" width="160" height="160">
+        </div>
+        <div class="hero-chips">
+          <span data-i18n="heroChipCorporate">corporate</span>
+          <span data-i18n="heroChipInstitutional">institutional</span>
+          <span data-i18n="heroChipMaintenance">maintenance</span>
+        </div>
+      </div>
+
+      <div class="hero-copy reveal delay-100">
         <p class="chip" data-i18n="heroEyebrow">reyliar</p>
         <h1 id="hero-title" data-i18n="heroTitle">Welcome to my page.</h1>
         <p class="hero-lead" data-i18n="heroLead">
@@ -82,17 +93,6 @@
         <div class="hero-actions" aria-label="Primary actions" data-i18n-aria-label="heroActionsLabel">
           <a class="button button-primary" href="mailto:alkim@reyliar.xyz" data-i18n="ctaStart">Start a project</a>
           <a class="button button-outline" href="#projects" data-i18n="ctaWork">View projects</a>
-        </div>
-      </div>
-
-      <div class="hero-side reveal delay-100" aria-hidden="true">
-        <div class="hero-mark-wrap">
-          <img class="hero-logo" src="assets/logo.png" alt="reyliar" width="160" height="160">
-        </div>
-        <div class="hero-chips">
-          <span data-i18n="heroChipCorporate">corporate</span>
-          <span data-i18n="heroChipInstitutional">institutional</span>
-          <span data-i18n="heroChipMaintenance">maintenance</span>
         </div>
       </div>
     </section>

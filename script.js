@@ -56,7 +56,7 @@ const COPY = {
     serviceHostingTitle: "Hosting & Setup",
     serviceHostingDesc: "Managing DNS, configuring SSL certificates, and setting up contact forms.",
     serviceVideoTitle: "Video Editing & After Effects",
-    serviceVideoDesc: "Polished video editing, custom motion graphics, and styling for your social media channels.",
+    serviceVideoDesc: 'I edit your videos for social media and other platforms using the <svg viewBox="0 0 20 20" width="16" height="16" style="display:inline-block;vertical-align:text-bottom;margin:0 1px 0 2px" aria-label="After Effects"><rect width="20" height="20" rx="3" fill="#00005b"/><text x="10" y="14.5" font-size="9.5" font-weight="900" text-anchor="middle" fill="#9b8aff" font-family="Arial,sans-serif">Ae</text></svg>\u00a0After Effects app.',
     contactKicker: "contact",
     contactTitle: "Let's build something together",
     contactLead: "Tell me about your project and the best way to reach you. I'll get back to you quickly.",
@@ -127,7 +127,7 @@ const COPY = {
     serviceHostingTitle: "Hosting & Domain",
     serviceHostingDesc: "Alan adı ayarları, SSL sertifikası kurulumu ve iletişim formlarının çalışır hale getirilmesi.",
     serviceVideoTitle: "Video Kurgu & After Effects",
-    serviceVideoDesc: "Sosyal medya kanallarınız için profesyonel montaj, After Effects ile özel geçişler ve hareketli grafikler.",
+    serviceVideoDesc: 'Sosyal medya ve diğer platformlar için videolarınızı <svg viewBox="0 0 20 20" width="16" height="16" style="display:inline-block;vertical-align:text-bottom;margin:0 1px 0 2px" aria-label="After Effects"><rect width="20" height="20" rx="3" fill="#00005b"/><text x="10" y="14.5" font-size="9.5" font-weight="900" text-anchor="middle" fill="#9b8aff" font-family="Arial,sans-serif">Ae</text></svg>\u00a0After Effects uygulamasıyla kurguluyorum.',
     contactKicker: "iletişim",
     contactTitle: "Birlikte çalışalım mı?",
     contactLead: "Nasıl bir projeye ihtiyacınız olduğunu ve size nasıl ulaşabileceğimi yazın, hemen konuşalım.",
@@ -172,6 +172,11 @@ function setLanguage(language) {
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     const key = node.dataset.i18n;
     if (key && copy[key]) node.textContent = copy[key];
+  });
+
+  document.querySelectorAll("[data-i18n-html]").forEach((node) => {
+    const key = node.dataset.i18nHtml;
+    if (key && copy[key]) node.innerHTML = copy[key];
   });
 
   document.querySelectorAll("[data-i18n-aria-label]").forEach((node) => {

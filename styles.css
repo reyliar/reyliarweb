@@ -170,6 +170,13 @@ select {
   transform: translateY(0);
 }
 
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .starfield {
   position: fixed;
   inset: 0;

@@ -259,6 +259,7 @@ updateHeaderState();
 initCustomCursor();
 initScrollReveal();
 initPortfolios();
+initParticles();
 window.addEventListener("scroll", updateHeaderState, { passive: true });
 
 /* ── Theme toggle ── */
@@ -456,5 +457,151 @@ function renderPortfolios() {
     );
     revealElements.forEach((el) => observer.observe(el));
   }
+}
+
+/* ── Scroll-Responsive Particle System ── */
+
+function initParticles() {
+  const canvas = document.getElementById("particle-canvas");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const PARTICLE_COUNT = 90;
+  const CONNECTION_DIST = 110;
+  const BASE_SPEED = 0.25;
+  const particles = [];
+
+  let width = 0;
+  let height = 0;
+  let scrollVel = 0;
+  let prevScrollY = window.scrollY;
+  let animId = null;
+
+  /* ── Resize ── */
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+  }
+  resize();
+  window.addEventListener("resize", resize, { passive: true });
+
+  /* ── Theme-aware colors ── */
+  function isLight() {
+    return doc.getAttribute("data-theme") === "light";
+  }
+
+  function particleColor(opacity) {
+    // Dark: soft blue-white  |  Light: deeper blue-slate
+    return isLight()
+      ? `rgba(26, 111, 181, ${opacity})`
+      : `rgba(167, 216, 255, ${opacity})`;
+  }
+
+  function lineColor() {
+    return isLight()
+      ? "rgba(26, 111, 181, 0.06)"
+      : "rgba(167, 216, 255, 0.05)";
+  }
+
+  /* ── Spawn particles ── */
+  function spawnAll() {
+    particles.length = 0;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 2.2 + 0.6,          // radius 0.6 – 2.8 px
+        baseX: (Math.random() - 0.5) * BASE_SPEED,
+        baseY: (Math.random() - 0.5) * BASE_SPEED,
+        opacity: Math.random() * 0.45 + 0.12,   // 0.12 – 0.57
+      });
+    }
+  }
+  spawnAll();
+  window.addEventListener("resize", spawnAll, { passive: true });
+
+  /* ── Scroll tracking ── */
+  function trackScroll() {
+    const current = window.scrollY;
+    scrollVel = (current - prevScrollY) * 0.08;  // smoothed delta
+    prevScrollY = current;
+  }
+
+  /* ── Animation loop ── */
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Ease scroll velocity toward zero each frame
+    scrollVel *= 0.94;
+
+    // Update & draw particles
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+
+      // Natural drift + scroll influence (scroll down → particles drift up slightly)
+      p.x += p.baseX;
+      p.y += p.baseY - scrollVel * (0.5 + p.r * 0.3);
+
+      // Wrap around edges
+      if (p.x < -10) p.x = width + 10;
+      if (p.x > width + 10) p.x = -10;
+      if (p.y < -10) p.y = height + 10;
+      if (p.y > height + 10) p.y = -10;
+
+      // Draw particle
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = particleColor(p.opacity);
+      ctx.fill();
+    }
+
+    // Draw subtle connections between nearby particles
+    ctx.strokeStyle = lineColor();
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CONNECTION_DIST) {
+          const alpha = (1 - dist / CONNECTION_DIST) * 0.28;
+          ctx.strokeStyle = isLight()
+            ? `rgba(26, 111, 181, ${alpha})`
+            : `rgba(167, 216, 255, ${alpha})`;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    animId = requestAnimationFrame(animate);
+  }
+
+  /* ── Lifecycle ── */
+  window.addEventListener("scroll", trackScroll, { passive: true });
+
+  // Stop when tab hidden, resume when visible
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      if (animId) { cancelAnimationFrame(animId); animId = null; }
+    } else {
+      if (!animId) animId = requestAnimationFrame(animate);
+    }
+  });
+
+  // Re-colour on theme change (piggyback on existing toggle)
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      // particles will pick up new colours next frame via isLight()
+    });
+  }
+
+  animId = requestAnimationFrame(animate);
 }
 

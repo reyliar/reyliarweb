@@ -137,6 +137,13 @@ svg {
   fill: currentColor;
 }
 
+/* Prevent inline text SVGs (like the After Effects icon) from expanding to fill the container */
+.service-card p svg,
+p svg {
+  width: auto;
+  height: auto;
+}
+
 button,
 input,
 textarea,

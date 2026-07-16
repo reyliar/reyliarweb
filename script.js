@@ -150,6 +150,7 @@ const COPY = {
 };
 
 const DEFAULT_LANGUAGE = "en";
+let portfoliosData = [];
 const STORAGE_KEY = "portfolio-language";
 const THEME_KEY = "portfolio-theme";
 const doc = document.documentElement;
@@ -392,8 +393,6 @@ function initScrollReveal() {
 }
 
 /* ── Portfolios Loader ── */
-
-let portfoliosData = [];
 
 function initPortfolios() {
   const grid = document.getElementById("portfolios-grid");
